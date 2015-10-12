@@ -1,0 +1,11 @@
+.pie { position: relative; width: 80px; height: 80px; margin:0 auto; border-radius: 50%; background-color:#bdf9db; }
+.pie.gt-50 { background-color: #11CD6E; border:solid 3px #00ac55; }
+
+    .pie-progress { content: ""; position: absolute; border-radius: 50%; left: calc(50% - 40px); top: calc(50% - 40px); width: 80px; height: 80px; clip: rect(0, 80px, 80px, 40px);}
+        .pie-progress .pie-progress-fill { content: ""; position: absolute; border-radius: 50%; left: calc(50% - 40px); top: calc(50% - 40px); width: 80px; height: 80px; clip: rect(0, 40px, 80px, 0); border:solid 3px #00ac55; background:#11CD6E; /*transition:transform 0.3s;*/}
+    .gt-50 .pie-progress { clip: rect(0, 40px, 80px, 0); }
+        .gt-50 .pie-progress .pie-progress-fill { clip: rect(0, 80px, 80px, 40px); border:solid 3px #bdf9db; background:#bdf9db; }
+
+/*.pie-percents { content: ""; position: absolute; border-radius: 50%; left: calc(50% - 70px/2); top: calc(50% - 70px/2); width: 70px; height: 70px; background: #fff; text-align: center; display: table; }
+.pie-percents span { display: block; font-size: 2em; color: #11CD6E;}
+.pie-percents-wrapper { display: table-cell; vertical-align: middle;}*/

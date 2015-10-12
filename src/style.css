@@ -1,0 +1,268 @@
+@font-face {
+    font-family: 'iconfont';
+    src: url('font/iconfont.ttf') format('truetype');
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+form,
+input,
+textarea,
+button,
+fieldset,
+legend,
+figure,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 14px/1.5 Corbel, "Helvetica Neue", Helvetica, Arial;
+    ;
+    color: #666;
+}
+
+button,
+input,
+select,
+textarea {
+    vertical-align: top;
+    font-size: 12px;
+    font-family: Corbel, "Helvetica Neue", Helvetica, Arial;
+}
+
+header,
+footer,
+aside,
+article,
+section,
+hgroup,
+nav,
+figure {
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+    font-family: "Century Gothic", "Microsoft YaHei";
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img {
+    vertical-align: top;
+}
+
+a img {
+    border: none;
+}
+
+strong {
+    font-weight: bold;
+}
+
+cite,
+em,
+i {
+    font-style: italic;
+}
+
+ins {
+    background: #ffc;
+    text-decoration: none;
+}
+
+abbr,
+acronym {
+    border-bottom: 1px dotted #666;
+    cursor: help;
+}
+
+sup,
+sub {
+    height: 0;
+    line-height: 1;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    bottom: 1ex;
+}
+
+sub {
+    top: 0.5ex;
+}
+
+a {
+    color: #3B5998;
+    text-decoration: none;
+}
+
+:focus {
+    outline: 0;
+}
+
+.ui-clear:after {
+    height: 0;
+    display: block;
+    content: "\200B";
+    clear: both;
+}
+
+.ui-font {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+}
+
+
+/*--content-*/
+
+* {
+    box-sizing: border-box;
+}
+
+.ui-app {
+    height: 267px;
+    overflow: hidden;
+    box-shadow: inset 0 0 2px #fff, inset 0 0 100px #d5dbe2;
+    -webkit-app-region: drag;
+}
+
+.ui-hd {
+    display: -webkit-box;
+    height: 50px;
+    margin: 0 50px;
+    padding: 10px 0;
+    -webkit-user-select: none;
+    box-shadow: 0 12px 18px rgba(64, 100, 138, .4), inset 0 0 3px rgba(255, 255, 255, .6), 0 0 3px rgba(64, 100, 138, .3), 0 2px 4px #3b5c7f, inset 0 1px 1px rgba(64, 100, 138, .25);
+    background-image: linear-gradient(to top, #dee7f0, #f1f6fa);
+    border-radius: 0 0 3px 3px;
+}
+
+
+/*.ui-hd-drag { position:absolute; top:0; bottom:0; right:50px; left:107px; z-index:0;   }*/
+
+.ui-hd-icon {
+    -webkit-app-region: no-drag;
+    -webkit-box-flex: 1.0;
+    position: relative;
+    z-index: 1;
+    margin: 0 3px;
+    color: rgba(64, 100, 138, 0.8);
+    font-family: "iconfont";
+    font-size: 22px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.ui-hd-icon:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0);
+    box-shadow: -1px 0 rgba(255, 255, 255, .25);
+    background-image: linear-gradient(to top, rgba(64, 100, 138, .2), rgba(92, 144, 199, .2));
+    content: "";
+}
+
+.ui-hd-icon:last-child:after {
+    display: none;
+}
+
+.ui-hd-icon:hover {
+    color: rgba(64, 100, 138, 1);
+}
+
+.ui-close:hover {
+    color: red;
+}
+
+
+/*.ui-bd { height:213px;  overflow:hidden; }*/
+
+.ui-area {
+    -webkit-app-region: no-drag;
+    position: relative;
+    z-index: 1;
+    margin: 12px auto 0;
+    height: 193px;
+    width: 298px;
+    padding: 30px 0;
+    font-size: 12px;
+    /*background:rgba(222,230,246,0.2);*/
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    /*background:url("images/bg.jpg") no-repeat 0 0; */
+    color: rgba(64, 100, 138, 0.6);
+    -webkit-user-select: none;
+}
+
+.ui-area-drop {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    border: 2px dashed rgba(64, 100, 138, 0.2);
+}
+
+.ui-area-drop.ui-area-drop-have {
+    border-color: rgba(64, 100, 138, 0.4);
+}
+
+.ui-area-tip {
+    text-align: center;
+}
+
+.ui-area-progress {
+    padding: 5px 0 0;
+}
+
+.ui-area-waiting {
+    padding: 3px 0 0;
+    line-height:1;
+}
+
+.ui-area-waiting:before {
+    display: block;
+    text-align: center;
+    font-family: "iconfont";
+    font-size: 40px;
+    padding-bottom:8px;
+    content: "\e600";
+}

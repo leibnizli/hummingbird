@@ -1,0 +1,26 @@
+{
+  "name": "hummingbird",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stormtea123/hummingbird.git"
+  },
+  "author": "stormtea123",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stormtea123/hummingbird/issues"
+  },
+  "homepage": "https://github.com/stormtea123/hummingbird#readme",
+  "dependencies": {
+    "imagemin": "^3.2.0",
+    "imagemin-mozjpeg": "^5.1.0",
+    "imagemin-pngquant": "^4.2.0",
+    "imagemin-webp": "^3.1.0",
+    "nconf": "^0.8.2"
+  }
+}
