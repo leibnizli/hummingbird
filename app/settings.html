@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="src/settings.css">
+</head>
+
+<body>
+    <div class="settings" id="settings" style="display:none;">
+        <table class="settings-tb">
+            <!-- <caption>
+                拖动滑块设置压缩质量
+            </caption> -->
+            <tbody>
+                <tr>
+                    <td class="settings-name">jpg</td>
+                    <td>
+                        <input class="settings-range" type="range" min="60" max="100" step="1" data-target="jpg" />
+                    </td>
+                    <td class="settings-value"><output id="jpg">85</output></td>
+                </tr>
+                <tr>
+                    <td class="settings-name">webp</td>
+                    <td>
+                        <input class="settings-range" type="range" min="60" max="100" step="1" data-target="webp" />
+                    </td>
+                    <td class="settings-value"><output id="webp">85</output></td>
+                </tr>
+                <tr>
+                    <td class="settings-name">png</td>
+                    <td>已设置最佳方案</td>
+                    <td class="settings-value"></td>
+                </tr>
+                <tr>
+                    <td class="settings-name">gif</td>
+                    <td>无损压缩</td>
+                    <td class="settings-value"></td>
+                </tr>
+                <tr>
+                    <td class="settings-name">svg</td>
+                    <td>已设置最佳方案</td>
+                    <td class="settings-value"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="build/bundle.js"></script>
+</body>
+
+</html>

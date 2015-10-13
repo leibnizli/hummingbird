@@ -18,26 +18,30 @@ if (!configuration.get('jpg')) {
 if (!configuration.get('webp')) {
     configuration.set('webp', 85);
 }
+if (!configuration.get('count')) {
+    configuration.set('count', 0);
+}
+if (!configuration.get('size')) {
+    configuration.set('size', 0);
+}
 // 当 Electron 完成了初始化并且准备创建浏览器窗口的时候
 // 这个方法就被调用
 app.on('ready', function() {
-    
-
-    
     // 创建浏览器窗口。
     mainWindow = new BrowserWindow({
         icon: './src/images/icon.png',
         title: '蜂鸟',
         width: 320,
         height: 267,
-        frame: false
+        frame: false,
+        //resizable: false,
     });
 
     // 加载应用的 index.html
     mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
     // 打开开发工具
-    mainWindow.openDevTools();
+    //mainWindow.openDevTools();
     // 当 window 被关闭，这个事件会被发出
     mainWindow.on('closed', function() {
         // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -45,6 +49,7 @@ app.on('ready', function() {
     });
     mainWindow.webContents.on('did-finish-load', function() {
         mainWindow.webContents.send('quality', configuration.get('jpg'),configuration.get('webp'));
+        mainWindow.webContents.send('mainWindow-share', configuration.get('count'),configuration.get('size'));
     });
 });
 
@@ -59,12 +64,13 @@ ipc.on('open-settings-window', function () {
         return;
     }
     settingsWindow = new BrowserWindow({
+        width: 340,
+        height: 300,
         icon: './src/images/icon.png',
         frame: true,
         title: '设置 - 蜂鸟',
-        height: 254,
         resizable: false,
-        width: 339
+        'auto-hide-menu-bar': true
     });
     settingsWindow.loadUrl('file://' + __dirname + '/settings.html');
 
@@ -80,4 +86,9 @@ ipc.on('open-settings-window', function () {
 ipc.on('set-configuration', function (event, arg1,arg2) {
     configuration.set(arg1, arg2);
     mainWindow.webContents.send('quality', configuration.get('jpg'),configuration.get('webp'));
+});
+ipc.on('set-share', function (event, count, size) {
+    configuration.set('count', count);
+    configuration.set('size', size);
+    mainWindow.webContents.send('mainWindow-share', count, size);
 });

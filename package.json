@@ -4,7 +4,19 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "electron ./app",
+
+    "clean": "rm -rf ./dist",
+    "clean:osx": "rm -rf ./dist/osx",
+    "clean:win": "rm -rf ./dist/win",
+
+    "build": "npm run clean && npm run build:osx && npm run build:win",
+    "build:osx": "npm run clean:osx && electron-packager ./app \"Loopline Systems\" --out=dist/osx --platform=darwin --arch=x64 --version=0.25.3 --icon=assets/osx/icon.icns",
+    "build:win": "npm run clean:win && electron-packager ./app \"Loopline Systems\" --out=dist/win --platform=win32 --arch=ia32 --version=0.25.3 --icon=assets/win/icon.ico",
+
+    "pack": "npm run pack:osx && npm run pack:win",
+    "pack:osx": "npm run build:osx && electron-builder \"dist/osx/Loopline Systems.app\" --platform=osx --out=\"dist/osx\" --config=packager.json",
+    "pack:win": "npm run build:win && electron-builder \"dist/win/Loopline Systems-win32\" --platform=win --out=\"dist/win\" --config=packager.json"
   },
   "repository": {
     "type": "git",
@@ -22,5 +34,10 @@
     "imagemin-pngquant": "^4.2.0",
     "imagemin-webp": "^3.1.0",
     "nconf": "^0.8.2"
+  },
+  "devDependencies": {
+    "electron-packager": "^4.0.2",
+    "electron-prebuilt": "^0.25.2",
+    "electron-builder": "^1.0.0"
   }
 }
