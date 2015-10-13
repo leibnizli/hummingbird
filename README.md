@@ -15,12 +15,12 @@
 <table>
     <tbody>
         <tr>
-            <td>压缩前</td>
-            <td>压缩后</td>
-        </tr>
-        <tr>
             <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/jpg-before.jpg" alt="" width="280" height="392"></td>
             <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/jpg-after.jpg" alt="" width="280" height="392"></td>
+        </tr>
+        <tr>
+            <td>压缩前</td>
+            <td>压缩后</td>
         </tr>
         <tr>
             <td>41kb</td>
@@ -36,12 +36,12 @@
 <table>
     <tbody>
         <tr>
-            <td>压缩前</td>
-            <td>压缩后</td>
-        </tr>
-        <tr>
             <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/png-before.png" alt="" width="128" height="128"></td>
             <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/png-after.png" alt="" width="128" height="128"></td>
+        </tr>
+        <tr>
+            <td>压缩前</td>
+            <td>压缩后</td>
         </tr>
         <tr>
             <td>28.9kb</td>
@@ -56,12 +56,12 @@
 <table>
     <tbody>
         <tr>
-            <td>压缩前</td>
-            <td>压缩后</td>
-        </tr>
-        <tr>
             <td><img src="https://cdn.rawgit.com/stormtea123/hummingbird/master/demo/svg-before.svg" alt="" width="216" height="164"></td>
             <td><img src="https://cdn.rawgit.com/stormtea123/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
+        </tr>
+        <tr>
+            <td>压缩前</td>
+            <td>压缩后</td>
         </tr>
         <tr>
             <td>5.47kb</td>
