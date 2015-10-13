@@ -1,9 +1,9 @@
-蜂鸟
-===============
+<img align="right" src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
+======================
 
 > `蜂鸟`是一个图像(jpg/png/webp/svg/gif)压缩客户端。
 
-<p><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379"></p>
+<img align="right" src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
 
 ##Install
 
