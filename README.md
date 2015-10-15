@@ -10,7 +10,7 @@
 ##Install
 
 * <a href="http://share.weiyun.com/3ecf53e394544ec5160339a270987afd">OS X</a>
-* <a href="http://share.weiyun.com/ddc09e4843639b23173c23b5c8bd0e89">Windows</a>将下载后的压缩包解压到目标文件 → 选择`Hummingbird.exe`右键单击 → 选择发送到 → 桌面快捷方式
+* <a href="http://share.weiyun.com/ddc09e4843639b23173c23b5c8bd0e89">Windows</a>
 
 OS X 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
