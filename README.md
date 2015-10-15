@@ -3,12 +3,14 @@
 
 > `蜂鸟`是一个图像(jpg/png/webp/svg/gif)压缩客户端。
 
+压缩后会替换掉当前文件，替换前会在当前目录新建`source`文件夹并备份处理前的文件。
+
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
 
 ##Install
 
-* <a href="https://github.com/stormtea123/hummingbird/releases">OS X</a>
-* <a href="https://github.com/stormtea123/hummingbird/releases">Windows</a>
+* <a href="http://share.weiyun.com/3ecf53e394544ec5160339a270987afd">OS X</a>
+* <a href="http://share.weiyun.com/ddc09e4843639b23173c23b5c8bd0e89">Windows</a>
 
 ##Usage
 
