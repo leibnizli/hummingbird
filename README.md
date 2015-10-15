@@ -10,11 +10,16 @@
 ##Install
 
 * <a href="http://share.weiyun.com/3ecf53e394544ec5160339a270987afd">OS X</a>
-* <a href="http://share.weiyun.com/ddc09e4843639b23173c23b5c8bd0e89">Windows</a>
+* <a href="http://share.weiyun.com/ddc09e4843639b23173c23b5c8bd0e89">Windows</a>将下载后的压缩包解压到目标文件 → 选择`Hummingbird.exe`右键单击 → 选择发送到 → 桌面快捷方式
 
-OS X 可能需要你在`系统偏好设置` - `安全性与隐私` 选择允许`任何来源`的应用程序
+OS X 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
-Windows平台下是一个解压文件而不是安装包，因为文件目录太长所以多次封装安装包不成功（不影响使用）。运行解压目录下`Hummingbird.exe`即可。如果想想删除文件夹，按`shift + delete`即可，或者用其它软件粉碎。
+Windows平台下是一个解压文件夹而不是安装包，因为文件目录太长多次封装安装包不成功（不影响使用）。
+
+* (建议)将下载后的压缩包解压到目标文件夹，选择`Hummingbird.exe`右键单击 → 选择`发送到` → `桌面快捷方式`
+* (或)直接运行解压目录下`Hummingbird.exe`
+
+如果想想删除文件夹，按`shift + delete`即可，或者用其它软件粉碎。
 
 > 分享统计数据和压缩参数配置数据是保存在用户目录下`hummingbird-config.json`中，本App不做任何数据上传，绝对安全。
 
