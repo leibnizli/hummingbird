@@ -9,8 +9,8 @@
 
 ##Install
 
-* <a href="http://share.weiyun.com/3ecf53e394544ec5160339a270987afd">OS X</a>
-* <a href="http://share.weiyun.com/ddc09e4843639b23173c23b5c8bd0e89">Windows</a>
+* <a href="http://vdisk.weibo.com/s/yVcSbNb-Ksypj">OS X</a>
+* <a href="http://vdisk.weibo.com/s/yVcSbNb-Ksypj">Windows</a>
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
