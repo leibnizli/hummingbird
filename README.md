@@ -7,7 +7,7 @@
 
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
 
-##Install
+## Install
 
 * <a href="http://pan.baidu.com/s/1o8KQOwa">OS X</a>
 * <a href="http://pan.baidu.com/s/1eStwMVS">Windows</a>
@@ -23,9 +23,9 @@
 
 > 分享统计数据和压缩参数配置数据是保存在用户目录下`hummingbird-config.json`中，本App不做任何数据上传，绝对安全。
 
-##Usage
+## Usage
 
-###jpg压缩对比
+### jpg压缩对比
 
 <table>
     <tbody>
@@ -44,7 +44,7 @@
     </tbody>
 </table>
 
-###png压缩对比
+### png压缩对比
 
 对于png24通道透明有比较好的压缩效果
 
@@ -66,7 +66,7 @@
     </tbody>
 </table>
 
-###svg压缩对比
+### svg压缩对比
 
 <table>
     <tbody>
