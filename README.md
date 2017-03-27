@@ -62,7 +62,6 @@
             <td>28.9kb</td>
             <td>9.42kb</td>
         </tr>
-
     </tbody>
 </table>
 
