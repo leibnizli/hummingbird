@@ -1,8 +1,8 @@
-var app = require('app'); // 控制应用生命周期的模块。
-var BrowserWindow = require('browser-window'); // 创建原生浏览器窗口的模块
+const {app, BrowserWindow,ipcMain} = require('electron')
+const path = require('path')
+const url = require('url')
 var configuration = require("./configuration");
-var ipc = require('ipc'),
-    settingsWindow = null,
+var settingsWindow = null,
     mainWindow = null;
 
 app.on('window-all-closed', function() {
@@ -31,17 +31,19 @@ app.on('ready', function() {
     mainWindow = new BrowserWindow({
         icon: './src/images/icon.png',
         title: '蜂鸟',
-        width: 320,
-        height: 267,
+        // width: 320,
+        // height: 267,
+        width: 1000,
+        height: 600,
         frame: false,
         //resizable: false,
     });
 
     // 加载应用的 index.html
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     // 打开开发工具
-    //mainWindow.openDevTools();
+    mainWindow.openDevTools();
     // 当 window 被关闭，这个事件会被发出
     mainWindow.on('closed', function() {
         // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -52,14 +54,13 @@ app.on('ready', function() {
         mainWindow.webContents.send('mainWindow-share', configuration.get('count'),configuration.get('size'));
     });
 });
-
-ipc.on('close-main-window', function () {
+ipcMain.on('close-main-window', function () {
     app.quit();
 });
-ipc.on('main-minimized', function () {
+ipcMain.on('main-minimized', function () {
     mainWindow.minimize();
 });
-ipc.on('open-settings-window', function () {
+ipcMain.on('open-settings-window', function () {
     if (settingsWindow) {
         return;
     }
@@ -72,7 +73,7 @@ ipc.on('open-settings-window', function () {
         resizable: false,
         'auto-hide-menu-bar': true
     });
-    settingsWindow.loadUrl('file://' + __dirname + '/settings.html');
+    settingsWindow.loadURL('file://' + __dirname + '/settings.html');
 
     settingsWindow.on('closed', function () {
         settingsWindow = null;
@@ -83,11 +84,11 @@ ipc.on('open-settings-window', function () {
         settingsWindow.webContents.send('settings-quality', configuration.get('jpg'),configuration.get('webp'));
     });
 });
-ipc.on('set-configuration', function (event, arg1,arg2) {
+ipcMain.on('set-configuration', function (event, arg1,arg2) {
     configuration.set(arg1, arg2);
     mainWindow.webContents.send('quality', configuration.get('jpg'),configuration.get('webp'));
 });
-ipc.on('set-share', function (event, count, size) {
+ipcMain.on('set-share', function (event, count, size) {
     configuration.set('count', count);
     configuration.set('size', size);
     mainWindow.webContents.send('mainWindow-share', count, size);

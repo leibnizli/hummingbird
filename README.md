@@ -1,7 +1,6 @@
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
-======================
 
-> `蜂鸟`是一个图像(jpg/png/webp/svg/gif)压缩客户端。
+> `蜂鸟`是一个图像(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 
 压缩后会替换掉当前文件，替换前会在当前目录新建`source`文件夹并备份处理前的文件。
 

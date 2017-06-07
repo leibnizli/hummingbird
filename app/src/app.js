@@ -1,15 +1,25 @@
 var fs = require("fs");
 var path = require('path');
 
-var ipc = require('ipc');
-var Imagemin = require('imagemin');
-var ImageminPngquant = require('imagemin-pngquant');
-var ImageminWebp = require('imagemin-webp');
-var ImageminMozjpeg = require('imagemin-mozjpeg');
+const {ipcRenderer} = require('electron')
+const imagemin = require('imagemin');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminOptipng = require('imagemin-optipng');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminSvgo = require('imagemin-svgo');
+const imageminGifsicle = require('imagemin-gifsicle');
+const imageminWebp = require('imagemin-webp');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+var gulp = require('gulp');
+var htmlmin = require('gulp-htmlmin');
+var uglify = require('gulp-uglify');
+var rename = require("gulp-rename");
+var cleanCSS = require('gulp-clean-css');
+
 var Pie = require("./components/pie/index.js");
 var jpgValue, webpValue, shareCount, shareSize;
 
-ipc.on('quality', function(arg1, arg2) {
+ipcRenderer.on('quality', function(e, arg1, arg2) {
     jpgValue = arg1;
     webpValue= arg2;
 });
@@ -63,7 +73,7 @@ App.prototype = {
     _filterFiles: function(files) {
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            if (file.type.indexOf("image") === -1) {
+            if (file.type.indexOf("image") === -1&&file.type.indexOf("css") === -1&&file.type.indexOf("javascript") === -1&&file.type.indexOf("html") === -1) {
                 continue;
             }
             this.filesArray.push({
@@ -88,51 +98,97 @@ App.prototype = {
             //mkdir
             self._mkdirSync(path.join(fileDirname, 'source'));
             //writeFile
-            !fs.existsSync(fileSourcePath) && fs.writeFileSync(fileSourcePath, fs.readFileSync(filePath));
-            var imagemin = new Imagemin().src(filePath).dest(fileDirname);
+            if (self.filesArray[index].type.indexOf("image") > -1){
+                !fs.existsSync(fileSourcePath) && fs.writeFileSync(fileSourcePath, fs.readFileSync(filePath));
+            } else {
+                fs.writeFileSync(fileSourcePath, fs.readFileSync(filePath));
+            }
+            
             switch (self.filesArray[index].type) {
+
                 case "image/svg+xml":
-                    imagemin.use(Imagemin.svgo());
+                    imagemin([filePath], fileDirname, {
+                        plugins: [
+                            imageminSvgo({})
+                        ]
+                    }).then(files => {
+                        runThen(files);
+                    });
                     break;
                 case "image/jpeg":
-                    imagemin.use(Imagemin.jpegtran({
-                        progressive: true
-                    }));
-                    imagemin.use(ImageminMozjpeg({
-                        tune: 'psnr',
-                        quality: jpgValue || 85
-                    }));
+                    imagemin([filePath], fileDirname, {
+                        plugins: [
+                            imageminJpegtran({progressive: true}),
+                            imageminMozjpeg({
+                                tune: 'psnr',
+                                quality: jpgValue || 85
+                            })
+                        ]
+                    }).then(files => {
+                        runThen(files);
+                    });
                     break;
                 case "image/png":
-                    imagemin.use(Imagemin.optipng({
-                        optimizationLevel: 2
-                    })).use(ImageminPngquant({
-                        quality: '65-85',
-                        speed: 3
-                    }));
+                    imagemin([filePath], fileDirname, {
+                        plugins: [
+                            imageminOptipng({optimizationLevel: 2}),
+                            imageminPngquant({quality: '65-85',speed: 3})
+                        ]
+                    }).then(files => {
+                        runThen(files);
+                    });
                     break;
                 case "image/gif":
-                    imagemin.use(Imagemin.gifsicle());
+                    imagemin.use(imagemin.gifsicle());
+                    imagemin([filePath], fileDirname, {
+                        plugins: [imageminGifsicle()]
+                    }).then(files => {
+                        runThen(files);
+                    });
                     break;
                 case "image/webp":
-                    imagemin.use(ImageminWebp({
-                        quality: webpValue || 85
-                    }));
+                    imagemin([filePath], fileDirname, {
+                        plugins: [
+                            imageminWebp({quality: webpValue || 85})
+                        ]
+                    }).then(files => {
+                        runThen(files);
+                    });
+                    break;
+                case "text/css":
+                    gulp.src(filePath).pipe(cleanCSS({compatibility: 'ie8'})).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function(){
+                        runThen()
+                    });
+                    break;
+                case "text/javascript":
+                    gulp.src(filePath).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function(){
+                        runThen()
+                    });
+                    break;
+                case "text/html":
+                    gulp.src(filePath).pipe(htmlmin({collapseWhitespace: true})).pipe(gulp.dest(fileDirname)).on('end', function(){
+                        runThen()
+                    });
                     break;
             }
-            imagemin.run(function(err, data) {
-                self.filesArray[index].optimized = data[0]._contents.length;
+            function runThen(files){
+                if (files){
+                    self.filesArray[index].optimized = files[0].data.length;
+                } else {
+                    self.filesArray[index].optimized = Math.floor(self.filesArray[index].size/2);
+                }
+                //=> [{data: <Buffer 89 50 4e …>, path: 'build/images/foo.jpg'}, …]
                 index++;
                 pie.set(((index / len) * 100).toFixed(0));
                 if (index >= len) {
-                    self._dropOver(len);
+                    self._dropOver(len,files);
                     return;
                 };
                 filesHandle();
-            });
+            }
         })();
     },
-    _dropOver: function(num) {
+    _dropOver: function(num,files) {
         this.status = "waiting";
         this._updateState();
         this.filesArray.forEach(function(file) {
@@ -141,7 +197,7 @@ App.prototype = {
         this.$el.find(".ui-area-waiting").html("已处理" + num + "个文件,压缩空间" + (this.diff / (1024)).toFixed(1) + 'KB');
         localStorage.setItem("count", window.shareCount+1);
         localStorage.setItem("size", window.shareSize+1);
-        ipc.send('set-share', window.shareCount+1, window.shareSize+this.diff);
+        ipcRenderer.send('set-share', window.shareCount+1, window.shareSize+this.diff);
     },
     _mkdirSync: function(path) {
         try {
