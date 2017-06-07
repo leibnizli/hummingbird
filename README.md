@@ -3,6 +3,7 @@
 > `蜂鸟`是一个图像(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 
 jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，替换前会在当前目录新建`source`文件夹并备份处理前的文件。
+
 css/js压缩后会生成一个带.min的新文件。
 
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
