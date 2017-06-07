@@ -9,7 +9,7 @@
 ## Install
 
 * <a href="http://pan.baidu.com/s/1o8KQOwa">OS X</a>
-* <a href="https://pan.baidu.com/s/1skIOT3n">Windows (v2.0.0)</a>
+* <a href="https://pan.baidu.com/s/1mioNiys">Windows (v2.0.0)</a>
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
