@@ -10,7 +10,7 @@ css/js压缩后会生成一个带.min的新文件。
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1hsd0ajE">OS X</a> (v2.0.0)
+* <a href="https://pan.baidu.com/s/1bp5u8xT">OS X</a> (v2.0.0)
 * <a href="https://pan.baidu.com/s/1mioNiys">Windows</a> (v2.0.0)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序

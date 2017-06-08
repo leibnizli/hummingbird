@@ -25,13 +25,13 @@
     "imagemin-mozjpeg": "^6.0.0",
     "imagemin-pngquant": "^5.0.1",
     "imagemin-webp": "^4.0.0",
-    "nconf": "^0.8.4"
-  },
-  "dependencies": {
-    "gulp-clean-css": "^3.4.1",
     "imagemin-gifsicle": "^5.1.0",
     "imagemin-jpegtran": "^5.0.2",
     "imagemin-optipng": "^5.2.1",
-    "imagemin-svgo": "^5.2.2"
+    "imagemin-svgo": "^5.2.2",
+    "nconf": "^0.8.4"
+  },
+  "dependencies": {
+    "gulp-clean-css": "^3.4.1"
   }
 }

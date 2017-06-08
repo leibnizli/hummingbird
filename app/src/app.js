@@ -112,7 +112,9 @@ App.prototype = {
                             imageminSvgo({})
                         ]
                     }).then(files => {
-                        runThen(files);
+                        runSucceed(files);
+                    },err => {
+                        runSkip(err)
                     });
                     break;
                 case "image/jpeg":
@@ -125,7 +127,9 @@ App.prototype = {
                             })
                         ]
                     }).then(files => {
-                        runThen(files);
+                        runSucceed(files);
+                    },err => {
+                        runSkip(err)
                     });
                     break;
                 case "image/png":
@@ -135,15 +139,18 @@ App.prototype = {
                             imageminPngquant({quality: '65-85',speed: 3})
                         ]
                     }).then(files => {
-                        runThen(files);
+                        runSucceed(files);
+                    },err => {
+                        runSkip(err)
                     });
                     break;
                 case "image/gif":
-                    imagemin.use(imagemin.gifsicle());
                     imagemin([filePath], fileDirname, {
                         plugins: [imageminGifsicle()]
                     }).then(files => {
-                        runThen(files);
+                        runSucceed(files);
+                    },err => {
+                        runSkip(err)
                     });
                     break;
                 case "image/webp":
@@ -152,27 +159,29 @@ App.prototype = {
                             imageminWebp({quality: webpValue || 85})
                         ]
                     }).then(files => {
-                        runThen(files);
+                        runSucceed(files);
+                    },err => {
+                        runSkip(err)
                     });
                     break;
                 case "text/css":
                     gulp.src(filePath).pipe(cleanCSS({compatibility: 'ie8'})).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function(){
-                        runThen()
+                        runSucceed()
                     });
                     break;
                 //case "text/javascript":
                 case "text/javascript":
                     gulp.src(filePath).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function(){
-                        runThen()
+                        runSucceed()
                     });
                     break;
                 case "text/html":
                     gulp.src(filePath).pipe(htmlmin({collapseWhitespace: true})).pipe(gulp.dest(fileDirname)).on('end', function(){
-                        runThen()
+                        runSucceed()
                     });
                     break;
             }
-            function runThen(files){
+            function runSucceed(files){
                 if (files){
                     self.filesArray[index].optimized = files[0].data.length;
                 } else {
@@ -183,6 +192,16 @@ App.prototype = {
                 pie.set(((index / len) * 100).toFixed(0));
                 if (index >= len) {
                     self._dropOver(len,files);
+                    return;
+                };
+                filesHandle();
+            }
+            function runSkip(err){
+                self.filesArray[index].optimized = self.filesArray[index].size;
+                index++;
+                pie.set(((index / len) * 100).toFixed(0));
+                if (index >= len) {
+                    self._dropOver(len);
                     return;
                 };
                 filesHandle();

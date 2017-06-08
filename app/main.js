@@ -31,8 +31,8 @@ app.on('ready', function() {
     mainWindow = new BrowserWindow({
         icon: './src/images/icon.png',
         title: '蜂鸟 v2.0.0',
-        width: 320,
-        height: 267,
+        width: 820,
+        height: 767,
         frame: false,
         resizable: false,
     });
@@ -63,8 +63,8 @@ ipcMain.on('open-settings-window', function () {
         return;
     }
     settingsWindow = new BrowserWindow({
-        width: 1340,
-        height: 1300,
+        width: 340,
+        height: 300,
         icon: './src/images/icon.png',
         frame: true,
         title: '设置 - 蜂鸟',
