@@ -8,16 +8,16 @@
 
 ## Install
 
-* <a href="http://pan.baidu.com/s/1o8KQOwa">OS X</a>
-* <a href="https://pan.baidu.com/s/1mioNiys">Windows (v2.0.0)</a>
+* <a href="https://pan.baidu.com/s/1hsd0ajE">OS X</a> (v2.0.0)
+* <a href="https://pan.baidu.com/s/1mioNiys">Windows</a> (v2.0.0)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
-`Windows`是一个解压文件夹而不是安装包，因为文件目录太长多次封装安装包不成功（不影响使用）。
+`Windows`是一个解压文件夹而不是安装包。
 
 * (建议)将下载后的压缩包解压到目标文件夹，选择`Hummingbird.exe`右键单击 → 选择`发送到` → `桌面快捷方式`
 * (或)直接运行解压目录下`Hummingbird.exe`
-* 不支持部分Windows 10系统
+* 可能不支持部分Windows 10系统
 * 在Windows系统中.JPG后缀的文件可能会无法运行
 
 > 分享统计数据和压缩参数配置数据是保存在用户目录下`hummingbird-config.json`中，本App不做任何数据上传，绝对安全。

@@ -73,8 +73,7 @@ App.prototype = {
     _filterFiles: function(files) {
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            console.log(file.type)
-            if (file.type.indexOf("image") === -1&&file.type.indexOf("css") === -1&&file.type.indexOf("x-js") === -1&&file.type.indexOf("html") === -1) {
+            if (file.type.indexOf("image") === -1&&file.type.indexOf("css") === -1&&file.type.indexOf("javascript") === -1&&file.type.indexOf("html") === -1) {
                 continue;
             }
             this.filesArray.push({
@@ -162,7 +161,7 @@ App.prototype = {
                     });
                     break;
                 //case "text/javascript":
-                case "application/x-js":
+                case "text/javascript":
                     gulp.src(filePath).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function(){
                         runThen()
                     });

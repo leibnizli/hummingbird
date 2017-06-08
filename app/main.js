@@ -34,7 +34,7 @@ app.on('ready', function() {
         width: 320,
         height: 267,
         frame: false,
-        //resizable: false,
+        resizable: false,
     });
 
     // 加载应用的 index.html
@@ -63,8 +63,8 @@ ipcMain.on('open-settings-window', function () {
         return;
     }
     settingsWindow = new BrowserWindow({
-        width: 340,
-        height: 300,
+        width: 1340,
+        height: 1300,
         icon: './src/images/icon.png',
         frame: true,
         title: '设置 - 蜂鸟',
