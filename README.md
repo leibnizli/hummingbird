@@ -1,17 +1,20 @@
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
 
-> `蜂鸟`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
+> `Hummingbird`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 
-jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，替换前会在当前目录新建`source`文件夹并备份处理前的文件。
+> `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html). 
 
-css/js压缩后会生成一个带.min的新文件。
+* jpg/png/webp/svg/gif/html压缩后会替换掉当前文件
+* 默认会在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中取消
+* 支持拖放文件夹
+* css/js压缩后会生成一个带.min的新文件。
 
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1dFAaosL">macOS</a> (v2.0.0)
-* <a href="https://pan.baidu.com/s/1bBmamU">Windows</a> (v2.0.0)
+* <a href="https://pan.baidu.com/s/1dFAaosL">macOS</a> (v3.0.0)
+* <a href="https://pan.baidu.com/s/1bBmamU">Windows</a> (v3.0.0)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
@@ -35,8 +38,8 @@ css/js压缩后会生成一个带.min的新文件。
             <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/jpg-after.jpg" alt="" width="280" height="392"></td>
         </tr>
         <tr>
-            <td>压缩前</td>
-            <td>压缩后</td>
+            <td>Before</td>
+            <td>After</td>
         </tr>
         <tr>
             <td>41kb</td>
@@ -56,8 +59,8 @@ css/js压缩后会生成一个带.min的新文件。
             <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/png-after.png" alt="" width="128" height="128"></td>
         </tr>
         <tr>
-            <td>压缩前</td>
-            <td>压缩后</td>
+            <td>Before</td>
+            <td>After</td>
         </tr>
         <tr>
             <td>28.9kb</td>
@@ -75,8 +78,8 @@ css/js压缩后会生成一个带.min的新文件。
             <td><img src="https://cdn.rawgit.com/stormtea123/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
         </tr>
         <tr>
-            <td>压缩前</td>
-            <td>压缩后</td>
+            <td>Before</td>
+            <td>After</td>
         </tr>
         <tr>
             <td>5.47kb</td>

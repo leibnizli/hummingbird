@@ -3,3 +3,6 @@
 /dist/
 *.dmg
 appdmg.json
+.idea
+*lock.json
+/app/build/

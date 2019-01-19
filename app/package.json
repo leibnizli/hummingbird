@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stormtea123/hummingbird.git"
+    "url": "git+https://github.com/thunkli/hummingbird.git"
   },
-  "author": "stormtea123",
+  "author": "thunkli",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stormtea123/hummingbird/issues"
+    "url": "https://github.com/thunkli/hummingbird/issues"
   },
-  "homepage": "https://github.com/stormtea123/hummingbird#readme",
+  "homepage": "https://github.com/thunkli/hummingbird#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-htmlmin": "^3.0.0",

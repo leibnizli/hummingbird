@@ -1,4 +1,4 @@
-var fs = require("fs");
+const fs = require("fs");
 const {shell,ipcRenderer} = require('electron')
 require("./lib/jquery.js");
 //drag
@@ -42,7 +42,7 @@ if (navigator.userAgent.indexOf("Windows") > -1) {
         "border": "solid 1px #7d95ad"
     })
 }
-var App = require("./app.js");
+const App = require("./app.js");
 new App("#ui-app");
 //设置参数
 require("./settings.js");
