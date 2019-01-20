@@ -33,8 +33,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/jpg-before.jpg" alt="" width="280" height="392"></td>
-            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/jpg-after.jpg" alt="" width="280" height="392"></td>
+            <td><img src="./demo/jpg-before.jpg" alt="" width="280" height="392"></td>
+            <td><img src="./demo/jpg-after.jpg" alt="" width="280" height="392"></td>
         </tr>
         <tr>
             <td>Before</td>
@@ -54,8 +54,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/png-before.png" alt="" width="128" height="128"></td>
-            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/png-after.png" alt="" width="128" height="128"></td>
+            <td><img src="./demo/png-before.png" alt="" width="128" height="128"></td>
+            <td><img src="./demo/png-after.png" alt="" width="128" height="128"></td>
         </tr>
         <tr>
             <td>Before</td>
@@ -73,8 +73,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/svg-before.svg" alt="" width="216" height="164"></td>
-            <td><img src="https://raw.ragithubusercontentwgit.com/thunkli/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
+            <td><img src="./demo/svg-before.svg" alt="" width="216" height="164"></td>
+            <td><img src="./demo/svg-after.svg" alt="" width="216" height="164"></td>
         </tr>
         <tr>
             <td>Before</td>
