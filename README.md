@@ -1,10 +1,10 @@
-<img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
+<img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
 
 > `Hummingbird`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 
 > `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html). 
 
-<img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
+<img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
 * 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
@@ -33,8 +33,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/jpg-before.jpg" alt="" width="280" height="392"></td>
-            <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/jpg-after.jpg" alt="" width="280" height="392"></td>
+            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/jpg-before.jpg" alt="" width="280" height="392"></td>
+            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/jpg-after.jpg" alt="" width="280" height="392"></td>
         </tr>
         <tr>
             <td>Before</td>
@@ -54,8 +54,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/png-before.png" alt="" width="128" height="128"></td>
-            <td><img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/png-after.png" alt="" width="128" height="128"></td>
+            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/png-before.png" alt="" width="128" height="128"></td>
+            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/png-after.png" alt="" width="128" height="128"></td>
         </tr>
         <tr>
             <td>Before</td>
@@ -73,8 +73,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://cdn.rawgit.com/stormtea123/hummingbird/master/demo/svg-before.svg" alt="" width="216" height="164"></td>
-            <td><img src="https://cdn.rawgit.com/stormtea123/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
+            <td><img src="https://cdn.rawgit.com/thunkli/hummingbird/master/demo/svg-before.svg" alt="" width="216" height="164"></td>
+            <td><img src="https://cdn.rawgit.com/thunkli/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
         </tr>
         <tr>
             <td>Before</td>
