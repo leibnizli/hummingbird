@@ -1,8 +1,11 @@
-/node_modules/
+node_modules
 .DS_Store
 /dist/
 *.dmg
-appdmg.json
 .idea
 *lock.json
 /app/build/
+electron-packager-darwin-template
+electron-packager-mac
+*.zip
+*.log

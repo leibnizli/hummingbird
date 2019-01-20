@@ -1,11 +1,10 @@
-const {app, BrowserWindow,ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path')
 const url = require('url')
-var configuration = require("./configuration");
-var settingsWindow = null,
+const configuration = require("./configuration");
+let settingsWindow = null,
     mainWindow = null;
-
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function () {
     // 在 OS X 上，通常用户在明确地按下 Cmd + Q 之前
     // 应用会保持活动状态
     if (process.platform != 'darwin') {
@@ -24,32 +23,40 @@ if (!configuration.get('count')) {
 if (!configuration.get('size')) {
     configuration.set('size', 0);
 }
+if (!configuration.get('backup')) {
+    configuration.set('backup', false);
+}
 // 当 Electron 完成了初始化并且准备创建浏览器窗口的时候
 // 这个方法就被调用
-app.on('ready', function() {
+app.on('ready', function () {
     // 创建浏览器窗口。
     mainWindow = new BrowserWindow({
         icon: './src/images/icon.png',
         title: '蜂鸟 v2.0.0',
-        width: 820,
-        height: 767,
+        width: 320,
+        height: 267,
         frame: false,
         resizable: false,
+        webPreferences: {
+            nodeIntegration: true,
+            nodeIntegrationInWorker: true
+        }
     });
 
     // 加载应用的 index.html
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     // 打开开发工具
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     // 当 window 被关闭，这个事件会被发出
-    mainWindow.on('closed', function() {
+    mainWindow.on('closed', function () {
         // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
         mainWindow = null;
     });
-    mainWindow.webContents.on('did-finish-load', function() {
-        mainWindow.webContents.send('quality', configuration.get('jpg'),configuration.get('webp'));
-        mainWindow.webContents.send('mainWindow-share', configuration.get('count'),configuration.get('size'));
+    mainWindow.webContents.on('did-finish-load', function () {
+        mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
+        mainWindow.webContents.send('mainWindow-share', configuration.get('count'), configuration.get('size'));
+        mainWindow.webContents.send('backup', configuration.get('backup'));
     });
 });
 ipcMain.on('close-main-window', function () {
@@ -69,22 +76,31 @@ ipcMain.on('open-settings-window', function () {
         frame: true,
         title: '设置 - 蜂鸟',
         resizable: false,
-        'auto-hide-menu-bar': true
+        'auto-hide-menu-bar': true,
+        webPreferences: {
+            nodeIntegration: true,
+            nodeIntegrationInWorker: true
+        }
     });
     settingsWindow.loadURL('file://' + __dirname + '/settings.html');
 
     settingsWindow.on('closed', function () {
         settingsWindow = null;
     });
-    //settingsWindow.openDevTools();
+    // settingsWindow.openDevTools();
 
-    settingsWindow.webContents.on('did-finish-load', function() {
-        settingsWindow.webContents.send('settings-quality', configuration.get('jpg'),configuration.get('webp'));
+    settingsWindow.webContents.on('did-finish-load', function () {
+        settingsWindow.webContents.send('set-quality', configuration.get('jpg'), configuration.get('webp'));
+        settingsWindow.webContents.send('backup', configuration.get('backup'))
     });
 });
-ipcMain.on('set-configuration', function (event, arg1,arg2) {
+ipcMain.on('set-quality', function (event, arg1, arg2) {
     configuration.set(arg1, arg2);
-    mainWindow.webContents.send('quality', configuration.get('jpg'),configuration.get('webp'));
+    mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
+});
+ipcMain.on('backup', function (event, value) {
+    configuration.set('backup', value);
+    mainWindow.webContents.send('backup', value);
 });
 ipcMain.on('set-share', function (event, count, size) {
     configuration.set('count', count);

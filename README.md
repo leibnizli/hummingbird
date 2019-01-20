@@ -4,17 +4,16 @@
 
 > `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html). 
 
-* jpg/png/webp/svg/gif/html压缩后会替换掉当前文件
-* 默认会在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中取消
-* 支持拖放文件夹
-* css/js压缩后会生成一个带.min的新文件。
-
 <img src="https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
+
+* jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
+* 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
+* 支持拖放文件夹
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1dFAaosL">macOS</a> (v3.0.0)
-* <a href="https://pan.baidu.com/s/1bBmamU">Windows</a> (v3.0.0)
+* <a href="https://pan.baidu.com/s/17dQIha_jPvsFda_Ap6XnPA">macOS</a> (v3.0.0)
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">Windows</a> (v3.0.0)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 

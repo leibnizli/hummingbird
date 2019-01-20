@@ -29,7 +29,7 @@ ipcRenderer.on('mainWindow-share', function(e, count, size) {
     window.shareSize = size;
 });
 $(document).on("click", ".ui-share", function(e) {
-    shell.openExternal('http://service.weibo.com/share/share.php?url=https://github.com/stormtea123/hummingbird&ralateUid=1564456012&language=zh_cn&title=蜂鸟客户端已经帮我处理图片' + window.shareCount + '次，压缩空间' + (window.shareSize / (1024 * 1024)).toFixed(4) + 'M，好人一生平安&pic=https://raw.githubusercontent.com/stormtea123/hummingbird/master/demo/hummingbird.jpg&searchPic=false&style=number');
+    shell.openExternal('https://service.weibo.com/share/share.php?url=https://github.com/stormtea123/hummingbird&ralateUid=1564456012&language=zh_cn&title=蜂鸟客户端已经帮我处理图片' + window.shareCount + '次，压缩空间' + (window.shareSize / (1024 * 1024)).toFixed(4) + 'M，好人一生平安&pic=https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/hummingbird.jpg&searchPic=false&style=number');
 });
 $(document).on("click", ".ui-minimized", function(e) {
     ipcRenderer.send('main-minimized');
