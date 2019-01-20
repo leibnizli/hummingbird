@@ -73,8 +73,8 @@
 <table>
     <tbody>
         <tr>
-            <td><img src="https://cdn.rawgit.com/thunkli/hummingbird/master/demo/svg-before.svg" alt="" width="216" height="164"></td>
-            <td><img src="https://cdn.rawgit.com/thunkli/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
+            <td><img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/svg-before.svg" alt="" width="216" height="164"></td>
+            <td><img src="https://raw.ragithubusercontentwgit.com/thunkli/hummingbird/master/demo/svg-after.svg" alt="" width="216" height="164"></td>
         </tr>
         <tr>
             <td>Before</td>
