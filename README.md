@@ -21,7 +21,6 @@
 
 * (建议)将下载后的压缩包解压到目标文件夹，选择`Hummingbird.exe`右键单击 → 选择`发送到` → `桌面快捷方式`
 * (或)直接运行解压目录下`Hummingbird.exe`
-* 可能不支持部分Windows 10系统
 * 在Windows系统中.JPG后缀的文件可能会无法运行
 
 > 分享统计数据和压缩参数配置数据是保存在用户目录下`hummingbird-config.json`中，本App不做任何数据上传，绝对安全。
