@@ -12,7 +12,7 @@
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/17dQIha_jPvsFda_Ap6XnPA">macOS</a> (v3.0.0)
+* <a href="https://pan.baidu.com/s/1bcs7ikI152O8AFyTOvx6ag">macOS</a> (v4.0.1, 提取码：zwuw)
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">Windows</a> (v3.0.0)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序

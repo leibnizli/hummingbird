@@ -32,7 +32,7 @@ app.on('ready', function () {
     // 创建浏览器窗口。
     mainWindow = new BrowserWindow({
         icon: './src/images/icon.png',
-        title: '蜂鸟 v2.0.0',
+        title: '蜂鸟 v4.0.1',
         width: 320,
         height: 267,
         frame: false,
