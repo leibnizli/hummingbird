@@ -8,12 +8,11 @@
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
 * 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
-* 支持拖放文件夹
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1bcs7ikI152O8AFyTOvx6ag">macOS</a> (v4.0.1, 提取码：zwuw)
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">Windows</a> (v3.0.0)
+* <a href="https://pan.baidu.com/s/1dFAaosL">macOS</a> (v2.0.0, 不支持文件夹压缩)
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">Windows</a> (v3.0.0，支持拖放文件夹压缩)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
