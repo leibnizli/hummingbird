@@ -11,8 +11,9 @@
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1dFAaosL">macOS</a> (v2.0.0, 不支持文件夹压缩)
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">Windows</a> (v3.0.0，支持拖放文件夹压缩)
+* <a href="https://pan.baidu.com/s/1dFAaosL">macOS v2.0.0</a> (不支持文件夹压缩)
+* <a href="https://pan.baidu.com/s/1dKbZWfZPHbMPg4WTfpqndQ">macOS v4.0.1</a> (提取码`uqk4`, 支持拖放文件夹压缩，某些系统版本不支持压缩png)
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">Windows v3.0.0</a> (支持拖放文件夹压缩)
 
 `OS X` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
 
