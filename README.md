@@ -11,7 +11,7 @@
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1dFAaosL">**macOS v2.0.0**</a> (推荐使用，不支持文件夹批量压缩)
+* <a href="https://pan.baidu.com/s/1dFAaosL">**macOS v2.0.0**</a> (推荐使用，不支持拖放文件夹压缩)
 * <a href="https://pan.baidu.com/s/1dKbZWfZPHbMPg4WTfpqndQ">macOS v4.0.1</a> (提取码`uqk4`, 支持拖放文件夹压缩，某些系统版本不支持压缩png)
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (推荐使用，支持拖放文件夹压缩)
 
