@@ -1,10 +1,8 @@
-<img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
+<img src="https://raw.githubusercontent.com/leibnizli/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
 
 > `Hummingbird`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 
-> `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html). 
-
-<img src="https://raw.githubusercontent.com/thunkli/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
+<img src="https://raw.githubusercontent.com/leibnizli/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
 * 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
