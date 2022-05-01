@@ -4,15 +4,13 @@ English | [简体中文](./README.md)
 
 ![hummingbird](https://user-images.githubusercontent.com/1193966/160070323-f58e802b-3a05-40dd-95bf-fba2150ab01f.png)
 
-* jpg/png/webp/svg/gif/html will replace the current file after compression, and a new file with .min will be generated after css/js compression
-* You can create a `source` folder in the current directory and back up the files before processing, which can be enabled in the settings
-
+* jpg/png/webp/svg/gif/html will replace the current file after compression, and a new file with .min will be generated after css/js compression.
+* You can create a `source` folder in the current directory and back up the files before processing, which can be enabled in the settings.
 
 ## Install
 
 * <a href="https://pan.baidu.com/s/1dFAaosL">**macOS v2.0.0**</a> (Do not support the drag and drop folder compression)
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (Support the drag and drop folder compression)
-
 
 ## Usage
 
@@ -36,7 +34,6 @@ English | [简体中文](./README.md)
 </table>
 
 ### png
-
 
 <table>
     <tbody>
