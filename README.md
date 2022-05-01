@@ -1,4 +1,4 @@
-简体中文| [English](./README-EN.md)
+简体中文 | [English](./README-en.md)
 
 <img src="https://raw.githubusercontent.com/leibnizli/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
 

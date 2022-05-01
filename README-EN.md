@@ -55,7 +55,7 @@ English | [简体中文](./README.md)
     </tbody>
 </table>
 
-### svg压缩对比
+### svg
 
 <table>
     <tbody>
