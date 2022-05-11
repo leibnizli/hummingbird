@@ -1,4 +1,4 @@
-English | [简体中文](./README-cn-ZH.md)
+English | [简体中文](./README-zh-CN.md)
 
 `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html).
 
