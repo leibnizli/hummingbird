@@ -9,8 +9,8 @@ English | [简体中文](./README-cn-ZH.md)
 
 ## Install
 
-* <a href="https://pan.baidu.com/s/1dFAaosL">**macOS v2.0.0**</a> (Do not support the drag and drop folder compression)
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (Support the drag and drop folder compression)
+* <a href="https://drive.google.com/file/d/1oOKDEL0Wox9VdwZ8pcCZz0yyf2E63z1g/view?usp=sharing">**macOS v2.0.0**</a> (Do not support the drag and drop folder compression)
+* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=sharing">**Windows v3.0.0**</a> (Support the drag and drop folder compression)
 
 ## Usage
 
