@@ -49,16 +49,16 @@ function App(el, options) {
 App.prototype = {
     _init: function () {
         this._updateState();
-        this.$el.find(".ui-area-waiting").html("将图形文件拖放至此");
+        this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
         this.$el.on("dragenter", ".ui-area-drop", (e) => {
             e.preventDefault();
             $(e.target).addClass("ui-area-drop-have");
-            this.$el.find(".ui-area-waiting").html("松开鼠标,就开始处理了");
+            this.$el.find(".ui-area-waiting").html("Release the mouse, and the process begins");
         });
         this.$el.on("dragleave", ".ui-area-drop", (e) => {
             e.preventDefault();
             $(e.target).removeClass("ui-area-drop-have");
-            this.$el.find(".ui-area-waiting").html("将图形文件拖放至此");
+            this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
         });
         this.$el.on("drop", ".ui-area-drop", (e) => {
             $(e.target).removeClass("ui-area-drop-have");
@@ -72,7 +72,7 @@ App.prototype = {
     _filterFiles: function (dataTransfer) {
         const items = dataTransfer.items;
         if (items.length === 0) {
-            this.$el.find(".ui-area-waiting").html("将图形文件拖放至此");
+            this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
             return false;
         }
         for (let i = 0; i < items.length; i++) {
