@@ -5,14 +5,14 @@
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thunkli/hummingbird.git"
+    "url": "git+https://github.com/leibnizli/hummingbird.git"
   },
-  "author": "thunkli",
+  "author": "leibnizli",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thunkli/hummingbird/issues"
+    "url": "https://github.com/leibnizli/hummingbird/issues"
   },
-  "homepage": "https://github.com/thunkli/hummingbird#readme",
+  "homepage": "https://github.com/leibnizli/hummingbird#readme",
   "devDependencies": {
     "gulp": "^4.0.0",
     "gulp-htmlmin": "^3.0.0",

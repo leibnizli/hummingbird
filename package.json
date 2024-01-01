@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stormtea123/hummingbird.git"
+    "url": "git+https://github.com/leibnizli/hummingbird.git"
   },
-  "author": "stormtea123",
+  "author": "leibnizli",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stormtea123/hummingbird/issues"
+    "url": "https://github.com/leibnizli/hummingbird/issues"
   },
-  "homepage": "https://github.com/stormtea123/hummingbird#readme",
+  "homepage": "https://github.com/leibnizli/hummingbird#readme",
   "devDependencies": {
     "electron": "^4.0.1",
     "electron-packager": "13.0.1",
