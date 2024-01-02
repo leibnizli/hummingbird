@@ -2,15 +2,23 @@ English | [简体中文](./README-zh-CN.md)
 
 `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html).
 
-![hummingbird](https://user-images.githubusercontent.com/1193966/160070323-f58e802b-3a05-40dd-95bf-fba2150ab01f.png)
+![Hummingbird](https://github.com/leibnizli/hummingbird/assets/1193966/5e44fd5e-15f9-4ba5-a40b-75310bd14815)
 
 * jpg/png/webp/svg/gif/html will replace the current file after compression, and a new file with .min will be generated after css/js compression.
 * You can create a `source` folder in the current directory and back up the files before processing, which can be enabled in the settings.
 
 ## Install
 
+### Overseas users
+
 * <a href="https://drive.google.com/file/d/1oOKDEL0Wox9VdwZ8pcCZz0yyf2E63z1g/view?usp=sharing">**macOS v2.0.0**</a> (Do not support the drag and drop folder compression)
 * <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=sharing">**Windows v3.0.0**</a> (Support the drag and drop folder compression)
+
+### Mainland users（大陆用户）
+
+* <a href="https://pan.baidu.com/s/1dFAaosL">**macOS v2.0.0**</a> (不支持拖放文件夹压缩)
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (支持拖放文件夹压缩)
+
 
 ## Usage
 

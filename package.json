@@ -1,8 +1,8 @@
 {
   "name": "hummingbird",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "./app/main.js",
   "scripts": {
     "start": "webpack --watch",
     "dev": "electron ./app",
@@ -27,11 +27,11 @@
   },
   "homepage": "https://github.com/leibnizli/hummingbird#readme",
   "devDependencies": {
-    "electron": "^4.0.1",
-    "electron-packager": "13.0.1",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "babel-loader": "^8.0.5",
+    "electron": "^28.1.0",
+    "electron-packager": "17.1.2",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   }

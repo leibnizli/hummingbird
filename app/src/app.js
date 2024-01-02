@@ -251,7 +251,7 @@ App.prototype = {
         this.filesArray.forEach(function (file) {
             this.diff += file.size - file.optimized;
         }.bind(this));
-        this.$el.find(".ui-area-waiting").html("已处理" + num + "个文件,压缩空间" + (this.diff / (1024)).toFixed(1) + 'KB');
+        this.$el.find(".ui-area-waiting").html(`${num} files have been processed and the compressed space is ${(this.diff / (1024)).toFixed(1)}KB`);
         localStorage.setItem("count", window.shareCount + 1);
         localStorage.setItem("size", window.shareSize + 1);
         ipcRenderer.send('set-share', window.shareCount + 1, window.shareSize + this.diff);
