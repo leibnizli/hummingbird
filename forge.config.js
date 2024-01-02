@@ -37,7 +37,7 @@ module.exports = {
           owner: "leibnizli",
           name: "hummingbird"
         },
-        prerelease: true
+        draft: true
       }
     }
   ],
