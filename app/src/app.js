@@ -174,19 +174,16 @@ App.prototype = {
           });
           break;
         case "image/png":
-          (async () => {
-            await imagemin([filePath], {
-              destination: fileDirname,
-              plugins: [
-                imageminOptipng(),
-                imageminPngquant()
-              ]
-            }).then(files => {
-              runSucceed(files, "img");
-            }, err => {
-              runSkip(err)
-            });
-          })();
+          imagemin([filePath], fileDirname, {
+            plugins: [
+              imageminOptipng({optimizationLevel: 2}),
+              imageminPngquant({quality: '65-85',speed: 3})
+            ]
+          }).then(files => {
+            runSucceed(files,"img");
+          }, err => {
+            runSkip(err)
+          });
           break;
         case "image/gif":
           imagemin([filePath], fileDirname, {
