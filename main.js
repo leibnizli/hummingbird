@@ -1,3 +1,6 @@
+const { updateElectronApp } = require('update-electron-app');
+updateElectronApp(); // additional configuration options available
+
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path')
 const url = require('url')

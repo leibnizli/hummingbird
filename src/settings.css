@@ -1,0 +1,16 @@
+input[type='range'] { -webkit-appearance: none; appearance: none; background-color: #FFF;
+    vertical-align: middle; width: 180px; }
+input[type=range]::-webkit-slider-runnable-track { -webkit-appearance: none; appearance: none; background-color: #e4e8ec; height: 4px; vertical-align: middle; }
+input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; background-color: #8da2b9; height: 20px; width: 10px; vertical-align: middle; cursor:move; margin-top: -8px;}
+html,body { height:100%; }
+body { display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; }
+.settings { width:300px; }
+    .settings-backup { height:32px; padding:10px; background:#f9f9f9; line-height:12px; margin-bottom:7px; text-align:center; font-size:12px; }
+    .settings-backup span { margin-left:7px; }
+    .settings-tb { width:100%; text-align: center; }
+    .settings-tb caption { color: #000; padding-bottom: 5px; }
+    .settings-name { text-align: right; }
+    .settings-value { min-width:40px; }
+    .settings-tb td { padding: 8px 10px; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd; font-size: 12px; }
+    .settings-tb tr td:last-child { border-right: 0; }
+    .settings-tb tr:last-child td { border-bottom: 0; }

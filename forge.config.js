@@ -1,6 +1,6 @@
 module.exports = {
   packagerConfig: {
-    icon: "./app/src/images/icon",
+    icon: "./src/images/icon",
   },
   rebuildConfig: {},
 
@@ -11,12 +11,12 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: [],
     },
     {
       name: '@electron-forge/maker-dmg',
       config: {
-        icon: './app/src/images/icon.icns',
+        icon: './src/images/icon.icns',
         format: 'ULFO'
       }
     },
@@ -28,6 +28,18 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {},
     },
+  ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "leibnizli",
+          name: "hummingbird"
+        },
+        prerelease: true
+      }
+    }
   ],
   plugins: [],
 };

@@ -2,15 +2,7 @@
   "name": "hummingbird",
   "version": "4.0.0",
   "description": "",
-  "main": "./app/main.js",
-  "scripts": {
-    "build": "webpack --watch",
-    "start": "electron-forge start",
-    "dev": "electron ./app",
-    "clean": "rm -rf ./dist",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
-  },
+  "main": "main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leibnizli/hummingbird.git"
@@ -21,22 +13,47 @@
     "url": "https://github.com/leibnizli/hummingbird/issues"
   },
   "homepage": "https://github.com/leibnizli/hummingbird#readme",
+  "scripts": {
+    "build": "webpack --watch",
+    "start": "electron-forge start",
+    "dev": "electron .",
+    "clean": "rm -rf ./out",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@electron-forge/cli": "^7.2.0",
     "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-dmg": "^7.2.0",
     "@electron-forge/maker-rpm": "^7.2.0",
     "@electron-forge/maker-squirrel": "^7.2.0",
-    "@electron-forge/maker-dmg": "^7.2.0",
     "@electron-forge/maker-zip": "^7.2.0",
+    "@electron-forge/publisher-github": "^7.2.0",
     "babel-loader": "^8.0.5",
     "electron": "^28.1.0",
     "electron-packager": "17.1.2",
+    "electron-squirrel-startup": "^1.0.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "update-electron-app": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^3.4.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "imagemin": "^5.3.1",
+    "imagemin-gifsicle": "^6.0.1",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-optipng": "^5.2.1",
+    "imagemin-pngquant": "^5.0.1",
+    "imagemin-svgo": "^7.0.0",
+    "imagemin-webp": "^5.0.0",
+    "nconf": "0.11.4"
   }
 }

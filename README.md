@@ -11,12 +11,12 @@ English | [简体中文](./README-zh-CN.md)
 
 ### Overseas users
 
-* <a href="https://drive.google.com/file/d/1oOKDEL0Wox9VdwZ8pcCZz0yyf2E63z1g/view?usp=sharing">**macOS v2.0.0**</a> (Do not support the drag and drop folder compression)
+* <a href="https://drive.google.com/file/d/1oOKDEL0Wox9VdwZ8pcCZz0yyf2E63z1g/view?usp=sharing">**macOS v2.0.0**</a> (Support the drag and drop folder compression)
 * <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=sharing">**Windows v3.0.0**</a> (Support the drag and drop folder compression)
 
 ### Mainland users（大陆用户）
 
-* <a href="https://pan.baidu.com/s/1dFAaosL">**macOS v2.0.0**</a> (不支持拖放文件夹压缩)
+* <a href="https://pan.baidu.com/s/1pd28MRYnSAFh_hAkWBlFsg?pwd=232i">**macOS v4.0.0**</a> (支持拖放文件夹压缩)
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (支持拖放文件夹压缩)
 
 

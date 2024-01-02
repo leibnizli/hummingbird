@@ -4,10 +4,11 @@ node_modules
 *.dmg
 .idea
 *lock.json
-/app/build/
+/build/
 electron-packager-darwin-template
 electron-packager-mac
 *.zip
 *.log
 
 out/
+.env
