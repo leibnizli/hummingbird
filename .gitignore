@@ -9,3 +9,5 @@ electron-packager-darwin-template
 electron-packager-mac
 *.zip
 *.log
+
+out/
