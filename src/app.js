@@ -81,6 +81,9 @@ App.prototype = {
       this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
       return false;
     }
+    if (!this.time) {
+      this.time = Date.now();
+    }
     for (let i = 0; i < items.length; i++) {
       const entry = items[i].webkitGetAsEntry();
       if (entry) {
@@ -93,16 +96,12 @@ App.prototype = {
     if (item.isFile) {
       // Get file
       item.file((file) => {
-        if (!this.time) {
-          this.time = Date.now();
-        }
         clearTimeout(this.Timer);
         this.Timer = setTimeout(() => {
           this.status = "drop";
           this._updateState();
           this._delFiles(this.filesArray);
         }, 100);
-        this.time = Date.now();
         if (file.type.indexOf("image") > -1 || file.type.indexOf("css") > -1 || file.type.indexOf("javascript") > -1 || file.type.indexOf("html") > -1) {
           this.filesArray.push({
             size: file.size,
@@ -123,13 +122,27 @@ App.prototype = {
     }
   },
   _delFiles: function () {
+    let p = 0;
     let pie = new Pie(),
       index = 0,
       self = this,
       len = this.filesArray.length;
     pie.set(0);
-    (function filesHandle() {
-      const filePath = self.filesArray[index].path,
+    const obj = new Proxy({count:0}, {
+      get: function (target, propKey, receiver) {
+        return Reflect.get(target, propKey, receiver);
+      },
+      set: function (target, propKey, value, receiver) {
+        Reflect.set(target, propKey, value, receiver);
+        if (target.count < 5) {
+          filesHandle(index)
+        }
+      }
+    });
+
+    function filesHandle(i) {
+      if (i+1 > len) return
+      const filePath = self.filesArray[i].path,
         fileDirname = path.dirname(filePath),
         fileBasename = path.basename(filePath),
         fileSourcePath = path.join(fileDirname, 'source', fileBasename);
@@ -137,15 +150,13 @@ App.prototype = {
       if (backup) {
         //mkdir
         self._mkdirSync(path.join(fileDirname, 'source'));
-        if (self.filesArray[index].type.indexOf("image") > -1) {
+        if (self.filesArray[i].type.indexOf("image") > -1) {
           !fs.existsSync(fileSourcePath) && fs.writeFileSync(fileSourcePath, fs.readFileSync(filePath));
         } else {
           fs.writeFileSync(fileSourcePath, fs.readFileSync(filePath));
         }
       }
-
-
-      switch (self.filesArray[index].type) {
+      switch (self.filesArray[i].type) {
 
         case "image/svg+xml":
           imagemin([filePath], fileDirname, {
@@ -153,9 +164,11 @@ App.prototype = {
               imageminSvgo({})
             ]
           }).then(files => {
-            runSucceed(files, "img");
+            runSucceed(i, [
+              {size: getFilesizeInBytes(filePath)}
+            ]);
           }, err => {
-            runSkip(err)
+            runSkip(i, err)
           });
           break;
         case "image/jpeg":
@@ -168,30 +181,30 @@ App.prototype = {
               })
             ]
           }).then(files => {
-            runSucceed(files, "img");
+            runSucceed(i, files, "img");
           }, err => {
-            runSkip(err)
+            runSkip(i, err)
           });
           break;
         case "image/png":
           imagemin([filePath], fileDirname, {
             plugins: [
               imageminOptipng({optimizationLevel: 2}),
-              imageminPngquant({quality: '65-85',speed: 3})
+              imageminPngquant({quality: '65-85', speed: 3})
             ]
           }).then(files => {
-            runSucceed(files,"img");
+            runSucceed(i, files, "img");
           }, err => {
-            runSkip(err)
+            runSkip(i, err)
           });
           break;
         case "image/gif":
           imagemin([filePath], fileDirname, {
             plugins: [imageminGifsicle()]
           }).then(files => {
-            runSucceed(files, "img");
+            runSucceed(i, files, "img");
           }, err => {
-            runSkip(err)
+            runSkip(i, err)
           });
           break;
         case "image/webp":
@@ -200,14 +213,14 @@ App.prototype = {
               imageminWebp({quality: webpValue || 85})
             ]
           }).then(files => {
-            runSucceed(files, "img");
+            runSucceed(i, files, "img");
           }, err => {
-            runSkip(err)
+            runSkip(i, err)
           });
           break;
         case "text/css":
           gulp.src(filePath).pipe(cleanCSS({compatibility: 'ie8'})).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function () {
-            runSucceed([
+            runSucceed(i, [
               {
                 size: getFilesizeInBytes(
                   `${path.dirname(filePath)}/${path.parse(filePath).name}.min${path.parse(filePath).ext}`
@@ -219,7 +232,7 @@ App.prototype = {
         //case "text/javascript":
         case "text/javascript":
           gulp.src(filePath).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function () {
-            runSucceed([
+            runSucceed(i, [
               {
                 size: getFilesizeInBytes(
                   `${path.dirname(filePath)}/${path.parse(filePath).name}.min${path.parse(filePath).ext}`
@@ -230,48 +243,52 @@ App.prototype = {
           break;
         case "text/html":
           gulp.src(filePath).pipe(htmlmin({collapseWhitespace: true})).pipe(gulp.dest(fileDirname)).on('end', function () {
-            runSucceed([
+            runSucceed(i, [
               {size: getFilesizeInBytes(filePath)}
             ]);
           });
           break;
       }
+      index++;
+      obj.count++;
+    }
 
-      function runSucceed(files, type) {
-        console.log(files);
-        if (type === "img") {
-          if (files) {
-            self.filesArray[index].optimized = files[0].data.length;
-          }
-        } else {
-          self.filesArray[index].optimized = files[0].size;
+    function runSucceed(i, files, type) {
+      console.log(i, files, type)
+      if (type === "img") {
+        if (files) {
+          self.filesArray[i].optimized = files[0] ? files[0].data.length : self.filesArray[i].size;
         }
-        //=> [{data: <Buffer 89 50 4e …>, path: 'build/images/foo.jpg'}, …]
-        index++;
-        pie.set(((index / len) * 100).toFixed(0));
-        if (index >= len) {
-          self._dropOver(len, files);
-          return;
-        }
-        filesHandle();
+      } else {
+        self.filesArray[i].optimized = files[0] ? files[0].size : self.filesArray[i].size;
       }
+      p++;
+      pie.set(((p / len) * 100).toFixed(0));
+      obj.count--;
+      if (p >= len) {
+        self._dropOver(len);
+      }
+    }
 
-      function runSkip(err) {
-        console.log(err)
-        self.filesArray[index].optimized = self.filesArray[index].size;
-        index++;
-        pie.set(((index / len) * 100).toFixed(0));
-        if (index >= len) {
-          self._dropOver(len);
-          return;
-        }
-        filesHandle();
+    function runSkip(i, err) {
+      console.log(i, err)
+      self.filesArray[i].optimized = self.filesArray[i].size;
+      p++;
+      pie.set(((p / len) * 100).toFixed(0));
+      obj.count--;
+      if (p >= len) {
+        self._dropOver(len);
       }
-    })();
+    }
+
+    if (len > 0) {
+      filesHandle(0)
+    }
   },
-  _dropOver: function (num, files) {
+  _dropOver: function (num) {
     this.status = "waiting";
     this._updateState();
+    console.log(this.filesArray)
     this.filesArray.forEach(function (file) {
       this.diff += file.size - file.optimized;
     }.bind(this));

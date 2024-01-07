@@ -1,5 +1,7 @@
 const { updateElectronApp } = require('update-electron-app');
-updateElectronApp(); // additional configuration options available
+updateElectronApp({
+  updateInterval: '1 hour'
+}); // additional configuration options available
 
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path')

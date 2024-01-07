@@ -22,8 +22,6 @@
 * (或)直接运行解压目录下`Hummingbird.exe`
 * 在Windows系统中.JPG后缀的文件可能会无法运行
 
-> 分享统计数据和压缩参数配置数据是保存在用户目录下`hummingbird-config.json`中，本App不做任何数据上传，绝对安全。
-
 ## 使用
 
 ### jpg压缩对比
