@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: [],
+      platforms: ['darwin'],
     },
     {
       name: '@electron-forge/maker-dmg',
