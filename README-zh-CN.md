@@ -4,14 +4,14 @@
 
 > `Hummingbird`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 
-<img src="https://raw.githubusercontent.com/leibnizli/hummingbird/master/demo/demo.png" alt="" width="432" height="379">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/06adae8d-0256-4b33-903e-ca1728d62375" alt="Hummingbird" width="432" height="379">
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
 * 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
 
 ## 安装
 
-* <a href="https://pan.baidu.com/s/1z6mu-MYvuAM2I5HNGBFdcg?pwd=hd2t">**macOS v4.0.0**</a> (支持拖放文件夹压缩)
+* <a href="https://pan.baidu.com/s/1_i0fzJ916mGe6Kn-zLERsQ?pwd=z79c">**macOS v4.2.0**</a> (支持拖放文件夹压缩，支持多线程)
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (支持拖放文件夹压缩)
 
 `macOS` 可能需要你在`系统偏好设置` → `安全性与隐私` 选择允许`任何来源`的应用程序
