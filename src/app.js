@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require('path');
-
 const {ipcRenderer} = require('electron');
 const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
@@ -15,6 +14,7 @@ const htmlmin = require('gulp-htmlmin');
 const uglify = require('gulp-uglify');
 const rename = require("gulp-rename");
 const cleanCSS = require('gulp-clean-css');
+const mime = require('mime');
 
 const Pie = require("./components/pie");
 let jpgValue, webpValue, backup;
@@ -55,7 +55,30 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
+    this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories, or click to select one or more files");
+    this.$el.on("click", ".ui-area-drop", (e) => {
+      e.preventDefault();
+      ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
+        if (paths === undefined) {
+          return
+        } // Dialog was cancelled
+        this.filesArray = [];
+        this.diff = 0;
+        this.status = "drop";
+        this._updateState();
+        for (let p of paths) {
+          const mime_type = mime.getType(p);
+          this.filesArray.push({
+            size: getFilesizeInBytes(p),
+            name: path.basename(p),
+            path: p,
+            type: mime_type
+          });
+        }
+        //console.log(this.filesArray);
+        this._delFiles(this.filesArray);
+      });
+    });
     this.$el.on("dragenter", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).addClass("ui-area-drop-have");
@@ -64,21 +87,19 @@ App.prototype = {
     this.$el.on("dragleave", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
+      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories, or click to select one or more files");
     });
     this.$el.on("drop", ".ui-area-drop", (e) => {
       $(e.target).removeClass("ui-area-drop-have");
       this.filesArray = [];
       this.diff = 0;
       this._filterFiles(e.originalEvent.dataTransfer);
-
-
     });
   },
   _filterFiles: function (dataTransfer) {
     const items = dataTransfer.items;
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html("Drag and drop the file here");
+      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories, or click to select one or more files");
       return false;
     }
     if (!this.time) {
@@ -92,7 +113,6 @@ App.prototype = {
     }
   },
   _traverseFileTree: function (item, path) {
-    path = path || "";
     if (item.isFile) {
       // Get file
       item.file((file) => {
@@ -116,7 +136,7 @@ App.prototype = {
       const dirReader = item.createReader();
       dirReader.readEntries((entries) => {
         for (let i = 0; i < entries.length; i++) {
-          this._traverseFileTree(entries[i], path + item.name + "/");
+          this._traverseFileTree(entries[i]);
         }
       });
     }
@@ -128,7 +148,7 @@ App.prototype = {
       self = this,
       len = this.filesArray.length;
     pie.set(0);
-    const obj = new Proxy({count:0}, {
+    const obj = new Proxy({count: 0}, {
       get: function (target, propKey, receiver) {
         return Reflect.get(target, propKey, receiver);
       },
@@ -141,7 +161,8 @@ App.prototype = {
     });
 
     function filesHandle(i) {
-      if (i+1 > len) return
+      if (i + 1 > len) return;
+      index++;
       const filePath = self.filesArray[i].path,
         fileDirname = path.dirname(filePath),
         fileBasename = path.basename(filePath),
@@ -248,13 +269,13 @@ App.prototype = {
             ]);
           });
           break;
+        default:
+          runSkip(i);
       }
-      index++;
       obj.count++;
     }
 
     function runSucceed(i, files, type) {
-      console.log(i, files, type)
       if (type === "img") {
         if (files) {
           self.filesArray[i].optimized = files[0] ? files[0].data.length : self.filesArray[i].size;

@@ -3,7 +3,7 @@ updateElectronApp({
   updateInterval: '1 hour'
 }); // additional configuration options available
 
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const path = require('path')
 const url = require('url')
 const configuration = require("./configuration");
@@ -43,6 +43,7 @@ app.on('ready', function () {
     frame: false,
     resizable: false,
     webPreferences: {
+      enableRemoteModule: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
       contextIsolation: false
@@ -116,3 +117,14 @@ ipcMain.on('set-share', function (event, count, size) {
   configuration.set('size', size);
   mainWindow.webContents.send('mainWindow-share', count, size);
 });
+ipcMain.handle('dialog:openMultiFileSelect', () => {
+  let options = {
+    properties: ['openFile', 'multiSelections']
+  };
+  return dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
+    .then((result) => {
+      // Bail early if user cancelled dialog
+      if (result.canceled) { return }
+      return result.filePaths;
+    })
+})

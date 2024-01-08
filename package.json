@@ -1,6 +1,6 @@
 {
   "name": "hummingbird",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Support the drag and drop folder compression.",
   "main": "main.js",
   "repository": {
@@ -53,6 +53,7 @@
     "imagemin-pngquant": "^5.0.1",
     "imagemin-svgo": "^7.0.0",
     "imagemin-webp": "^5.0.0",
+    "mime": "^3.0.0",
     "nconf": "0.11.4",
     "update-electron-app": "^3.0.0"
   }
