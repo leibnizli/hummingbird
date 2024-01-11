@@ -13,13 +13,24 @@
     "url": "https://github.com/leibnizli/hummingbird/issues"
   },
   "homepage": "https://github.com/leibnizli/hummingbird#readme",
+  "build": {
+    "appId": "dev.arayofsunshine.hummingbird",
+    "mac": {
+      "category": "tool"
+    },
+    "asar": false
+  },
   "scripts": {
-    "build": "webpack --watch",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "rm -rf ./dist && electron-builder --dir",
+    "dist": "rm -rf ./dist && electron-builder",
+    "build-watch": "webpack --watch",
+    "build": "webpack",
     "start": "electron-forge start",
     "dev": "electron .",
     "clean": "rm -rf ./out",
     "package": "electron-forge package",
-    "make": "npm run clean && electron-forge make",
+    "make": "npm run clean && export $(cat .env | xargs) && electron-forge make",
     "publish": "electron-forge publish"
   },
   "devDependencies": {
@@ -34,6 +45,7 @@
     "@electron-forge/publisher-github": "^7.2.0",
     "babel-loader": "^8.0.5",
     "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
     "electron-packager": "17.1.2",
     "electron-squirrel-startup": "^1.0.0",
     "webpack": "^4.28.4",

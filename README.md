@@ -9,15 +9,15 @@ English | [简体中文](./README-zh-CN.md)
 
 ## Install
 
-### Overseas users
+### International network (国际网)
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.2.0**</a> (Supports drag and drop folder compression and multi-threading)
-* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=sharing">**Windows v3.0.0**</a> (Support the drag and drop folder compression)
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.2.0**</a> (Supports drag and drop folder compression and multi-threading)
 
-### Mainland users（大陆用户）
+### Continental users（大陆网）
 
 * <a href="https://pan.baidu.com/s/1_i0fzJ916mGe6Kn-zLERsQ?pwd=z79c">**macOS v4.2.0**</a> (支持拖放文件夹压缩，支持多线程)
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (支持拖放文件夹压缩)
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (支持拖放文件夹压缩，支持多线程)
 
 ## Usage
 

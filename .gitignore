@@ -4,7 +4,6 @@ node_modules
 *.dmg
 .idea
 *lock.json
-/build/
 electron-packager-darwin-template
 electron-packager-mac
 *.zip
@@ -12,3 +11,4 @@ electron-packager-mac
 
 out/
 .env
+build/bundle.js

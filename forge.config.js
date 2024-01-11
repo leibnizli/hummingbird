@@ -1,22 +1,27 @@
 module.exports = {
   packagerConfig: {
-    icon: "./src/images/icon",
+    icon: "./build/icon",
+    // osxNotarize: {
+    //   tool: 'notarytool',
+    //   appleApiKey: process.env.APPLE_API_KEY,
+    //   appleApiKeyId: process.env.APPLE_API_KEY_ID,
+    //   appleApiIssuer: process.env.APPLE_API_ISSUER
+    // }
   },
   rebuildConfig: {},
 
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
+      name: '@electron-forge/maker-squirrel'
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: ['darwin', 'win32'],
     },
     {
       name: '@electron-forge/maker-dmg',
       config: {
-        icon: './src/images/icon.icns',
+        icon: './build/icon.icns',
         format: 'ULFO'
       }
     },
