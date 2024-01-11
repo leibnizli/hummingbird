@@ -3,7 +3,6 @@ module.exports = {
     icon: "./src/images/icon",
   },
   rebuildConfig: {},
-
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
