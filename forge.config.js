@@ -13,13 +13,6 @@ module.exports = {
       platforms: ['darwin', 'linux', 'win32'],
     },
     {
-      name: '@electron-forge/maker-dmg',
-      config: {
-        icon: './src/images/icon.icns',
-        format: 'ULFO'
-      }
-    },
-    {
       name: '@electron-forge/maker-deb',
       config: {},
     },
