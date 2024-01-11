@@ -32,7 +32,6 @@ function getFilesizeInBytes(filename) {
   var fileSizeInBytes = stats.size;
   return fileSizeInBytes;
 }
-
 function App(el, options) {
   this.$el = $(el);
   this.options = options;
