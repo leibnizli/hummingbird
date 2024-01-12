@@ -11,15 +11,16 @@ English | [简体中文](./README-zh-CN.md)
 
 ### International network (国际网)
 
-* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.2.0**</a> (Supports drag and drop folder compression and multi-threading)
-* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.2.0**</a> (Supports drag and drop folder compression and multi-threading)
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.2.0**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.2.0**</a>
 
-### Continental users（大陆网）
+### Non-international network（非国际网）
 
-* <a href="https://pan.baidu.com/s/1_i0fzJ916mGe6Kn-zLERsQ?pwd=z79c">**macOS v4.2.0**</a> (支持拖放文件夹压缩，支持多线程)
-* <a href="https://pan.baidu.com/s/1beSjp7IL5J0aOC70rFY5ng?pwd=a9a8">**Windows v4.2.0**</a> (.exe，支持拖放文件夹压缩，支持多线程)
-* <a href="https://pan.baidu.com/s/1t09bmU48pWHecKQSt0dh8Q?pwd=qprq">**Windows v4.2.0**</a> (.zip，支持拖放文件夹压缩，支持多线程)
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (.zip，支持拖放文件夹压缩，不支持多线程)
+* <a href="https://pan.baidu.com/s/1Cj-SXb_JciziVSGz-00X1Q?pwd=ag4w">**macOS v4.2.0**</a> (.dmg，Apple Silicon)
+* <a href="https://pan.baidu.com/s/1-RUt6rJ5Sv4VvZZCe737ng?pwd=pp78">**macOS v4.2.0**</a> (.dmg，x86_64)
+* <a href="https://pan.baidu.com/s/1beSjp7IL5J0aOC70rFY5ng?pwd=a9a8">**Windows v4.2.0**</a> (.exe)
+* <a href="https://pan.baidu.com/s/1t09bmU48pWHecKQSt0dh8Q?pwd=qprq">**Windows v4.2.0**</a> (.zip)
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows v3.0.0**</a> (.zip，不支持多线程)
 
 ## Usage
 
