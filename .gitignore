@@ -11,4 +11,4 @@ electron-packager-mac
 
 out/
 .env
-build/bundle.js
+assets

@@ -16,7 +16,14 @@
   "build": {
     "appId": "dev.arayofsunshine.hummingbird",
     "mac": {
-      "category": "tool"
+      "category": "tool",
+      "target": {
+        "target": "default",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
     },
     "asar": false
   },
@@ -24,13 +31,14 @@
     "postinstall": "electron-builder install-app-deps",
     "pack": "rm -rf ./dist && electron-builder --dir",
     "dist": "rm -rf ./dist && electron-builder",
-    "build-watch": "webpack --watch",
-    "build": "webpack",
-    "start": "electron-forge start",
+    "build-watch": "rm -rf assets && webpack --watch",
+    "build": "rm -rf assets && webpack",
     "dev": "electron .",
     "clean": "rm -rf ./out",
-    "package": "electron-forge package",
-    "make": "npm run clean && export $(cat .env | xargs) && electron-forge make",
+    "clean-dist": "rm -rf ./dist",
+    "start": "electron-forge start",
+    "package": "rm -rf ./out && electron-forge package",
+    "make": "rm -rf ./out && export $(cat .env | xargs) && electron-forge make",
     "publish": "electron-forge publish"
   },
   "devDependencies": {
@@ -44,12 +52,17 @@
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/publisher-github": "^7.2.0",
     "babel-loader": "^8.0.5",
+    "css-loader": "^6.9.0",
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "electron": "^28.1.0",
     "electron-builder": "^24.9.1",
     "electron-packager": "17.1.2",
     "electron-squirrel-startup": "^1.0.0",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
+    "mini-css-extract-plugin": "^2.7.7",
+    "style-loader": "^3.3.4",
+    "terser": "^5.26.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "gulp": "^4.0.0",

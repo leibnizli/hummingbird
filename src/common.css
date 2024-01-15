@@ -1,0 +1,45 @@
+@font-face { font-family: 'iconfont'; src: url('font/iconfont.ttf') format('truetype');}
+
+body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,form,input,textarea,button,fieldset,legend,figure,ul { margin: 0; padding: 0;}
+
+body { font: 14px/1.5 Corbel, "Helvetica Neue", Helvetica, Arial; ; color: #666;}
+
+button,input,select,textarea { vertical-align: top; font-size: 12px; font-family: Corbel, "Helvetica Neue", Helvetica, Arial;}
+
+header,footer,aside,article,section,hgroup,nav,figure { display: block;}
+
+h1,h2,h3,h4,h5,h6 { font-size: 100%; font-weight: normal; font-family: "Century Gothic", "Microsoft YaHei";}
+
+ol,ul { list-style: none;}
+
+del { text-decoration: line-through;}
+
+table { border-collapse: collapse; border-spacing: 0;}
+
+img { vertical-align: top;}
+
+a img { border: none;}
+
+strong { font-weight: bold;}
+
+cite,em,i { font-style: italic;}
+
+ins { background: #ffc; text-decoration: none;}
+
+abbr,acronym { border-bottom: 1px dotted #666; cursor: help;}
+
+sup,sub { height: 0; line-height: 1; position: relative; vertical-align: baseline;}
+
+sup { bottom: 1ex;}
+
+sub { top: 0.5ex;}
+
+a { color: #3B5998; text-decoration: none;}
+:focus { outline: 0;}
+.ui-clear:after { height: 0; display: block; content: "\200B"; clear: both;}
+.ui-font { font-family: "iconfont" !important; font-size: 16px; font-style: normal;}
+
+
+/*--content-*/
+
+* { box-sizing: border-box;}
