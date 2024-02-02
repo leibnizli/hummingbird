@@ -28,12 +28,11 @@
     "asar": false
   },
   "scripts": {
+    "build": "rm -rf ./assets &&  node ./esbuild.config.js",
+    "dev": "electron .",
     "postinstall": "electron-builder install-app-deps",
     "pack": "rm -rf ./dist && electron-builder --dir",
     "dist": "rm -rf ./dist && electron-builder",
-    "build-watch": "rm -rf assets && webpack --watch",
-    "build": "rm -rf assets && webpack",
-    "dev": "electron .",
     "clean": "rm -rf ./out",
     "clean-dist": "rm -rf ./dist",
     "start": "electron-forge start",
@@ -42,8 +41,6 @@
     "publish": "electron-forge publish"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
     "@electron-forge/cli": "^7.2.0",
     "@electron-forge/maker-deb": "^7.2.0",
     "@electron-forge/maker-dmg": "^7.2.0",
@@ -51,18 +48,11 @@
     "@electron-forge/maker-squirrel": "^7.2.0",
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/publisher-github": "^7.2.0",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^6.9.0",
-    "css-minimizer-webpack-plugin": "^5.0.1",
     "electron": "^28.1.0",
     "electron-builder": "^24.9.1",
     "electron-packager": "17.1.2",
     "electron-squirrel-startup": "^1.0.0",
-    "mini-css-extract-plugin": "^2.7.7",
-    "style-loader": "^3.3.4",
-    "terser": "^5.26.0",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "esbuild": "0.19.11"
   },
   "dependencies": {
     "gulp": "^4.0.0",
