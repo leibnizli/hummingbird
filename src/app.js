@@ -55,8 +55,8 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories, or click to select one or more files");
-    this.$el.on("click", ".ui-area-drop", (e) => {
+    this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories");
+    this.$el.on("click", "#import", (e) => {
       e.preventDefault();
       ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
         if (paths === undefined) {
@@ -87,7 +87,7 @@ App.prototype = {
     this.$el.on("dragleave", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories, or click to select one or more files");
+      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories");
     });
     this.$el.on("drop", ".ui-area-drop", (e) => {
       $(e.target).removeClass("ui-area-drop-have");
@@ -99,7 +99,7 @@ App.prototype = {
   _filterFiles: function (dataTransfer) {
     const items = dataTransfer.items;
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories, or click to select one or more files");
+      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories");
       return false;
     }
     if (!this.time) {

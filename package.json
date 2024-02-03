@@ -28,7 +28,7 @@
     "asar": false
   },
   "scripts": {
-    "build": "rm -rf ./assets &&  node ./esbuild.config.js",
+    "build": "rm -rf ./assets &&  node esbuild.config.mjs",
     "dev": "electron .",
     "postinstall": "electron-builder install-app-deps",
     "pack": "rm -rf ./dist && electron-builder --dir",

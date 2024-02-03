@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-require('esbuild').buildSync({
+import * as esbuild from 'esbuild'
+
+let ctx = await esbuild.context({
   entryPoints: ['./src/common.js','./src/index.js','./src/settings.js'],
   bundle: true,
   minify: true,
@@ -11,3 +13,5 @@ require('esbuild').buildSync({
   loader: { '.ttf': 'file' },
   //loader: { '.ttf': 'dataurl' },
 })
+await ctx.watch()
+console.log('watching...')

@@ -3,7 +3,7 @@
 
 
 /*.ui-hd-drag { position:absolute; top:0; bottom:0; right:50px; left:107px; z-index:0;   }*/
-.ui-hd-icon { -webkit-app-region: no-drag; -webkit-box-flex: 1.0; position: relative; z-index: 1; margin: 0 3px; color: rgba(64, 100, 138, 0.8); font-family: "iconfont"; font-size: 22px; text-align: center; line-height: 30px; cursor: pointer;}
+.ui-hd-icon { -webkit-app-region: no-drag; -webkit-box-flex: 1.0; position: relative; z-index: 1; margin: 0 3px; color: rgba(64, 100, 138, 0.8); font-family: "iconfont"; font-size: 22px; text-align: center; line-height: 30px; cursor: pointer; }
 .ui-hd-icon:after { position: absolute; right: 0; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0); box-shadow: -1px 0 rgba(255, 255, 255, .25); background-image: linear-gradient(to top, rgba(64, 100, 138, .2), rgba(92, 144, 199, .2)); content: "";}
 .ui-hd-icon:last-child:after { display: none;}
 .ui-hd-icon:hover { color: rgba(64, 100, 138, 1);}

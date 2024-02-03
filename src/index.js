@@ -17,7 +17,6 @@ $(document).on({
         e.preventDefault();
     }
 });
-
 $(document).on("click", "#settings", function(e) {
     ipcRenderer.send('open-settings-window');
 });
