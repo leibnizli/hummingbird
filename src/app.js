@@ -1,3 +1,5 @@
+import {getUserHome} from "./util"
+
 const fs = require("fs");
 const path = require('path');
 const {ipcRenderer} = require('electron');
@@ -32,7 +34,6 @@ function getFilesizeInBytes(filename) {
   var fileSizeInBytes = stats.size;
   return fileSizeInBytes;
 }
-
 function App(el, options) {
   this.$el = $(el);
   this.options = options;
@@ -55,7 +56,7 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories");
+    this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
     this.$el.on("click", "#import", (e) => {
       e.preventDefault();
       ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
@@ -87,7 +88,7 @@ App.prototype = {
     this.$el.on("dragleave", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories");
+      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
     });
     this.$el.on("drop", ".ui-area-drop", (e) => {
       $(e.target).removeClass("ui-area-drop-have");
@@ -99,7 +100,7 @@ App.prototype = {
   _filterFiles: function (dataTransfer) {
     const items = dataTransfer.items;
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html("Drag and drop one or more files or directories");
+      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
       return false;
     }
     if (!this.time) {
@@ -276,6 +277,7 @@ App.prototype = {
     }
 
     function runSucceed(i, files, type) {
+      self.filesArray[i].time = new Date().toString();
       if (type === "img") {
         if (files) {
           self.filesArray[i].optimized = files[0] ? files[0].data.length : self.filesArray[i].size;
@@ -292,7 +294,9 @@ App.prototype = {
     }
 
     function runSkip(i, err) {
+      self.filesArray[i].time = new Date().toString();
       console.log(i, err)
+      self.filesArray[i].skip = true;
       self.filesArray[i].optimized = self.filesArray[i].size;
       p++;
       pie.set(((p / len) * 100).toFixed(0));
@@ -310,13 +314,22 @@ App.prototype = {
     this.status = "waiting";
     this._updateState();
     console.log(this.filesArray)
+    let log = "";
     this.filesArray.forEach(function (file) {
       this.diff += file.size - file.optimized;
+      log += `${file.time} ${file.name} ${file.size} - ${file.optimized} = ${this.diff} ${this.skip?"skip":""} \n`
     }.bind(this));
     this.$el.find(".ui-area-waiting").html(`${num} files have been processed and the compressed space is ${(this.diff / (1024)).toFixed(3)}KB`);
     localStorage.setItem("count", window.shareCount + 1);
     localStorage.setItem("size", window.shareSize + 1);
     ipcRenderer.send('set-share', window.shareCount + 1, window.shareSize + this.diff);
+    fs.appendFile(`${getUserHome()}/hummingbird-log.txt`, log, err => {
+      if (err) {
+        console.error(err);
+      } else {
+        // done!
+      }
+    });
   },
   _mkdirSync: function (path) {
     try {
