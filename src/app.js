@@ -1,6 +1,5 @@
 import {getUserHome} from "./util"
 import configuration from "../configuration";
-
 const sharp = require('sharp');
 const fs = require("fs");
 const path = require('path');
@@ -447,12 +446,31 @@ App.prototype = {
     localStorage.setItem("count", window.shareCount + 1);
     localStorage.setItem("size", window.shareSize + 1);
     ipcRenderer.send('set-share', window.shareCount + 1, window.shareSize + this.diff);
-    fs.appendFile(`${getUserHome()}/hummingbird-log.txt`, log, err => {
+
+    const maxSizeInBytes = 1024 * 1024; // 1MB
+    const logPath = path.join(getUserHome(), 'hummingbird-log.txt');
+    fs.stat(logPath, (err, stats) => {
       if (err) {
-        console.error(err);
-      } else {
-        // done!
+        console.error("Error occurred while getting file stats:", err);
+        return;
       }
+      if (stats.size > maxSizeInBytes) {
+        // File size exceeds 1MB, clear its content
+        fs.truncate(logPath, 0, (truncateErr) => {
+          if (truncateErr) {
+            console.error("Error occurred while truncating file:", truncateErr);
+            return;
+          }
+          console.log("File content cleared successfully.");
+        });
+      }
+      fs.appendFile(logPath, log, err => {
+        if (err) {
+          console.error(err);
+        } else {
+          // done!
+        }
+      });
     });
   },
   _mkdirSync: function (path) {
