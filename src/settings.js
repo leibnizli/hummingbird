@@ -1,26 +1,30 @@
 import "./settings.css";
+import configuration from "../configuration";
+
 const {ipcRenderer} = require('electron')
 
 function set(el, value) {
   $(el).val(value);
   $('#' + $(el).data("target")).val(value);
-
 }
-ipcRenderer.on('set-quality', function(e, arg1, arg2) {
-  const arg = arguments;
-  $(".settings-range").each(function(i, item) {
-    set(item, arg[i+1]);
-  });
-  $("#settings").show();
+
+$("input[name='backup']").prop('checked', configuration.get('backup'));
+$("#maxWidth").val(configuration.get('maxWidth'));
+$("#maxHeight").val(configuration.get('maxHeight'));
+const arg = [configuration.get('jpg'),configuration.get('webp')];
+$(".settings-range").each(function (i, item) {
+  set(item, arg[i]);
 });
-ipcRenderer.on('backup', function(e, arg1) {
-  $("input[name='backup']").prop('checked', arg1)
-  $("#settings").show();
-});
-$(document).on("change", "input[name='backup']", function(e) {
+$(document).on("change", "input[name='backup']", function (e) {
   ipcRenderer.send('backup', $(e.target).prop('checked'));
 });
-$(document).on("change", '.settings-range', function(e) {
+$(document).on("input", "#maxWidth", function (e) {
+  ipcRenderer.send('maxWidth', $(this).val());
+});
+$(document).on("input", "#maxHeight", function (e) {
+  ipcRenderer.send('maxHeight', $(this).val());
+});
+$(document).on("change", '.settings-range', function (e) {
   let $self = $(this),
     value = $self.val(),
     target = $self.data("target");

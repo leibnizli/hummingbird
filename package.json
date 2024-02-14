@@ -1,6 +1,6 @@
 {
   "name": "hummingbird",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Support the drag and drop folder compression.",
   "main": "main.js",
   "repository": {
@@ -28,21 +28,22 @@
     "asar": false
   },
   "scripts": {
-    "build": "rm -rf ./assets &&  node esbuild.config.mjs",
+    "esbuild": "rm -rf ./assets &&  node esbuild.config.mjs",
     "dev": "electron .",
     "postinstall": "electron-builder install-app-deps",
     "dir": "rm -rf ./dist && electron-builder --dir",
     "pack": "rm -rf ./dist && electron-builder",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "build": "electron-builder build --mac --publish never",
+    "deploy": "electron-builder build --mac --publish always"
   },
   "devDependencies": {
     "electron": "^28.1.0",
     "electron-builder": "^24.9.1",
-    "electron-packager": "17.1.2",
-    "electron-squirrel-startup": "^1.0.0",
     "esbuild": "0.19.11"
   },
   "dependencies": {
+    "electron-updater": "^6.1.7",
     "gulp": "^4.0.0",
     "gulp-clean-css": "^3.4.1",
     "gulp-htmlmin": "^3.0.0",
@@ -58,6 +59,6 @@
     "imagemin-webp": "^5.0.0",
     "mime": "^3.0.0",
     "nconf": "0.11.4",
-    "update-electron-app": "^3.0.0"
+    "sharp": "^0.33.2"
   }
 }

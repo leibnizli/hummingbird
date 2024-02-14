@@ -1,9 +1,5 @@
-const { updateElectronApp } = require('update-electron-app');
-updateElectronApp({
-  updateInterval: '1 hour'
-}); // additional configuration options available
-
 const {app, BrowserWindow, ipcMain, dialog} = require('electron');
+const { autoUpdater } = require('electron-updater');
 const path = require('path')
 const url = require('url')
 const configuration = require("./configuration");
@@ -13,8 +9,8 @@ app.on('window-all-closed', function () {
   // 在 OS X 上，通常用户在明确地按下 Cmd + Q 之前
   // 应用会保持活动状态
   if (process.platform != 'darwin') {
-    app.quit();
   }
+  app.quit();
 });
 if (!configuration.get('jpg')) {
   configuration.set('jpg', 85);
@@ -38,8 +34,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird v4.0.0',
-    width: 1320,
-    height: 1267,
+    width: 320,
+    height: 267,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -54,7 +50,7 @@ app.on('ready', function () {
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // 打开开发工具
-  mainWindow.openDevTools();
+  // mainWindow.openDevTools();
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -64,6 +60,9 @@ app.on('ready', function () {
     mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
     mainWindow.webContents.send('mainWindow-share', configuration.get('count'), configuration.get('size'));
     mainWindow.webContents.send('backup', configuration.get('backup'));
+  });
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
   });
 });
 ipcMain.on('close-main-window', function () {
@@ -77,8 +76,8 @@ ipcMain.on('open-settings-window', function () {
     return;
   }
   settingsWindow = new BrowserWindow({
-    width: 340,
-    height: 300,
+    width: 360,
+    height: 360,
     icon: './src/images/icon.png',
     frame: true,
     title: 'Settings - Hummingbird',
@@ -100,13 +99,20 @@ ipcMain.on('open-settings-window', function () {
   // settingsWindow.openDevTools();
 
   settingsWindow.webContents.on('did-finish-load', function () {
-    settingsWindow.webContents.send('set-quality', configuration.get('jpg'), configuration.get('webp'));
-    settingsWindow.webContents.send('backup', configuration.get('backup'))
+    //
   });
 });
 ipcMain.on('set-quality', function (event, arg1, arg2) {
   configuration.set(arg1, arg2);
   mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
+});
+ipcMain.on('maxWidth', function (event, value) {
+  configuration.set('maxWidth', value);
+  mainWindow.webContents.send('maxWidth', value);
+});
+ipcMain.on('maxHeight', function (event, value) {
+  configuration.set('maxHeight', value);
+  mainWindow.webContents.send('maxHeight', value);
 });
 ipcMain.on('backup', function (event, value) {
   configuration.set('backup', value);
@@ -128,3 +134,19 @@ ipcMain.handle('dialog:openMultiFileSelect', () => {
       return result.filePaths;
     })
 })
+ipcMain.on('app_version', (event) => {
+  console.log(app.getVersion())
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});

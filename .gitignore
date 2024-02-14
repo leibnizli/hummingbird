@@ -13,3 +13,5 @@ out/
 .env
 assets
 src/font/demo
+
+electron-builder.yml

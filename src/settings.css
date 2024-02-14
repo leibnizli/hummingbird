@@ -4,7 +4,7 @@ input[type=range]::-webkit-slider-runnable-track { -webkit-appearance: none; app
 input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; background-color: #8da2b9; height: 20px; width: 10px; vertical-align: middle; cursor:move; margin-top: -8px;}
 html,body { height:100%; }
 body { display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; }
-.settings { width:300px; }
+.settings { }
     .settings-backup { height:32px; padding:10px; background:#f9f9f9; line-height:12px; margin-bottom:7px; text-align:center; font-size:12px; }
     .settings-backup span { margin-left:7px; }
     .settings-tb { width:100%; text-align: center; }

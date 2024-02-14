@@ -1,5 +1,7 @@
 import {getUserHome} from "./util"
+import configuration from "../configuration";
 
+const sharp = require('sharp');
 const fs = require("fs");
 const path = require('path');
 const {ipcRenderer} = require('electron');
@@ -19,7 +21,8 @@ const cleanCSS = require('gulp-clean-css');
 const mime = require('mime');
 
 const Pie = require("./components/pie");
-let jpgValue, webpValue, backup;
+let jpgValue, webpValue, backup, maxWidth = configuration.get('maxWidth') || 0,
+  maxHeight = configuration.get('maxHeight') || 0;
 
 ipcRenderer.on('quality', function (e, arg1, arg2) {
   jpgValue = arg1;
@@ -29,11 +32,37 @@ ipcRenderer.on('backup', function (e, arg1) {
   backup = arg1;
 });
 
+let tip = ""
+
+function setTip() {
+  let $tip = $("#tip");
+  $tip.html('');
+  if (maxWidth > 0) {
+    $tip.html(`maxWidth:${maxWidth}`)
+  }
+  if (maxHeight > 0) {
+    $tip.html(`maxHeight:${maxHeight}`)
+  }
+  if (maxWidth > 0 && maxHeight > 0) {
+    $tip.html(`maxWidth:${maxWidth} maxHeight:${maxHeight}`)
+  }
+}
+
+setTip()
+ipcRenderer.on('maxWidth', function (e, arg1) {
+  maxWidth = arg1;
+  setTip()
+});
+ipcRenderer.on('maxHeight', function (e, arg1) {
+  maxHeight = arg1;
+  setTip()
+});
+
 function getFilesizeInBytes(filename) {
   var stats = fs.statSync(filename);
-  var fileSizeInBytes = stats.size;
-  return fileSizeInBytes;
+  return stats.size;
 }
+
 function App(el, options) {
   this.$el = $(el);
   this.options = options;
@@ -142,6 +171,84 @@ App.prototype = {
       });
     }
   },
+  _sharp: function (filePath) {
+    return new Promise((resolve, reject) => {
+      if (maxWidth > 0 && maxHeight < 1) {
+        // Read input image metadata
+        sharp(filePath)
+          .metadata()
+          .then(metadata => {
+            // If image width exceeds target width, resize it proportionally
+            if (metadata.width > maxWidth) {
+              return sharp(filePath)
+                .resize({width: Number(maxWidth)})
+                .toBuffer(function (err, buffer) {
+                  fs.writeFile(filePath, buffer, function (e) {
+                    console.log('Image has been resized to width ' + maxWidth + ' pixels');
+                    resolve()
+                  });
+                })
+            } else {
+              console.log('Image width does not exceed ' + maxWidth + ' pixels, no resizing needed');
+              resolve()
+            }
+          })
+          .catch(err => {
+            console.error('Failed to read image metadata:', err);
+            reject()
+          });
+      } else if (maxWidth < 1 && maxHeight > 0) {
+        // Read input image metadata
+        sharp(filePath)
+          .metadata()
+          .then(metadata => {
+            // If image width exceeds target width, resize it proportionally
+            if (metadata.height > maxHeight) {
+              return sharp(filePath)
+                .resize({height: Number(maxHeight)})
+                .toBuffer(function (err, buffer) {
+                  fs.writeFile(filePath, buffer, function (e) {
+                    console.log('Image has been resized to height ' + maxHeight + ' pixels');
+                    resolve()
+                  });
+                })
+            } else {
+              console.log('Image width does not exceed ' + maxHeight + ' pixels, no resizing needed');
+              resolve()
+            }
+          })
+          .catch(err => {
+            console.error('Failed to read image metadata:', err);
+            reject()
+          });
+      } else if (maxWidth > 0 && maxHeight > 0) {
+        sharp(filePath)
+          .metadata()
+          .then(metadata => {
+            // If image width exceeds target width, resize it proportionally
+            if (metadata.width > maxWidth) {
+              return sharp(filePath)
+                .resize({width: Number(maxWidth)})
+                .toBuffer(function (err, buffer) {
+                  fs.writeFile(filePath, buffer, function (e) {
+                    console.log('Image has been resized to width ' + maxWidth + ' pixels');
+                    resolve()
+                  });
+                })
+            } else {
+              console.log('Image width does not exceed ' + maxHeight + ' pixels, no resizing needed');
+              resolve()
+            }
+          })
+          .catch(err => {
+            console.error('Failed to read image metadata:', err);
+            reject()
+          });
+      } else {
+        resolve()
+      }
+    });
+  },
   _delFiles: function () {
     let p = 0;
     let pie = new Pie(),
@@ -179,7 +286,6 @@ App.prototype = {
         }
       }
       switch (self.filesArray[i].type) {
-
         case "image/svg+xml":
           imagemin([filePath], fileDirname, {
             plugins: [
@@ -194,51 +300,69 @@ App.prototype = {
           });
           break;
         case "image/jpeg":
-          imagemin([filePath], fileDirname, {
-            plugins: [
-              imageminJpegtran({progressive: true}),
-              imageminMozjpeg({
-                tune: 'psnr',
-                quality: jpgValue || 85
-              })
-            ]
-          }).then(files => {
-            runSucceed(i, files, "img");
-          }, err => {
-            runSkip(i, err)
-          });
+          self._sharp(filePath).finally(
+            () => {
+              imagemin([filePath], fileDirname, {
+                plugins: [
+                  imageminJpegtran({progressive: true}),
+                  imageminMozjpeg({
+                    tune: 'psnr',
+                    quality: jpgValue || 85
+                  })
+                ]
+              }).then(files => {
+                runSucceed(i, files, "img");
+              }, err => {
+                runSkip(i, err)
+              });
+            }
+          );
           break;
         case "image/png":
-          imagemin([filePath], fileDirname, {
-            plugins: [
-              imageminOptipng({optimizationLevel: 2}),
-              imageminPngquant({quality: '65-85', speed: 3})
-            ]
-          }).then(files => {
-            runSucceed(i, files, "img");
-          }, err => {
-            runSkip(i, err)
-          });
+          self._sharp(filePath).finally(
+            () => {
+              imagemin([filePath], fileDirname, {
+                plugins: [
+                  imageminOptipng({optimizationLevel: 2}),//OptiPNG 无损压缩算法
+                  imageminPngquant({quality: '65-85', speed: 3})//Pngquant 有损压缩算法
+                ]
+              }).then(files => {
+                runSucceed(i, files, "img");
+              }, err => {
+                runSkip(i, err)
+              });
+            }
+          );
           break;
         case "image/gif":
-          imagemin([filePath], fileDirname, {
-            plugins: [imageminGifsicle()]
-          }).then(files => {
-            runSucceed(i, files, "img");
-          }, err => {
-            runSkip(i, err)
-          });
+          self._sharp(filePath).finally(
+            () => {
+              imagemin([filePath], fileDirname, {
+                plugins: [imageminGifsicle()]
+              }).then(files => {
+                runSucceed(i, files, "img");
+              }, err => {
+                runSkip(i, err)
+              });
+            }
+          )
+
           break;
         case "image/webp":
-          imagemin([filePath], fileDirname, {
-            plugins: [
-              imageminWebp({quality: webpValue || 85})
-            ]
-          }).then(files => {
-            runSucceed(i, files, "img");
-          }, err => {
-            runSkip(i, err)
-          });
+          self._sharp(filePath).finally(
+            () => {
+              imagemin([filePath], fileDirname, {
+                plugins: [
+                  imageminWebp({quality: webpValue || 85})
+                ]
+              }).then(files => {
+                runSucceed(i, files, "img");
+              }, err => {
+                runSkip(i, err)
+              });
+            }
+          )
+
           break;
         case "text/css":
           gulp.src(filePath).pipe(cleanCSS({compatibility: 'ie8'})).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function () {
@@ -317,7 +441,7 @@ App.prototype = {
     let log = "";
     this.filesArray.forEach(function (file) {
       this.diff += file.size - file.optimized;
-      log += `${file.time} ${file.name} ${file.size} - ${file.optimized} = ${this.diff} ${this.skip?"skip":""} \n`
+      log += `${file.time} ${file.name} ${file.size} - ${file.optimized} = ${this.diff} ${this.skip ? "skip" : ""} \n`
     }.bind(this));
     this.$el.find(".ui-area-waiting").html(`${num} files have been processed and the compressed space is ${(this.diff / (1024)).toFixed(3)}KB`);
     localStorage.setItem("count", window.shareCount + 1);
@@ -335,7 +459,7 @@ App.prototype = {
     try {
       fs.mkdirSync(path)
     } catch (e) {
-      if (e.code != 'EEXIST') throw e;
+      if (e.code !== 'EEXIST') throw e;
     }
   },
   _updateState: function () {

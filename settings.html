@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="settings" id="settings" style="display:none;">
+    <div class="settings">
         <div class="settings-backup">
             <input type="checkbox" name="backup"><span>Back up the original file before compression</span>
         </div>
@@ -18,6 +18,20 @@
                 拖动滑块设置压缩质量
             </caption> -->
             <tbody>
+                <tr>
+                    <td class="settings-name">maxWidth</td>
+                    <td>
+                        <input type="number" id="maxWidth" /> px
+                    </td>
+                    <td class="settings-value"></td>
+                </tr>
+                <tr>
+                    <td class="settings-name">maxHeight</td>
+                    <td>
+                        <input type="number" id="maxHeight" /> px
+                    </td>
+                    <td class="settings-value"></td>
+                </tr>
                 <tr>
                     <td class="settings-name">jpg</td>
                     <td>
