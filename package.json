@@ -30,7 +30,6 @@
   "scripts": {
     "esbuild": "rm -rf ./assets &&  node esbuild.config.mjs",
     "dev": "electron .",
-    "postinstall": "electron-builder install-app-deps",
     "dir": "rm -rf ./dist && electron-builder --dir",
     "pack": "rm -rf ./dist && electron-builder",
     "clean": "rm -rf ./dist",

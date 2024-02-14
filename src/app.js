@@ -440,7 +440,7 @@ App.prototype = {
     let log = "";
     this.filesArray.forEach(function (file) {
       this.diff += file.size - file.optimized;
-      log += `${file.time} ${file.name} ${file.size} - ${file.optimized} = ${this.diff} ${this.skip ? "skip" : ""} \n`
+      log += `${file.time} ${file.name} ${file.size}B - ${file.optimized}B = ${this.diff}B ${this.skip ? "skip" : ""} \n`
     }.bind(this));
     this.$el.find(".ui-area-waiting").html(`${num} files have been processed and the compressed space is ${(this.diff / (1024)).toFixed(3)}KB`);
     localStorage.setItem("count", window.shareCount + 1);

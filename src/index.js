@@ -1,7 +1,25 @@
+import path from "path";
+
 const fs = require("fs");
 const {shell,ipcRenderer} = require('electron')
 import "./index.css";
 import {getUserHome} from "./util"
+const logPath = path.join(getUserHome(), 'hummingbird-log.txt');
+// 检测文件是否存在
+fs.access(logPath, fs.constants.F_OK, (err) => {
+  if (err) {
+    // 如果文件不存在，则创建一个空文件
+    fs.writeFile(logPath, '----log----\n', (err) => {
+      if (err) {
+        console.error('Error creating file:', err);
+      } else {
+        console.log('File created successfully.');
+      }
+    });
+  } else {
+    console.log('File already exists.');
+  }
+});
 //drag
 $(document).on({
     dragleave: function(e) {
@@ -21,7 +39,7 @@ $(document).on("click", "#settings", function(e) {
     ipcRenderer.send('open-settings-window');
 });
 $(document).on("click", "#log", function(e) {
-  shell.openPath(`${getUserHome()}/hummingbird-log.txt`)
+  shell.openPath(logPath)
 });
 $(document).on("click", "#issues", function(e) {
     shell.openExternal("https://github.com/leibnizli/hummingbird/issues");

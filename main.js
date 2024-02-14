@@ -3,6 +3,7 @@ const { autoUpdater } = require('electron-updater');
 const path = require('path')
 const url = require('url')
 const configuration = require("./configuration");
+
 let settingsWindow = null,
   mainWindow = null;
 app.on('window-all-closed', function () {
