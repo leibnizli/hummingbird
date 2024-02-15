@@ -1,5 +1,6 @@
 import "./settings.css";
 import configuration from "../configuration";
+import {shell} from "electron";
 
 const {ipcRenderer} = require('electron')
 
@@ -30,5 +31,8 @@ $(document).on("change", '.settings-range', function (e) {
     target = $self.data("target");
   set(this, $self.val());
   ipcRenderer.send('set-quality', target, Number(value));
+});
+$(document).on("click", '#buy', function (e) {
+  shell.openExternal("https://buy.arayofsunshine.dev");
 });
 

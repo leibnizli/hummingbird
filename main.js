@@ -1,9 +1,9 @@
-const {app, BrowserWindow, ipcMain, dialog} = require('electron');
+const {app, BrowserWindow, ipcMain, dialog, shell, Menu} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path')
 const url = require('url')
 const configuration = require("./configuration");
-
+const isMac = process.platform === 'darwin'
 let settingsWindow = null,
   mainWindow = null;
 app.on('window-all-closed', function () {
@@ -78,7 +78,7 @@ ipcMain.on('open-settings-window', function () {
   }
   settingsWindow = new BrowserWindow({
     width: 360,
-    height: 360,
+    height: 380,
     icon: './src/images/icon.png',
     frame: true,
     title: 'Settings - Hummingbird',
@@ -151,3 +151,107 @@ autoUpdater.on('update-downloaded', () => {
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
+const template = [
+  // { role: 'appMenu' }
+  ...(isMac
+    ? [{
+      label: app.name,
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideOthers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    }]
+    : []),
+  // { role: 'editMenu' }
+  {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      ...(isMac
+        ? [
+          { role: 'pasteAndMatchStyle' },
+          { role: 'delete' },
+          { role: 'selectAll' },
+          { type: 'separator' },
+          {
+            label: 'Speech',
+            submenu: [
+              { role: 'startSpeaking' },
+              { role: 'stopSpeaking' }
+            ]
+          }
+        ]
+        : [
+          { role: 'delete' },
+          { type: 'separator' },
+          { role: 'selectAll' }
+        ])
+    ]
+  },
+  // { role: 'viewMenu' }
+  {
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' }
+    ]
+  },
+  // { role: 'windowMenu' }
+  {
+    label: 'Window',
+    submenu: [
+      { role: 'minimize' },
+      { role: 'zoom' },
+      ...(isMac
+        ? [
+          { type: 'separator' },
+          { role: 'front' },
+          { type: 'separator' },
+          { role: 'window' }
+        ]
+        : [
+          { role: 'close' }
+        ])
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Report An Issue..',
+        click: async () => {
+          const { shell } = require('electron')
+          await shell.openExternal('https://github.com/leibnizli/hummingbird/issues')
+        }
+      },
+      {
+        label: 'Website',
+        click: async () => {
+          const { shell } = require('electron')
+          await shell.openExternal('https://arayofsunshine.dev')
+        }
+      },
+      {
+        label: 'Buy Me A Coffee',
+        click: async () => {
+          const { shell } = require('electron')
+          await shell.openExternal('https://buy.arayofsunshine.dev')
+        }
+      }
+    ]
+  }
+]
+
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
