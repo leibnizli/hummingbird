@@ -11,8 +11,8 @@
 
 ## 安装
 
-* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.2.0**</a>
-* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.2.0**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.3.0**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.3.0**</a>
 
 ## 使用
 
