@@ -14,6 +14,13 @@ English | [简体中文](./README-zh-CN.md)
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.3.0**</a>
 * <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.3.0**</a>
 
+### Non-international network（非国际网）
+
+* <a href="https://thunkli.com/download/hummingbird-macos">**macOS**</a>（Apple Silicon，上海节点）
+* <a href="https://thunkli.com/download/hummingbird-x86_64-macos">**macOS**</a>（Intel，上海节点）
+* <a href="https://thunkli.com/download/hummingbird-windows">**Windows**</a> （上海节点）
+
+
 ## Usage
 
 ### jpg
