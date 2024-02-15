@@ -9,7 +9,7 @@
 .ui-hd-icon:hover { color: rgba(64, 100, 138, 1);}
 .close:hover { color: red;}
 /*.ui-bd { height:213px;  overflow:hidden; }*/
-.ui-tip { height:20px; line-height:20px; text-align:center; font-size:12px; color:rgb(62 47 0 / 0.5); }
+.ui-tip { text-align:center; font-size:12px; color:rgb(62 47 0 / 0.5); }
 .ui-area { -webkit-app-region: no-drag; position: relative; z-index: 1; margin: 12px auto; height: 193px; width: 298px; padding: 30px 0; font-size: 12px; /*background:rgba(222,230,246,0.2);*/ display: grid; place-items: center; /*background:url("images/bg.jpg") no-repeat 0 0; */ color: rgba(64, 100, 138, 0.6); -webkit-user-select: none;}
     .ui-area-main a.click { font-weight:bold; text-decoration: underline }
 .ui-area-drop { position: absolute; z-index: 1; left: 0; top: 0; right: 0; bottom: 0; border-radius: 8px; border: 2px dashed rgba(64, 100, 138, 0.2);}
