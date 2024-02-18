@@ -1,6 +1,6 @@
 简体中文 | [English](./README.md)
 
-<img src="https://raw.githubusercontent.com/leibnizli/hummingbird/master/demo/logo.png" alt="" width="468" height="140">
+# <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
 > `Hummingbird`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
 

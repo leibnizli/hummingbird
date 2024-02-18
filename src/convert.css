@@ -1,0 +1,7 @@
+.convert { padding:20px; }
+.convert-hd p { padding:0 0 10px; }
+.convert-bd { padding:20px 0; }
+.convert-bd ul { display:flex; flex-wrap:wrap; }
+.convert-bd li { width:60px; }
+.convert-bd input { vertical-align:middle; margin-right:6px; }
+.convert-ft p { padding:0 0 10px; }

@@ -5,7 +5,8 @@ const url = require('url')
 const configuration = require("./configuration");
 const isMac = process.platform === 'darwin'
 let settingsWindow = null,
-  mainWindow = null;
+  mainWindow = null,
+  convertWindow = null;
 app.on('window-all-closed', function () {
   // 在 OS X 上，通常用户在明确地按下 Cmd + Q 之前
   // 应用会保持活动状态
@@ -71,6 +72,38 @@ ipcMain.on('close-main-window', function () {
 });
 ipcMain.on('main-minimized', function () {
   mainWindow.minimize();
+});
+ipcMain.on('open-convert-window', function () {
+  if (settingsWindow) {
+    return;
+  }
+  convertWindow = new BrowserWindow({
+    icon: './src/images/icon.png',
+    title: 'Convert image format',
+    width: 480,
+    height: 320,
+    frame: true,
+    resizable: true,
+    webPreferences: {
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
+      contextIsolation: false
+    }
+  });
+
+  // 加载应用的 index.html
+  convertWindow.loadURL('file://' + __dirname + '/convert.html');
+
+  // 打开开发工具
+  // convertWindow.openDevTools();
+  // 当 window 被关闭，这个事件会被发出
+  convertWindow.on('closed', function () {
+    // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
+    convertWindow = null;
+  });
+  convertWindow.webContents.on('did-finish-load', function () {
+  });
 });
 ipcMain.on('open-settings-window', function () {
   if (settingsWindow) {
@@ -239,7 +272,7 @@ const template = [
         label: 'Website',
         click: async () => {
           const { shell } = require('electron')
-          await shell.openExternal('https://arayofsunshine.dev')
+          await shell.openExternal('https://arayofsunshine.dev/hummingbird')
         }
       },
       {

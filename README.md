@@ -1,5 +1,7 @@
 English | [简体中文](./README-zh-CN.md)
 
+# <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
+
 `Hummingbird` uses smart lossy compression techniques to reduce the file size of your files(jpg/png/webp/svg/gif/css/js/html).
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/e1fad3bd-5919-4aac-b9eb-e7dc18aa2fa5" width="432">

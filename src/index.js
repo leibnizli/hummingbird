@@ -38,6 +38,9 @@ $(document).on({
 $(document).on("click", "#settings", function(e) {
     ipcRenderer.send('open-settings-window');
 });
+$(document).on("click", "#convert", function(e) {
+  ipcRenderer.send('open-convert-window');
+});
 $(document).on("click", "#log", function(e) {
   shell.openPath(logPath)
 });
