@@ -12,11 +12,13 @@
             bottom: 20px;
             left: 20px;
             width: 200px;
+            z-index: 1;
             padding: 20px;
             border-radius: 5px;
             background-color: white;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
+
         .hidden {
             display: none;
         }
@@ -24,75 +26,83 @@
 </head>
 
 <body>
-    <div class="ui-app" id="ui-app" style="-webkit-app-region: drag;">
-        <ul class="ui-hd">
-            <li class="ui-hd-icon" id="settings" title="Settings"><img style="margin-top:3px;" width="24" height="24" src="./src/images/settings.svg" alt=""></li>
-            <li class="ui-hd-icon" id="import" title="Import"><img style="margin-top:3px;" width="24" height="24" src="./src/images/import.svg" alt=""></li>
-            <li class="ui-hd-icon" id="log" title="Log"><img style="margin-top:3px;" width="24" height="24" src="./src/images/history.svg" alt=""></li>
-            <li class="ui-hd-icon" id="convert" title="Convert image format"><img style="margin-top:3px;" width="24" height="24" src="./src/images/convert.svg" alt=""></li>
-            <li class="ui-hd-icon" id="share" title="share"><img style="margin-top:3px;" width="24" height="24" src="./src/images/share.svg" alt=""></li>
-            <li class="ui-hd-icon" id="minimized" title="Minimization"><img style="margin-top:3px;" width="24" height="24" src="./src/images/minimized.svg" alt=""></li>
-            <li class="ui-hd-icon" id="close" title="Close window"><img style="margin-top:3px;" width="24" height="24" src="./src/images/close.svg" alt=""></li>
-        </ul>
-        <!-- ui-area-ready -->
-        <div class="ui-bd">
-            <div class="ui-area">
-                <div>
-                    <div class="ui-area-main">
-                        <div class="ui-area-icon"><img width="40" src="./src/images/wait.svg"></div>
-                        <div class="ui-area-des"></div>
-                    </div>
-                    <div class="ui-tip" id="tip"></div>
+<div class="ui-app" id="ui-app" style="-webkit-app-region: drag;">
+    <ul class="ui-hd">
+        <li class="ui-hd-icon" id="settings" title="Settings"><img style="margin-top:3px;" width="24" height="24"
+                                                                   src="./src/images/settings.svg" alt=""></li>
+        <li class="ui-hd-icon" id="import" title="Import"><img style="margin-top:3px;" width="24" height="24"
+                                                               src="./src/images/import.svg" alt=""></li>
+        <li class="ui-hd-icon" id="log" title="Log"><img style="margin-top:3px;" width="24" height="24"
+                                                         src="./src/images/history.svg" alt=""></li>
+        <li class="ui-hd-icon" id="convert" title="Convert image format"><img style="margin-top:3px;" width="24"
+                                                                              height="24" src="./src/images/convert.svg"
+                                                                              alt=""></li>
+        <li class="ui-hd-icon" id="share" title="share"><img style="margin-top:3px;" width="24" height="24"
+                                                             src="./src/images/share.svg" alt=""></li>
+        <li class="ui-hd-icon" id="minimized" title="Minimization"><img style="margin-top:3px;" width="24" height="24"
+                                                                        src="./src/images/minimized.svg" alt=""></li>
+        <li class="ui-hd-icon" id="close" title="Close window"><img style="margin-top:3px;" width="24" height="24"
+                                                                    src="./src/images/close.svg" alt=""></li>
+    </ul>
+    <!-- ui-area-ready -->
+    <div class="ui-bd">
+        <div class="ui-area">
+            <div>
+                <div class="ui-area-main">
+                    <div class="ui-area-icon"><img width="40" src="./src/images/wait.svg"></div>
+                    <div class="ui-area-des"></div>
                 </div>
-                <div class="ui-area-drop"></div>
+                <div class="ui-tip" id="tip"></div>
             </div>
+            <div class="ui-area-drop"></div>
         </div>
     </div>
-    <div id="notification" class="hidden">
-        <p id="message"></p>
-        <button id="close-button" onClick="closeNotification()">
-            Close
-        </button>
-        <button id="restart-button" onClick="restartApp()" class="hidden">
-            Restart
-        </button>
-    </div>
+</div>
+<div id="notification" class="hidden">
+    <p id="message"></p>
+    <button id="close-button" onClick="closeNotification()">
+        Close
+    </button>
+    <button id="restart-button" onClick="restartApp()" class="hidden">
+        Restart
+    </button>
+</div>
 
-    <script>
-      const { ipcRenderer } = require('electron');
-      const version = document.getElementById('version');
-      const notification = document.getElementById('notification');
-      const message = document.getElementById('message');
-      const restartButton = document.getElementById('restart-button');
+<script>
+  const {ipcRenderer} = require('electron');
+  const version = document.getElementById('version');
+  const notification = document.getElementById('notification');
+  const message = document.getElementById('message');
+  const restartButton = document.getElementById('restart-button');
 
-      ipcRenderer.send('app_version');
-      ipcRenderer.on('app_version', (event, arg) => {
-        ipcRenderer.removeAllListeners('app_version');
-        //version.innerText = 'Version ' + arg.version;
-      });
+  ipcRenderer.send('app_version');
+  ipcRenderer.on('app_version', (event, arg) => {
+    ipcRenderer.removeAllListeners('app_version');
+    //version.innerText = 'Version ' + arg.version;
+  });
 
-      ipcRenderer.on('update_available', () => {
-        ipcRenderer.removeAllListeners('update_available');
-        message.innerText = 'A new update is available. Downloading now...';
-        notification.classList.remove('hidden');
-      });
+  ipcRenderer.on('update_available', () => {
+    ipcRenderer.removeAllListeners('update_available');
+    message.innerText = 'A new update is available. Downloading now...';
+    notification.classList.remove('hidden');
+  });
 
-      ipcRenderer.on('update_downloaded', () => {
-        ipcRenderer.removeAllListeners('update_downloaded');
-        message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-        restartButton.classList.remove('hidden');
-        notification.classList.remove('hidden');
-      });
+  ipcRenderer.on('update_downloaded', () => {
+    ipcRenderer.removeAllListeners('update_downloaded');
+    message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+    restartButton.classList.remove('hidden');
+    notification.classList.remove('hidden');
+  });
 
-      function closeNotification() {
-        notification.classList.add('hidden');
-      }
+  function closeNotification() {
+    notification.classList.add('hidden');
+  }
 
-      function restartApp() {
-        ipcRenderer.send('restart_app');
-      }
-    </script>
-    <script src="assets/common.bundle.js"></script>
-    <script src="assets/index.bundle.js"></script>
+  function restartApp() {
+    ipcRenderer.send('restart_app');
+  }
+</script>
+<script src="assets/common.bundle.js"></script>
+<script src="assets/index.bundle.js"></script>
 </body>
 </html>
