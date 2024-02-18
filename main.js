@@ -114,7 +114,7 @@ ipcMain.on('open-settings-window', function () {
     height: 380,
     icon: './src/images/icon.png',
     frame: true,
-    title: 'Settings - Hummingbird',
+    title: 'Settings',
     resizable: false,
     'auto-hide-menu-bar': true,
     webPreferences: {

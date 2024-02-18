@@ -2,9 +2,11 @@
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-> `Hummingbird`是一个资源(jpg/png/webp/svg/gif/css/js/html)压缩客户端。
+**Hummingbird**使用智能压缩技术来减少文件的文件大小，支持：jpg、png、webp、svg、gif、gif、css、js、html
+**Hummingbird**可以转换不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif。
+**Hummingbird**可以导出不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif、 .ico、.icns(仅苹果系统)格式的图片。
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/e1fad3bd-5919-4aac-b9eb-e7dc18aa2fa5" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/758e55c6-428b-4821-9537-49b1eebb0a7a" width="432">
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
 * 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
@@ -27,7 +29,9 @@
 
 ## 使用
 
-### jpg压缩对比
+### 压缩图片
+
+#### jpg压缩对比
 
 <table>
     <tbody>
@@ -46,7 +50,7 @@
     </tbody>
 </table>
 
-### png压缩对比
+#### png压缩对比
 
 对于png24通道透明有比较好的压缩效果
 
@@ -67,7 +71,7 @@
     </tbody>
 </table>
 
-### svg压缩对比
+#### svg压缩对比
 
 <table>
     <tbody>
@@ -85,4 +89,8 @@
         </tr>
     </tbody>
 </table>
+
+### 图片格式转换
+
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/f143c02d-acc9-4b16-91ca-5a6cb2d3327f" width="480">
 
