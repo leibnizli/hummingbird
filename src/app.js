@@ -481,7 +481,7 @@ App.prototype = {
     }
   },
   _updateState: function () {
-    this.$el.find(".ui-area-main").html(this.statusHtml[this.status]);
+    this.$el.find(".ui-area-des").html(this.statusHtml[this.status]);
   }
 }
 module.exports = App;

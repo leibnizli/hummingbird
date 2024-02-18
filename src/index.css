@@ -3,13 +3,14 @@
 
 
 /*.ui-hd-drag { position:absolute; top:0; bottom:0; right:50px; left:107px; z-index:0;   }*/
-.ui-hd-icon { -webkit-app-region: no-drag; position: relative; z-index: 1; width:34px; margin: 0 3px; color: rgba(64, 100, 138, 0.8); font-family: "iconfont"; font-size: 22px; text-align: center; line-height: 30px; cursor: pointer; }
+.ui-hd-icon { -webkit-app-region: no-drag; position: relative; z-index: 1; width:34px; margin: 0 3px; color: rgba(64, 100, 138, 0.8); text-align: center; line-height: 30px; cursor: pointer; }
 .ui-hd-icon:after { position: absolute; right: -3px; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0); box-shadow: -1px 0 rgba(255, 255, 255, .25); background-image: linear-gradient(to top, rgba(64, 100, 138, .2), rgba(92, 144, 199, .2)); content: "";}
 .ui-hd-icon:last-child:after { display: none;}
 .ui-hd-icon:hover { color: rgba(64, 100, 138, 1);}
 .close:hover { color: red;}
 /*.ui-bd { height:213px;  overflow:hidden; }*/
 .ui-tip { text-align:center; font-size:12px; color:rgb(62 47 0 / 0.5); }
+.ui-area-icon { text-align:center; padding-bottom:8px; }
 .ui-area { -webkit-app-region: no-drag; position: relative; z-index: 1; margin: 12px auto; height: 193px; width: 298px; padding: 30px 0; font-size: 12px; /*background:rgba(222,230,246,0.2);*/ display: grid; place-items: center; /*background:url("images/bg.jpg") no-repeat 0 0; */ color: rgba(64, 100, 138, 0.6); -webkit-user-select: none;}
     .ui-area-main a.click { font-weight:bold; text-decoration: underline }
 .ui-area-drop { position: absolute; z-index: 1; left: 0; top: 0; right: 0; bottom: 0; border-radius: 8px; border: 2px dashed rgba(64, 100, 138, 0.2);}
@@ -17,7 +18,7 @@
 .ui-area-tip { text-align: center;}
 .ui-area-progress { padding: 5px 0 0;}
 .ui-area-waiting { padding: 3px 20px 0; line-height:1.3;}
-.ui-area-waiting:before { display: block; text-align: center; font-family: "iconfont"; font-size: 40px; padding-bottom:8px; content: "\e600";}
+.ui-area-waiting:before { display: block; text-align: center;  padding-bottom:8px; }
 .pie { position: relative; width: 80px; height: 80px; margin:0 auto; border-radius: 50%; background-color:#bdf9db; }
 .pie.gt-50 { background-color: #11CD6E; border:solid 3px #00ac55; }
     .pie-progress { content: ""; position: absolute; border-radius: 50%; left: calc(50% - 40px); top: calc(50% - 40px); width: 80px; height: 80px; clip: rect(0, 80px, 80px, 40px);}
