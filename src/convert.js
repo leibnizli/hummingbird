@@ -19,6 +19,7 @@ function openFolder(path) {
 //image/vnd.microsoft.icon
 $(document).on("change", '#file', function (e) {
   console.log(this.files)
+  $("#convertLog").html(``)
   files = Array.from(this.files).map((ele, i) => {
     return {
       path: ele.path,
@@ -73,23 +74,11 @@ function generateFavicon(sourcePath, destPath) {
   }).then(result => {
     fs.writeFileSync(destPath, result);
     console.log(`Image has been ${destPath}`);
+  }).catch((err)=>{
+    $("#convertLog").html(`${err}`)
   });
 }
 
-const tempDir = 'temp';
-if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir);
-}
-
-// 调整大小的图像尺寸
-const sizes = [16, 32, 64, 128, 256, 512];
-
-// 调整大小的函数
-async function resizeImage(inputPath, size, outputPath) {
-  await sharp(inputPath)
-    .resize(size, size)
-    .toFile(outputPath);
-}
 function Convert() {
   if (checkedData.length === 0) return;
   if (files.length === 0) return;
@@ -153,11 +142,12 @@ function Convert() {
           generateFavicon(ele.path, targetPath)
           break;
         case "icns":
-          console.log(__dirname)
           const iconsetFolderPath = path.join(fileDirname, 'icons.iconset');
+          if (!fs.existsSync(iconsetFolderPath)) {
+            fs.mkdirSync(iconsetFolderPath);
+          }
           try {
             // 执行每个命令
-            execSync(`mkdir ${iconsetFolderPath}`);
             execSync(`sips -z 16 16 ${ele.path} -o ${iconsetFolderPath}/icon_16x16.png`);
             execSync(`sips -z 32 32 ${ele.path} -o ${iconsetFolderPath}/icon_16x16@2x.png`);
             execSync(`sips -z 32 32 ${ele.path} -o ${iconsetFolderPath}/icon_32x32.png`);
@@ -173,6 +163,7 @@ function Convert() {
 
             console.log('All commands executed successfully');
           } catch (error) {
+            $("#convertLog").html(`Error executing command: ${error.message}`)
             console.error(`Error executing command: ${error.message}`);
           }
 

@@ -11,6 +11,7 @@
 <body>
 <div class="convert">
     <div class="convert-hd">
+        <p>Do not include <strong>spaces</strong> in path!</p>
         <p>Support .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif</p>
         <p><input type="file" id="file" accept=".png, .webp, .jpeg, .jpg, .gif, .tiff, .avif" multiple></p>
         <p><button id="getBase64" style="display: none;">Copy Base64 String</button></p>
@@ -55,6 +56,7 @@
     <div class="convert-ft">
         <p><button id="export">Export</button></p>
     </div>
+    <div id="convertLog" class="convert-log"></div>
 </div>
 <script src="./assets/common.bundle.js"></script>
 <script src="./src/convert.js"></script>

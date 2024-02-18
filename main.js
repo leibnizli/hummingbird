@@ -96,7 +96,7 @@ ipcMain.on('open-convert-window', function () {
   convertWindow.loadURL('file://' + __dirname + '/convert.html');
 
   // 打开开发工具
-  // convertWindow.openDevTools();
+  // process.env.NODE_ENV === "dev" && convertWindow.openDevTools();
   // 当 window 被关闭，这个事件会被发出
   convertWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
