@@ -84,7 +84,7 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [or]");
+    this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [ or ]");
     this.$el.on("click", "#import", (e) => {
       e.preventDefault();
       ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
@@ -116,7 +116,7 @@ App.prototype = {
     this.$el.on("dragleave", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [or]");
+      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [ or ]");
     });
     this.$el.on("drop", ".ui-area-drop", (e) => {
       $(e.target).removeClass("ui-area-drop-have");
@@ -128,7 +128,7 @@ App.prototype = {
   _filterFiles: function (dataTransfer) {
     const items = dataTransfer.items;
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [or]");
+      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [ or ]");
       return false;
     }
     if (!this.time) {

@@ -2,9 +2,9 @@
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-**Hummingbird**使用智能压缩技术来减少文件的文件大小，支持：jpg、png、webp、svg、gif、gif、css、js、html
-**Hummingbird**可以转换不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif。
-**Hummingbird**可以导出不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif、 .ico、.icns(仅苹果系统)格式的图片。
+* **Hummingbird**使用智能压缩技术来减少文件的文件大小，支持：jpg、png、webp、svg、gif、gif、css、js、html。
+* **Hummingbird**可以转换不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif。
+* **Hummingbird**可以导出不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif、 .ico、.icns(仅苹果系统)格式的图片。
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/758e55c6-428b-4821-9537-49b1eebb0a7a" width="432">
 

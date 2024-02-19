@@ -2,7 +2,7 @@ English | [简体中文](./README-zh-CN.md)
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-* **Hummingbird** Use intelligent compression technology to reduce the file size of the file. Support: .jpg, .png, .webp, .svg, .gif, .css, .js, .html
+* **Hummingbird** Use intelligent compression technology to reduce the file size of the file. Support: .jpg, .png, .webp, .svg, .gif, .css, .js, .html.
 * **Hummingbird** can convert pictures of different formats, support: .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif.
 * **Hummingbird** can export pictures of different formats, support: .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif, .ico, .icns (only Apple system) format.
 
