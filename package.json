@@ -1,6 +1,6 @@
 {
   "name": "hummingbird",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "Support the drag and drop folder compression.",
   "main": "main.js",
   "repository": {

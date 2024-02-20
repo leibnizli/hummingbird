@@ -49,6 +49,9 @@ $(document).on("click", '#getBase64', function (e) {
 });
 $(document).on("click", '#export', function (e) {
   checkedData = []
+  files = files.filter((ele)=>{
+    return ele.type !== "image/svg+xml"
+  });
   if (files.length > 0) {
     $("input[type='checkbox']").each((i, ele) => {
       if ($(ele).prop('checked')) {
@@ -148,18 +151,18 @@ function Convert() {
           }
           try {
             // 执行每个命令
-            execSync(`sips -z 16 16 ${ele.path} -o ${iconsetFolderPath}/icon_16x16.png`);
-            execSync(`sips -z 32 32 ${ele.path} -o ${iconsetFolderPath}/icon_16x16@2x.png`);
-            execSync(`sips -z 32 32 ${ele.path} -o ${iconsetFolderPath}/icon_32x32.png`);
-            execSync(`sips -z 64 64 ${ele.path} -o ${iconsetFolderPath}/icon_32x32@2x.png`);
-            execSync(`sips -z 128 128 ${ele.path} -o ${iconsetFolderPath}/icon_128x128.png`);
-            execSync(`sips -z 256 256 ${ele.path} -o ${iconsetFolderPath}/icon_128x128@2x.png`);
-            execSync(`sips -z 256 256 ${ele.path} -o ${iconsetFolderPath}/icon_256x256.png`);
-            execSync(`sips -z 512 512 ${ele.path} -o ${iconsetFolderPath}/icon_256x256@2x.png`);
-            execSync(`sips -z 512 512 ${ele.path} -o ${iconsetFolderPath}/icon_512x512.png`);
-            execSync(`sips -z 1024 1024 ${ele.path} -o ${iconsetFolderPath}/icon_512x512@2x.png`);
-            execSync(`iconutil -c icns ${iconsetFolderPath} -o ${targetPath}`);
-            execSync(`rm -r ${iconsetFolderPath}`);
+            execSync(`sips -z 16 16 "${ele.path}" -o "${iconsetFolderPath}/icon_16x16.png"`);
+            execSync(`sips -z 32 32 "${ele.path}" -o "${iconsetFolderPath}/icon_16x16@2x.png"`);
+            execSync(`sips -z 32 32 "${ele.path}" -o "${iconsetFolderPath}/icon_32x32.png"`);
+            execSync(`sips -z 64 64 "${ele.path}" -o "${iconsetFolderPath}/icon_32x32@2x.png"`);
+            execSync(`sips -z 128 128 "${ele.path}" -o "${iconsetFolderPath}/icon_128x128.png"`);
+            execSync(`sips -z 256 256 "${ele.path}" -o "${iconsetFolderPath}/icon_128x128@2x.png"`);
+            execSync(`sips -z 256 256 "${ele.path}" -o "${iconsetFolderPath}/icon_256x256.png"`);
+            execSync(`sips -z 512 512 "${ele.path}" -o "${iconsetFolderPath}/icon_256x256@2x.png"`);
+            execSync(`sips -z 512 512 "${ele.path}" -o "${iconsetFolderPath}/icon_512x512.png"`);
+            execSync(`sips -z 1024 1024 "${ele.path}" -o "${iconsetFolderPath}/icon_512x512@2x.png"`);
+            execSync(`iconutil -c icns "${iconsetFolderPath}" -o "${targetPath}"`);
+            execSync(`rm -r "${iconsetFolderPath}"`);
 
             console.log('All commands executed successfully');
           } catch (error) {
@@ -174,6 +177,7 @@ function Convert() {
       openFolder(fileDirname);
     }
   });
-
 }
-
+$(document).on("click", '#how', function (e) {
+  shell.openExternal("https://arayofsunshine.dev/blog/base64");
+});

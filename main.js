@@ -81,7 +81,7 @@ ipcMain.on('open-convert-window', function () {
     icon: './src/images/icon.png',
     title: 'Convert image format',
     width: 480,
-    height: 320,
+    height: 340,
     frame: true,
     resizable: true,
     webPreferences: {
