@@ -1,9 +1,10 @@
 import path from "path";
 
 const fs = require("fs");
-const {shell,ipcRenderer} = require('electron')
+const {shell, ipcRenderer} = require('electron')
 import "./index.css";
 import {getUserHome} from "./util"
+
 const logPath = path.join(getUserHome(), 'hummingbird-log.txt');
 // 检测文件是否存在
 fs.access(logPath, fs.constants.F_OK, (err) => {
@@ -22,49 +23,62 @@ fs.access(logPath, fs.constants.F_OK, (err) => {
 });
 //drag
 $(document).on({
-    dragleave: function(e) {
-        e.preventDefault();
-    },
-    drop: function(e) {
-        e.preventDefault();
-    },
-    dragenter: function(e) {
-        e.preventDefault();
-    },
-    dragover: function(e) {
-        e.preventDefault();
-    }
+  dragleave: function (e) {
+    e.preventDefault();
+  },
+  drop: function (e) {
+    e.preventDefault();
+  },
+  dragenter: function (e) {
+    e.preventDefault();
+  },
+  dragover: function (e) {
+    e.preventDefault();
+  }
 });
-$(document).on("click", "#settings", function(e) {
-    ipcRenderer.send('open-settings-window');
+$(document).on("click", "#settings", function (e) {
+  ipcRenderer.send('open-settings-window');
 });
-$(document).on("click", "#convert", function(e) {
+$(document).on("click", "#convert", function (e) {
   ipcRenderer.send('open-convert-window');
 });
-$(document).on("click", "#log", function(e) {
+$(document).on("click", "#log", function (e) {
   shell.openPath(logPath)
 });
-$(document).on("click", "#issues", function(e) {
-    shell.openExternal("https://github.com/leibnizli/hummingbird/issues");
+$(document).on("click", "#issues", function (e) {
+  shell.openExternal("https://github.com/leibnizli/hummingbird/issues");
 });
 window.shareCount = window.shareSize = 0;
-ipcRenderer.on('mainWindow-share', function(e, count, size) {
-    window.shareCount = count;
-    window.shareSize = size;
+ipcRenderer.on('mainWindow-share', function (e, count, size) {
+  window.shareCount = count;
+  window.shareSize = size;
 });
-$(document).on("click", "#share", function(e) {
-    shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${window.shareCount} times and compressed the space to ${(window.shareSize / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
+$(document).on("click", "#share", function (e) {
+  shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${window.shareCount} times and compressed the space to ${(window.shareSize / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
 });
-$(document).on("click", "#minimized", function(e) {
-    ipcRenderer.send('main-minimized');
+$(document).on("click", "#minimized", function (e) {
+  ipcRenderer.send('main-minimized');
 });
-$(document).on("click", "#close", function(e) {
-    ipcRenderer.send('close-main-window');
+$(document).on("click", "#close", function (e) {
+  ipcRenderer.send('close-main-window');
 });
-if (navigator.userAgent.indexOf("Windows") > -1) {
-    $("#ui-app").css({
-        "border": "solid 1px #7d95ad"
-    })
-}
+navigator.userAgentData.getHighEntropyValues(["platformVersion"])
+  .then(ua => {
+    if (navigator.userAgentData.platform === "Windows") {
+      const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+      if (majorPlatformVersion >= 13) {
+        console.log("Windows 11 or later");
+      } else if (majorPlatformVersion > 0) {
+        console.log("Windows 10");
+      } else {
+        console.log("Before Windows 10");
+        $("#ui-app").css({
+          "border": "solid 1px #7d95ad"
+        })
+      }
+    } else {
+      console.log("Not running on Windows");
+    }
+  });
 const App = require("./app.js");
 new App("#ui-app");
