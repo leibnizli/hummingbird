@@ -1,3 +1,4 @@
+import i18n from 'i18n';
 import {getUserHome} from "./util"
 import configuration from "../configuration";
 const sharp = require('sharp');
@@ -18,6 +19,15 @@ const uglify = require('gulp-uglify');
 const rename = require("gulp-rename");
 const cleanCSS = require('gulp-clean-css');
 const mime = require('mime');
+
+/* i18n config */
+const lang = navigator.language
+i18n.configure({
+  updateFiles: false,
+  locales: ['en-US', 'zh-CN'],
+  directory: path.join(__dirname, 'locales'),
+  defaultLocale: /zh/.test(lang) ? 'zh-CN' : 'en-US'
+});
 
 const Pie = require("./components/pie");
 let jpgValue, webpValue, backup, maxWidth = configuration.get('maxWidth') || 0,
@@ -84,7 +94,7 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [ or ]");
+    this.$el.find(".ui-area-waiting").html(i18n.__('drop'));
     this.$el.on("click", "#import", (e) => {
       e.preventDefault();
       ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
@@ -116,7 +126,7 @@ App.prototype = {
     this.$el.on("dragleave", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [ or ]");
+      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
     });
     this.$el.on("drop", ".ui-area-drop", (e) => {
       $(e.target).removeClass("ui-area-drop-have");
@@ -128,7 +138,7 @@ App.prototype = {
   _filterFiles: function (dataTransfer) {
     const items = dataTransfer.items;
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories.<br /> Filename cannot contain [ or ]");
+      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
       return false;
     }
     if (!this.time) {

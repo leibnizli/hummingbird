@@ -49,6 +49,7 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
+    "i18n": "^0.15.1",
     "imagemin": "^5.3.1",
     "imagemin-gifsicle": "^6.0.1",
     "imagemin-jpegtran": "^6.0.0",
