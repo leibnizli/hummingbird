@@ -47,10 +47,12 @@ app.on('ready', function () {
       contextIsolation: false
     }
   });
-
+  let locate = "";
+  if (app.getLocale() === "zh-CN") {
+    locate = "-zh-CN";
+  }
   // 加载应用的 index.html
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
-
+  mainWindow.loadURL('file://' + __dirname + `/index${locate}.html`);
   // 打开开发工具
   // mainWindow.openDevTools();
   // 当 window 被关闭，这个事件会被发出
@@ -91,9 +93,12 @@ ipcMain.on('open-convert-window', function () {
       contextIsolation: false
     }
   });
-
+  let locate = "";
+  if (app.getLocale() === "zh-CN") {
+    locate = "-zh-CN";
+  }
   // 加载应用的 index.html
-  convertWindow.loadURL('file://' + __dirname + '/convert.html');
+  convertWindow.loadURL('file://' + __dirname + `/convert${locate}.html`);
 
   // 打开开发工具
   // process.env.NODE_ENV === "dev" && convertWindow.openDevTools();
@@ -105,7 +110,9 @@ ipcMain.on('open-convert-window', function () {
   convertWindow.webContents.on('did-finish-load', function () {
   });
 });
+
 ipcMain.on('open-settings-window', function () {
+  console.log('app.getLocale()', app.getLocale());
   if (settingsWindow) {
     return;
   }
@@ -123,7 +130,11 @@ ipcMain.on('open-settings-window', function () {
       contextIsolation: false
     }
   });
-  settingsWindow.loadURL('file://' + __dirname + '/settings.html');
+  let locate = "";
+  if (app.getLocale() === "zh-CN") {
+    locate = "-zh-CN";
+  }
+  settingsWindow.loadURL('file://' + __dirname + `/settings${locate}.html`);
   // 打开开发工具
   //settingsWindow.openDevTools();
 

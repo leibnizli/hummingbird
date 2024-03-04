@@ -1,3 +1,5 @@
 {
-  "drop": "Drag and drop one or more files or directories"
+  "waiting": "Drag and drop one or more files or directories",
+  "dragenter": "Release the mouse, and the process begins",
+  "after": "files have been processed and the compressed space is"
 }

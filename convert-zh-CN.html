@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>批量转换图片格式</title>
+    <link rel="stylesheet" href="assets/common.bundle.css">
+    <link rel="stylesheet" href="src/convert.css">
+</head>
+
+<body>
+<div class="convert">
+    <div class="convert-hd">
+        <p>支持 .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif。 如果你选择 .svg, 你只能<b>复制 Base64 字符串</b>，不能转换成其他格式。</p>
+        <p><input type="file" id="file" accept=".png, .webp, .jpeg, .jpg, .gif, .tiff, .avif, .svg" multiple></p>
+        <p><button id="getBase64" style="display: none;">复制 Base64 字符串</button></p>
+    </div>
+
+    <div class="convert-bd">
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" value="jpeg">jpeg
+                </label>
+            </li>
+            <li>
+                <label><input type="checkbox" value="png">png</label>
+            </li>
+            <li>
+                <label><input type="checkbox" value="webp">webp</label>
+            </li>
+            <li>
+                <label><input type="checkbox" value="gif">gif</label>
+            </li>
+<!--            <li>-->
+<!--                <label><input type="checkbox" value="jp2">jp2</label>-->
+<!--            </li>-->
+            <li>
+                <label><input type="checkbox" value="tiff">tiff</label>
+            </li>
+            <li>
+                <label><input type="checkbox" value="avif">avif</label>
+            </li>
+<!--            <li>-->
+<!--                <label><input type="checkbox" value="heif">heif</label>-->
+<!--            </li>-->
+            <li>
+                <label><input type="checkbox" value="ico">ico</label>
+            </li>
+            <li id="icnsItem" style="display:none;">
+                <label><input type="checkbox" value="icns">icns</label>
+            </li>
+        </ul>
+    </div>
+    <div class="convert-ft">
+        <p><button id="export">导出</button></p>
+    </div>
+    <div id="convertLog" class="convert-log"></div>
+    <ul>
+        <li><a id="how" href="#">如何在html或CSS中使用Base64字符串?</a></li>
+    </ul>
+</div>
+<script src="./assets/common.bundle.js"></script>
+<script src="./src/convert.js"></script>
+</body>
+
+</html>

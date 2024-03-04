@@ -41,6 +41,7 @@ $(document).on("change", '#file', function (e) {
   }
 });
 $(document).on("click", '#getBase64', function (e) {
+  if (files.length === 0) return;
   const pngData = fs.readFileSync(files[0].path);
   // 将PNG数据转换为Base64编码
   const base64Data = pngData.toString('base64');

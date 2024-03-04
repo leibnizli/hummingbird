@@ -94,7 +94,7 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html(i18n.__('drop'));
+    this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
     this.$el.on("click", "#import", (e) => {
       e.preventDefault();
       ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
@@ -121,12 +121,12 @@ App.prototype = {
     this.$el.on("dragenter", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).addClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Release the mouse, and the process begins");
+      this.$el.find(".ui-area-waiting").html(i18n.__('dragenter'));
     });
     this.$el.on("dragleave", ".ui-area-drop", (e) => {
       e.preventDefault();
       $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
+      this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
     });
     this.$el.on("drop", ".ui-area-drop", (e) => {
       $(e.target).removeClass("ui-area-drop-have");
@@ -138,7 +138,7 @@ App.prototype = {
   _filterFiles: function (dataTransfer) {
     const items = dataTransfer.items;
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html("Drop one or more files or directories");
+      this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
       return false;
     }
     if (!this.time) {
@@ -452,7 +452,7 @@ App.prototype = {
       this.diff += file.size - file.optimized;
       log += `${file.time} ${file.name} ${file.size}B - ${file.optimized}B = ${this.diff}B ${this.skip ? "skip" : ""} \n`
     }.bind(this));
-    this.$el.find(".ui-area-waiting").html(`${num} files have been processed and the compressed space is ${(this.diff / (1024)).toFixed(3)}KB`);
+    this.$el.find(".ui-area-waiting").html(`${num} ${i18n.__('after')} ${(this.diff / (1024)).toFixed(3)}KB`);
     localStorage.setItem("count", window.shareCount + 1);
     localStorage.setItem("size", window.shareSize + 1);
     ipcRenderer.send('set-share', window.shareCount + 1, window.shareSize + this.diff);
