@@ -18,8 +18,8 @@ English | [简体中文](./README-zh-CN.md)
 
 ### International network (国际网)
 
-* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS v4.3.0**</a>
-* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows v4.3.0**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a>
 
 ### Non-international network（非国际网）
 
