@@ -6,7 +6,7 @@
 * **Hummingbird**可以转换不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif。
 * **Hummingbird**可以导出不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif、 .ico、.icns(仅苹果系统)格式的图片。
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/758e55c6-428b-4821-9537-49b1eebb0a7a" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/1b290851-cb03-46b1-ab3b-b34ef907d552" width="432">
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
 * 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
