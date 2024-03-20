@@ -19,13 +19,13 @@ English | [简体中文](./README-zh-CN.md)
 ### International network (国际网)
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>
-* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (Windows >=10)
 
 ### Non-international network（非国际网）
 
 * <a href="https://thunkli.com/download/hummingbird-arm64-macos">**macOS**</a>（Apple Silicon，上海节点）
 * <a href="https://thunkli.com/download/hummingbird-macos">**macOS**</a>（Intel，上海节点）
-* <a href="https://thunkli.com/download/hummingbird-windows">**Windows**</a> （上海节点）
+* <a href="https://thunkli.com/download/hummingbird-windows">**Windows**</a> (Windows >=10) （上海节点）
 
 
 ## Usage

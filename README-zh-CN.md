@@ -9,7 +9,7 @@
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/1b290851-cb03-46b1-ab3b-b34ef907d552" width="432">
 
 * jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
-* 可以在在当前目录新建`source`文件夹并备份处理前的文件，可以在设置中开启
+* 可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件
 
 ## 安装
 
@@ -19,13 +19,13 @@
 ### International network (国际网)
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>
-* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (Windows >=10)
 
 ### Non-international network（非国际网）
 
 * <a href="https://thunkli.com/download/hummingbird-arm64-macos">**macOS**</a>（Apple Silicon，上海节点）
 * <a href="https://thunkli.com/download/hummingbird-macos">**macOS**</a>（Intel，上海节点）
-* <a href="https://thunkli.com/download/hummingbird-windows">**Windows**</a> （上海节点）
+* <a href="https://thunkli.com/download/hummingbird-windows">**Windows**</a> （上海节点） (Windows >=10)
 
 ## 使用
 
