@@ -25,14 +25,24 @@
         ]
       }
     },
-    "asar": false
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "asar": false,
+    "afterSign": "./build/notarize.js"
   },
   "scripts": {
-    "esbuild": "rm -rf ./assets &&  node esbuild.config.mjs",
-    "dev": "cross-env NODE_ENV=dev electron . ",
-    "dir": "rm -rf ./dist && electron-builder --dir",
-    "pack": "rm -rf ./dist && electron-builder",
-    "clean": "rm -rf ./dist",
+    "esbuild": "rimraf ./assets &&  node esbuild.config.mjs",
+    "dev": "electron . ",
+    "dir": "rimraf ./dist && electron-builder --dir",
+    "pack": "rimraf ./dist && electron-builder",
     "build": "electron-builder build --mac --publish never",
     "deploy": "electron-builder build --mac --publish always"
   },
@@ -43,6 +53,7 @@
     "esbuild": "0.19.11"
   },
   "dependencies": {
+    "electron-log": "^5.1.2",
     "electron-updater": "^6.1.7",
     "gulp": "^4.0.0",
     "gulp-clean-css": "^3.4.1",

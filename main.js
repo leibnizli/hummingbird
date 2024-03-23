@@ -1,9 +1,16 @@
 const {app, BrowserWindow, ipcMain, dialog, shell, Menu} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path')
+const log = require('electron-log');
 const url = require('url')
 const configuration = require("./configuration");
 const isMac = process.platform === 'darwin'
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
+
+console.log('process.env',process.env)
 let settingsWindow = null,
   mainWindow = null,
   convertWindow = null;
