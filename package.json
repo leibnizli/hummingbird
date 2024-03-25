@@ -35,12 +35,11 @@
         }
       ]
     },
-    "asar": false,
-    "afterSign": "./build/notarize.js"
+    "asar": false
   },
   "scripts": {
     "esbuild": "rimraf ./assets &&  node esbuild.config.mjs",
-    "dev": "electron . ",
+    "dev": "electron .",
     "dir": "rimraf ./dist && electron-builder --dir",
     "pack": "rimraf ./dist && electron-builder",
     "build": "electron-builder build --mac --publish never",

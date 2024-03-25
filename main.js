@@ -2,7 +2,7 @@ const {app, BrowserWindow, ipcMain, dialog, shell, Menu} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path')
 const log = require('electron-log');
-const url = require('url')
+
 const configuration = require("./configuration");
 const isMac = process.platform === 'darwin'
 
@@ -10,7 +10,6 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
-console.log('process.env',process.env)
 let settingsWindow = null,
   mainWindow = null,
   convertWindow = null;
@@ -43,8 +42,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 320,
-    height: 267,
+    width: 1320,
+    height: 1267,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -61,7 +60,7 @@ app.on('ready', function () {
   // 加载应用的 index.html
   mainWindow.loadURL('file://' + __dirname + `/index${locate}.html`);
   // 打开开发工具
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。

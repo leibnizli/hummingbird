@@ -1,5 +1,4 @@
 import path from "path";
-
 const fs = require("fs");
 const {shell, ipcRenderer} = require('electron')
 import "./index.css";
