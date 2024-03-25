@@ -16,16 +16,16 @@ English | [简体中文](./README-zh-CN.md)
 * [What is Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
 * [macOS App cannot be opened](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
 
-### International network (国际网)
+### Download from GitHub
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>
 * <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (>=10)
 
-### Non-international network（非国际网）
+### Download from Cloudflare
 
-* <a href="https://thunkli.com/download/hummingbird-arm64-macos">**macOS**</a>（Apple Silicon，上海节点）
-* <a href="https://thunkli.com/download/hummingbird-macos">**macOS**</a>（Intel，上海节点）
-* <a href="https://thunkli.com/download/hummingbird-windows">**Windows**</a> （>=10，上海节点）
+* <a href="https://static.arayofsunshine.dev/hummingbird-4.5.0-arm64.dmg">**macOS**</a>（Apple Silicon）
+* <a href="https://static.arayofsunshine.dev/hummingbird-4.5.0.dmg">**macOS**</a>（Intel）
+* <a href="https://static.arayofsunshine.dev/hummingbird.Setup.4.5.0.exe">**Windows**</a> （>=10）
 
 
 ## Usage
