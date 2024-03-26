@@ -9,7 +9,7 @@ let ctx = await esbuild.context({
   // platform: 'node',
   packages: 'external',
   entryNames: '[name].bundle',
-  outdir: 'assets',
+  outdir: 'public/assets',
   loader: { '.ttf': 'file' },
   //loader: { '.ttf': 'dataurl' },
 })

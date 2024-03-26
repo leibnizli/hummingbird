@@ -54,6 +54,7 @@
   "dependencies": {
     "electron-log": "^5.1.2",
     "electron-updater": "^6.1.7",
+    "express": "^4.19.2",
     "gulp": "^4.0.0",
     "gulp-clean-css": "^3.4.1",
     "gulp-htmlmin": "^3.0.0",

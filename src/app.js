@@ -1,10 +1,10 @@
 import i18n from 'i18n';
-import {getUserHome} from "./util"
+import {getUserHome} from "./util";
 import configuration from "../configuration";
 const sharp = require('sharp');
 const fs = require("fs");
 const path = require('path');
-const {ipcRenderer} = require('electron');
+const {app,ipcRenderer} = require('electron');
 const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminOptipng = require('imagemin-optipng');
@@ -25,7 +25,7 @@ const lang = navigator.language
 i18n.configure({
   updateFiles: false,
   locales: ['en-US', 'zh-CN'],
-  directory: path.join(__dirname, 'locales'),
+  directory: './locales',
   defaultLocale: /zh/.test(lang) ? 'zh-CN' : 'en-US'
 });
 
@@ -40,8 +40,6 @@ ipcRenderer.on('quality', function (e, arg1, arg2) {
 ipcRenderer.on('backup', function (e, arg1) {
   backup = arg1;
 });
-
-let tip = ""
 
 function setTip() {
   let $tip = $("#tip");

@@ -2,8 +2,17 @@ const {app, BrowserWindow, ipcMain, dialog, shell, Menu} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path')
 const log = require('electron-log');
-
 const configuration = require("./configuration");
+const express = require('express')
+const server = express()
+const port = 3373
+// 指定静态文件目录
+server.use(express.static('public'));
+
+server.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
 const isMac = process.platform === 'darwin'
 
 autoUpdater.logger = log;
@@ -35,6 +44,7 @@ if (!configuration.get('size')) {
 if (!configuration.get('backup')) {
   configuration.set('backup', false);
 }
+console.log('__dirname',__dirname,path.join(__dirname, 'locales'));
 // 当 Electron 完成了初始化并且准备创建浏览器窗口的时候
 // 这个方法就被调用
 app.on('ready', function () {
@@ -42,8 +52,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 1320,
-    height: 1267,
+    width: 320,
+    height: 267,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -58,9 +68,9 @@ app.on('ready', function () {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  mainWindow.loadURL('file://' + __dirname + `/index${locate}.html`);
+  mainWindow.loadURL(`http://localhost:3373` + `/index${locate}.html`);
   // 打开开发工具
-  mainWindow.openDevTools();
+  // mainWindow.openDevToolss();
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -104,7 +114,7 @@ ipcMain.on('open-convert-window', function () {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  convertWindow.loadURL('file://' + __dirname + `/convert${locate}.html`);
+  convertWindow.loadURL(`http://localhost:3373` + `/convert${locate}.html`);
 
   // 打开开发工具
   // process.env.NODE_ENV === "dev" && convertWindow.openDevTools();
@@ -140,7 +150,7 @@ ipcMain.on('open-settings-window', function () {
   if (app.getLocale() === "zh-CN") {
     locate = "-zh-CN";
   }
-  settingsWindow.loadURL('file://' + __dirname + `/settings${locate}.html`);
+  settingsWindow.loadURL(`http://localhost:3373` + `/settings${locate}.html`);
   // 打开开发工具
   //settingsWindow.openDevTools();
 
