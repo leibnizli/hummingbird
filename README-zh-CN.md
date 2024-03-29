@@ -16,16 +16,29 @@
 * [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
 * [macOS App打不开](https://arayofsunshine.dev//zh-Hans/blog/macos-app-cannot-be-opened)
 
-### Download from GitHub
+### 最新版本 v4.5.0
+
+#### 从GitHub下载
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>
 * <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (>=10)
 
-### Download from Cloudflare
+#### 从Cloudflare下载
 
 * <a href="https://static.arayofsunshine.dev/hummingbird-4.5.0-arm64.dmg">**macOS**</a>（Apple Silicon）
 * <a href="https://static.arayofsunshine.dev/hummingbird-4.5.0.dmg">**macOS**</a>（Intel）
 * <a href="https://static.arayofsunshine.dev/hummingbird.Setup.4.5.0.exe">**Windows**</a>（>=10）
+
+### 旧版本 v3.0.0
+
+#### 从Google网盘下载
+
+* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，适用于windows老版本，win7，win8）
+
+#### 从百度网盘下载
+
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，适用于windows老版本，win7，win8）
+
 
 ## 使用
 
