@@ -11,6 +11,7 @@ electron-packager-mac
 
 out/
 .env
+env.md
 assets
 src/font/demo
 

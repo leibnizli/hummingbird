@@ -20,7 +20,8 @@ English | [简体中文](./README-zh-CN.md)
 
 #### Download from GitHub
 
-* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (>=10)
 
 #### Download from Cloudflare
@@ -38,8 +39,6 @@ English | [简体中文](./README-zh-CN.md)
 #### 从百度网盘下载
 
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，适用于windows老版本，win7，win8）
-
-
 
 ## Usage
 
