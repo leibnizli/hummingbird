@@ -30,7 +30,7 @@ app.on('window-all-closed', function () {
   app.quit();
 });
 if (!configuration.get('jpg')) {
-  configuration.set('jpg', 85);
+  configuration.set('jpg', 80);
 }
 if (!configuration.get('webp')) {
   configuration.set('webp', 85);
@@ -52,8 +52,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 320,
-    height: 267,
+    width: 1320,
+    height: 1267,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -70,7 +70,7 @@ app.on('ready', function () {
   // 加载应用的 index.html
   mainWindow.loadURL(`http://localhost:3373` + `/index${locate}.html`);
   // 打开开发工具
-  // mainWindow.openDevToolss();
+  mainWindow.openDevTools();
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。

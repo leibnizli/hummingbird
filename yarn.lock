@@ -3856,24 +3856,6 @@ imagemin-gifsicle@^6.0.1:
     gifsicle "^4.0.0"
     is-gif "^3.0.0"
 
-imagemin-jpegtran@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/imagemin-jpegtran/-/imagemin-jpegtran-6.0.0.tgz"
-  integrity sha512-Ih+NgThzqYfEWv9t58EItncaaXIHR0u9RuhKa8CtVBlMBvY0dCIxgQJQCfwImA4AV1PMfmUKlkyIHJjb7V4z1g==
-  dependencies:
-    exec-buffer "^3.0.0"
-    is-jpg "^2.0.0"
-    jpegtran-bin "^4.0.0"
-
-imagemin-mozjpeg@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.npmjs.org/imagemin-mozjpeg/-/imagemin-mozjpeg-8.0.0.tgz"
-  integrity sha512-+EciPiIjCb8JWjQNr1q8sYWYf7GDCNDxPYnkD11TNIjjWNzaV+oTg4DpOPQjl5ZX/KRCPMEgS79zLYAQzLitIA==
-  dependencies:
-    execa "^1.0.0"
-    is-jpg "^2.0.0"
-    mozjpeg "^6.0.0"
-
 imagemin-optipng@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/imagemin-optipng/-/imagemin-optipng-5.2.1.tgz"
@@ -4223,11 +4205,6 @@ is-gzip@^1.0.0:
   resolved "https://registry.npmjs.org/is-gzip/-/is-gzip-1.0.0.tgz"
   integrity sha512-rcfALRIb1YewtnksfRIHGcIY93QnK8BIQ/2c9yDYcG/Y6+vRoJuTWBmmSEbyLLYtXm7q35pHOHbZFQBaLrhlWQ==
 
-is-jpg@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/is-jpg/-/is-jpg-2.0.0.tgz"
-  integrity sha512-ODlO0ruzhkzD3sdynIainVP5eoOFNN85rxA1+cwwnPe4dKyX0r5+hxNO5XpCrxlHcmb9vkOit9mhRD2JVuimHg==
-
 is-natural-number@^2.0.0:
   version "2.1.1"
   resolved "https://registry.npmjs.org/is-natural-number/-/is-natural-number-2.1.1.tgz"
@@ -4559,15 +4536,6 @@ jpeg-js@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/jpeg-js/-/jpeg-js-0.2.0.tgz"
   integrity sha512-Ni9PffhJtYtdD7VwxH6V2MnievekGfUefosGCHadog0/jAevRu6HPjYeMHbUemn0IPE8d4wGa8UsOGsX+iKy2g==
-
-jpegtran-bin@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/jpegtran-bin/-/jpegtran-bin-4.0.0.tgz"
-  integrity sha512-2cRl1ism+wJUoYAYFt6O/rLBfpXNWG2dUWbgcEkTt5WGMnqI46eEro8T4C5zGROxKRqyKpCBSdHPvt5UYCtxaQ==
-  dependencies:
-    bin-build "^3.0.0"
-    bin-wrapper "^4.0.0"
-    logalot "^2.0.0"
 
 js-yaml@^3.13.1:
   version "3.14.1"
@@ -5288,15 +5256,6 @@ moo@^0.5.1:
   version "0.5.2"
   resolved "https://registry.npmjs.org/moo/-/moo-0.5.2.tgz"
   integrity sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==
-
-mozjpeg@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/mozjpeg/-/mozjpeg-6.0.1.tgz"
-  integrity sha512-9Z59pJMi8ni+IUvSH5xQwK5tNLw7p3dwDNCZ3o1xE+of3G5Hc/yOz6Ue/YuLiBXU3ZB5oaHPURyPdqfBX/QYJA==
-  dependencies:
-    bin-build "^3.0.0"
-    bin-wrapper "^4.0.0"
-    logalot "^2.1.0"
 
 ms@2.0.0:
   version "2.0.0"

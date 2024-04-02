@@ -58,7 +58,7 @@ English | [简体中文](./README-zh-CN.md)
         </tr>
         <tr>
             <td>41kb</td>
-            <td>25kb</td>
+            <td>12kb</td>
         </tr>
     </tbody>
 </table>

@@ -4,15 +4,13 @@ import configuration from "../configuration";
 const sharp = require('sharp');
 const fs = require("fs");
 const path = require('path');
-const {app,ipcRenderer} = require('electron');
+const {ipcRenderer} = require('electron');
 const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminOptipng = require('imagemin-optipng');
-const imageminJpegtran = require('imagemin-jpegtran');
 const imageminSvgo = require('imagemin-svgo');
 const imageminGifsicle = require('imagemin-gifsicle');
 const imageminWebp = require('imagemin-webp');
-const imageminMozjpeg = require('imagemin-mozjpeg');
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const uglify = require('gulp-uglify');
@@ -307,23 +305,20 @@ App.prototype = {
           });
           break;
         case "image/jpeg":
-          self._sharp(filePath).finally(
-            () => {
-              imagemin([filePath], fileDirname, {
-                plugins: [
-                  imageminJpegtran({progressive: true}),
-                  imageminMozjpeg({
-                    tune: 'psnr',
-                    quality: jpgValue || 85
-                  })
-                ]
-              }).then(files => {
-                runSucceed(i, files, "img");
-              }, err => {
-                runSkip(i, err)
+          self._sharp(filePath).finally(() => {
+            sharp(filePath).jpeg({
+                mozjpeg: true,
+                quality: jpgValue || 80
+              })
+              .toBuffer(function (err, buffer) {
+                if (err) {
+                  runSkip(i, err)
+                }
+                fs.writeFile(filePath, buffer, function (e) {
+                  runSucceed(i, [{data:buffer}], "img");
+                });
               });
-            }
-          );
+          });
           break;
         case "image/png":
           self._sharp(filePath).finally(

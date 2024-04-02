@@ -60,7 +60,7 @@ v3.0.0，适用于windows老版本，win7，win8
         </tr>
         <tr>
             <td>41kb</td>
-            <td>25kb</td>
+            <td>12kb</td>
         </tr>
     </tbody>
 </table>

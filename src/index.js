@@ -73,7 +73,7 @@ navigator.userAgentData.getHighEntropyValues(["platformVersion"])
         console.log("Before Windows 10");
         $("#ui-app").css({
           "border": "solid 1px #7d95ad"
-        })
+        });
       }
     } else {
       console.log("Not running on Windows");

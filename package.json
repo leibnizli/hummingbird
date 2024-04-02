@@ -62,8 +62,6 @@
     "i18n": "^0.15.1",
     "imagemin": "^5.3.1",
     "imagemin-gifsicle": "^6.0.1",
-    "imagemin-jpegtran": "^6.0.0",
-    "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^5.2.1",
     "imagemin-pngquant": "^5.0.1",
     "imagemin-svgo": "^7.0.0",
