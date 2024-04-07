@@ -2,14 +2,20 @@
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-* **Hummingbird**使用智能压缩技术来减少文件的文件大小，支持：jpg、png、webp、svg、gif、gif、css、js、html。
-* **Hummingbird**可以转换不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif。
-* **Hummingbird**可以导出不同格式的图片，支持：.png、 .webp、 .jpeg、 .jpg、 .gif、 .tiff、 .avif、 .ico、.icns(仅苹果系统)格式的图片。
+1. **Hummingbird**使用智能压缩技术来减少文件的大小，支持：jpg、png、webp、svg、gif、gif、css、js、html、mp4、mov，可以设置压缩的同时等比例缩放图片或视频的尺寸。可以拖放文件夹压缩，一次最多可处理**100**个文件。
+2. **Hummingbird**可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
+3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
+4. **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
+5. **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
+   * 合并，可将svg文件批量拼合为字体文件
+   * 修改，可对字体追加、删除、替换、导出字形，例如：替换字体中的指定字形
+   * 裁剪，从中文字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
+6. **Hummingbird**可以查看压缩文件的历史记录。
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/1b290851-cb03-46b1-ab3b-b34ef907d552" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/ddd03382-f7a6-4b2a-80ad-245c4f884e62" width="432">
 
-* jpg/png/webp/svg/gif/html压缩后会替换掉当前文件，css/js压缩后会生成一个带.min的新文件
-* 可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件
+* jpg、png、webp、svg、gif、html压缩后会替换掉当前文件，可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件。
+* css、js、mp4压缩后会生成一个带.min的新文件。
 
 ## 安装
 
@@ -22,6 +28,7 @@
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Intel）
+* <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (>=10)
 
 #### 从Cloudflare下载
 
@@ -31,15 +38,10 @@
 
 ### 旧版本 v3.0.0
 
-v3.0.0，适用于windows老版本，win7，win8
+适用于windows老版本，win7，win8
 
-#### 从Google网盘下载
-
-* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，适用于windows老版本，win7，win8）
-
-#### 从百度网盘下载
-
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，适用于windows老版本，win7，win8）
+* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Google网盘）
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，百度网盘）
 
 
 ## 使用
@@ -104,8 +106,4 @@ v3.0.0，适用于windows老版本，win7，win8
         </tr>
     </tbody>
 </table>
-
-### 图片格式转换
-
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/f143c02d-acc9-4b16-91ca-5a6cb2d3327f" width="480">
 

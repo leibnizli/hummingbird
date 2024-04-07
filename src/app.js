@@ -1,6 +1,8 @@
 import i18n from 'i18n';
 import {getUserHome} from "./util";
 import configuration from "../configuration";
+const ffmpegStatic = require('ffmpeg-static');
+const ffmpeg = require('fluent-ffmpeg');
 const sharp = require('sharp');
 const fs = require("fs");
 const path = require('path');
@@ -17,7 +19,8 @@ const uglify = require('gulp-uglify');
 const rename = require("gulp-rename");
 const cleanCSS = require('gulp-clean-css');
 const mime = require('mime');
-
+// Tell fluent-ffmpeg where it can find FFmpeg
+ffmpeg.setFfmpegPath(ffmpegStatic);
 /* i18n config */
 const lang = navigator.language
 i18n.configure({
@@ -30,6 +33,7 @@ i18n.configure({
 const Pie = require("./components/pie");
 let jpgValue, webpValue, backup, maxWidth = configuration.get('maxWidth') || 0,
   maxHeight = configuration.get('maxHeight') || 0;
+let maxHeightVideo = configuration.get('maxHeightVideo') || 0;
 
 ipcRenderer.on('quality', function (e, arg1, arg2) {
   jpgValue = arg1;
@@ -62,7 +66,9 @@ ipcRenderer.on('maxHeight', function (e, arg1) {
   maxHeight = arg1;
   setTip()
 });
-
+ipcRenderer.on('maxHeightVideo', function (e, arg1) {
+  maxHeightVideo = arg1;
+});
 function getFilesizeInBytes(filename) {
   var stats = fs.statSync(filename);
   return stats.size;
@@ -153,16 +159,28 @@ App.prototype = {
       item.file((file) => {
         clearTimeout(this.Timer);
         this.Timer = setTimeout(() => {
-          this.status = "drop";
-          this._updateState();
-          this._delFiles(this.filesArray);
+          if (this.filesArray.length>0) {
+            this.status = "drop";
+            this._updateState();
+            this._delFiles(this.filesArray);
+          } else {
+            this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
+          }
         }, 100);
-        if (file.type.indexOf("image") > -1 || file.type.indexOf("css") > -1 || file.type.indexOf("javascript") > -1 || file.type.indexOf("html") > -1) {
+        if (file.type.indexOf("image") > -1 || file.type.indexOf("css") > -1 || file.type.indexOf("javascript") > -1 || file.type.indexOf("html") > -1 || file.type.indexOf("mp4") > -1) {
           this.filesArray.push({
             size: file.size,
             name: file.name,
             path: file.path,
             type: file.type
+          });
+        }
+        if (file.path.match(/\.(mov)$/)) {
+          this.filesArray.push({
+            size: file.size,
+            name: file.name,
+            path: file.path,
+            type: 'video/mov'
           });
         }
       });
@@ -276,10 +294,15 @@ App.prototype = {
     function filesHandle(i) {
       if (i + 1 > len) return;
       index++;
-      const filePath = self.filesArray[i].path,
-        fileDirname = path.dirname(filePath),
-        fileBasename = path.basename(filePath),
-        fileSourcePath = path.join(fileDirname, 'source', fileBasename);
+      const filePath = self.filesArray[i].path;
+      const fileDirname = path.dirname(filePath);
+      const fileBasename = path.basename(filePath);
+      const extension = path.extname(filePath);
+      const fileSourcePath = path.join(fileDirname, 'source', fileBasename);
+
+      const name = path.basename(filePath, `${extension}`);
+      const targetPath = path.join(fileDirname, `${name}.min${extension}`);
+      const options = [];
       //writeFile
       if (backup) {
         //mkdir
@@ -307,15 +330,16 @@ App.prototype = {
         case "image/jpeg":
           self._sharp(filePath).finally(() => {
             sharp(filePath).jpeg({
-                mozjpeg: true,
-                quality: jpgValue || 80
-              })
+              mozjpeg: true,
+              progressive: true,
+              quality: jpgValue || 80
+            })
               .toBuffer(function (err, buffer) {
                 if (err) {
                   runSkip(i, err)
                 }
                 fs.writeFile(filePath, buffer, function (e) {
-                  runSucceed(i, [{data:buffer}], "img");
+                  runSucceed(i, [{data: buffer}], "img");
                 });
               });
           });
@@ -326,7 +350,9 @@ App.prototype = {
               imagemin([filePath], fileDirname, {
                 plugins: [
                   imageminOptipng({optimizationLevel: 2}),//OptiPNG 无损压缩算法
-                  imageminPngquant({quality: '65-85', speed: 3})//Pngquant 有损压缩算法
+                  imageminPngquant({
+                    quality: [0.6, 0.85],
+                  })//Pngquant 有损压缩算法
                 ]
               }).then(files => {
                 runSucceed(i, files, "img");
@@ -377,7 +403,6 @@ App.prototype = {
             ]);
           });
           break;
-        //case "text/javascript":
         case "text/javascript":
           gulp.src(filePath).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest(fileDirname)).on('end', function () {
             runSucceed(i, [
@@ -394,6 +419,44 @@ App.prototype = {
             runSucceed(i, [
               {size: getFilesizeInBytes(filePath)}
             ]);
+          });
+          break;
+        case "video/mp4":
+          options.push('-crf 28')
+          if (maxHeightVideo>0){
+            options.push(`-vf scale=-2:${maxHeightVideo}`);
+          }
+          ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
+              if (progress.percent) {
+                pie.set(((p / len) * 100 + 1/len * progress.percent).toFixed(0));
+              }
+            }).saveToFile(targetPath).on('end', () => {
+              console.log('FFmpeg has finished.');
+              runSucceed(i, [
+                {size: getFilesizeInBytes(targetPath)}
+              ], );
+            }).on('error', (error) => {
+              runSkip(i, error)
+            });
+          break;
+        case "video/mov":
+          options.push('-crf 28');
+          options.push('-c:v libx264');
+          options.push('-c:a copy');
+          if (maxHeightVideo>0){
+            options.push(`-vf scale=-2:${maxHeightVideo}`);
+          }
+          ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
+            if (progress.percent) {
+              pie.set(((p / len) * 100 + 1/len * progress.percent).toFixed(0));
+            }
+          }).saveToFile(targetPath).on('end', () => {
+            console.log('FFmpeg has finished.');
+            runSucceed(i, [
+              {size: getFilesizeInBytes(targetPath)}
+            ], );
+          }).on('error', (error) => {
+            runSkip(i, error)
           });
           break;
         default:

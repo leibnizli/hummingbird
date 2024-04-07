@@ -41,6 +41,15 @@ $(document).on("click", "#settings", function (e) {
 $(document).on("click", "#convert", function (e) {
   ipcRenderer.send('open-convert-window');
 });
+$(document).on("click", "#code", function (e) {
+  ipcRenderer.send('open-code-window');
+});
+$(document).on("click", "#video", function (e) {
+  ipcRenderer.send('open-video-window');
+});
+$(document).on("click", "#font", function (e) {
+  ipcRenderer.send('open-font-window');
+});
 $(document).on("click", "#log", function (e) {
   shell.openPath(logPath)
 });

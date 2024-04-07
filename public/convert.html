@@ -5,63 +5,63 @@
     <meta charset="UTF-8">
     <title>Convert image format</title>
     <link rel="stylesheet" href="assets/common.bundle.css">
-    <link rel="stylesheet" href="convert.css">
+    <link rel="stylesheet" href="./convert.css">
 </head>
 
 <body>
 <div class="convert">
     <div class="convert-hd">
-        <p>Support .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif. If you choose .svg, you can only <b>Copy Base64 String</b>, and you cannot export other formats.</p>
-        <p><input type="file" id="file" accept=".png, .webp, .jpeg, .jpg, .gif, .tiff, .avif, .svg" multiple></p>
-        <p><button id="getBase64" style="display: none;">Copy Base64 String</button></p>
+        <p>You can choose from .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif, and .heic.</p>
+        <p>.heic can only be converted to .jpeg or .png format.</p>
+        <p>.ico and .icns can only be converted from .png format.</p>
     </div>
-
     <div class="convert-bd">
-        <ul>
-            <li>
-                <label>
-                    <input type="checkbox" value="jpeg">jpeg
-                </label>
-            </li>
-            <li>
-                <label><input type="checkbox" value="png">png</label>
-            </li>
-            <li>
-                <label><input type="checkbox" value="webp">webp</label>
-            </li>
-            <li>
-                <label><input type="checkbox" value="gif">gif</label>
-            </li>
-<!--            <li>-->
-<!--                <label><input type="checkbox" value="jp2">jp2</label>-->
-<!--            </li>-->
-            <li>
-                <label><input type="checkbox" value="tiff">tiff</label>
-            </li>
-            <li>
-                <label><input type="checkbox" value="avif">avif</label>
-            </li>
-<!--            <li>-->
-<!--                <label><input type="checkbox" value="heif">heif</label>-->
-<!--            </li>-->
-            <li>
-                <label><input type="checkbox" value="ico">ico</label>
-            </li>
-            <li id="icnsItem" style="display:none;">
-                <label><input type="checkbox" value="icns">icns</label>
-            </li>
-        </ul>
-    </div>
-    <div class="convert-ft">
+        <p><input type="file" id="file" accept=".png, .webp, .jpeg, .jpg, .gif, .tiff, .avif, .heic" multiple></p>
+        <div class="convert-bd-set">
+            <h2>Select the export format:</h2>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox" value="jpeg">jpeg
+                    </label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="png">png</label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="webp">webp</label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="gif">gif</label>
+                </li>
+                <!--            <li>-->
+                <!--                <label><input type="checkbox" value="jp2">jp2</label>-->
+                <!--            </li>-->
+                <li>
+                    <label><input type="checkbox" value="tiff">tiff</label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="avif">avif</label>
+                </li>
+                <!--            <li>-->
+                <!--                <label><input type="checkbox" value="heif">heif</label>-->
+                <!--            </li>-->
+                <li>
+                    <label><input type="checkbox" value="ico">ico</label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="icns">icns</label>
+                </li>
+            </ul>
+        </div>
         <p><button id="export">Export</button></p>
     </div>
-    <div id="convertLog" class="convert-log"></div>
-    <ul>
-        <li><a id="how" href="#">How to implement Base64 strings in html or CSS?</a></li>
-    </ul>
+    <div class="convert-ft">
+        <div id="convertLog" class="convert-log"></div>
+    </div>
 </div>
 <script src="../assets/common.bundle.js"></script>
-<script src="convert.js"></script>
+<script src="./convert.js"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VR549GFR33"></script>
 <script>
