@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="assets/common.bundle.css">
     <link rel="stylesheet" href="assets/index.bundle.css">
     <style>
-      #notification {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 200px;
-        z-index: 1;
-        padding: 20px;
-        border-radius: 5px;
-        background-color: white;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      }
+        #notification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 200px;
+            z-index: 1;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
 
-      .hidden {
-        display: none;
-      }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
 <div class="ui-app" id="ui-app" style="-webkit-app-region: drag;">
     <ul class="ui-hd">
-        <li class="ui-hd-icon" id="settings" title="设置">
+        <li class="ui-hd-icon" id="settings" title="压缩设置">
             <img style="margin-top:3px;" width="24" height="24" src="images/settings.svg" alt="">
         </li>
         <li class="ui-hd-icon" id="import" title="导入需要压缩的文件">
@@ -39,6 +39,18 @@
         </li>
         <li class="ui-hd-icon" id="convert" title="批量转换图片格式">
             <img style="margin-top:3px;" width="24" height="24" src="images/convert.svg"
+                 alt="">
+        </li>
+        <li class="ui-hd-icon" id="video" title="视频编辑">
+            <img style="margin-top:3px;" width="24" height="24" src="images/video.svg"
+                 alt="">
+        </li>
+        <li class="ui-hd-icon" id="code" title="文件编码">
+            <img style="margin-top:3px;" width="24" height="24" src="images/code.svg"
+                 alt="">
+        </li>
+        <li class="ui-hd-icon" id="font" title="字体编辑">
+            <img style="margin-top:3px;" width="24" height="24" src="images/font.svg"
                  alt="">
         </li>
         <li class="ui-hd-icon" id="share" title="分享至twitter">
@@ -113,7 +125,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VR549GFR33"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
   gtag('js', new Date());
 
   gtag('config', 'G-VR549GFR33');

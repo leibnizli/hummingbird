@@ -1,0 +1,19 @@
+body { background:#fff; font-size:12px; }
+.video { padding:20px; }
+.video-hd {
+    strong { color:#3E2F00; }
+}
+.video-hd p { }
+.video-bd { padding:20px 0;
+    p { padding:4px 0; }
+    .video-bd-set { margin:10px 0;}
+    ul { display:flex; flex-wrap:wrap; }
+    li { width:60px; }
+    input { vertical-align:middle; margin-right:6px; }
+}
+.video-ft {
+    padding:10px 0;
+    /*border-top:2px dashed rgba(64,100,138,.2);*/
+    .video-additional {  }
+}
+.video-log { padding:10px; color:#3E2F00; }

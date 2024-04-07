@@ -2,14 +2,20 @@ English | [简体中文](./README-zh-CN.md)
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-* **Hummingbird** Use intelligent compression technology to reduce the file size of the file. Support: .jpg, .png, .webp, .svg, .gif, .css, .js, .html.
-* **Hummingbird** can convert pictures of different formats, support: .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif.
-* **Hummingbird** can export pictures of different formats, support: .png, .webp, .jpeg, .jpg, .gif, .tiff, .avif, .ico, .icns (only Apple system) format.
+1. **Hummingbird** uses intelligent compression technology to reduce file size. It supports: jpg, png, webp, svg, gif, gif, css, js, html, mp4, mov. You can set compression while scaling images or videos at the same ratio. size of. Folder compression can be dragged and dropped and can process up to 100 files at a time.
+2. **Hummingbird** can convert pictures in different formats, supports: png, webp, jpeg, jpg, gif, tiff, avi, heic, and can export pictures in different formats, supports: png, webp, jpeg, jpg, gif , tiff, avif, ico, icns (Apple system only) format pictures.
+3. **Hummingbird** can extract audio from videos, delete audio from videos, convert videos to gif, and convert video formats, supporting mp4, mov, and avi.
+4. **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
+5. **Hummingbird** can handle font files, its predecessor is [Panda](https://github.com/leibnizli/panda).
+    * Merge, you can batch assemble svg files into font files
+    * Modify, you can add, delete, replace, and export glyphs to fonts, for example: replace specified glyphs in fonts
+    * Cropping, filtering out the required glyphs from Chinese fonts (filtering 8.1M Chinese fonts, it takes about 6 seconds to wait)
+6. **Hummingbird** can view the history of compressed files.
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/758e55c6-428b-4821-9537-49b1eebb0a7a" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/d6570323-63d6-40ea-8377-2b865d4d7075" width="432">
 
-* jpg/png/webp/svg/gif/html will replace the current file after compression, and a new file with .min will be generated after css/js compression.
-* Backup can be turned on in Settings, and hummingbird will back up the files to the `source` folder in the current directory.
+* jpg, png, webp, svg, gif, html will replace the current file after compression, Backup can be turned on in Settings, and hummingbird will back up the files to the `source` folder in the current directory.
+* A new file with .min will be generated after css, js, mp4 compression.
 
 ## Install
 
@@ -32,13 +38,10 @@ English | [简体中文](./README-zh-CN.md)
 
 ### Old version v3.0.0
 
-#### Download from Google Drive
+Suitable for old versions of windows, win7, win8
 
-* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Applicable to older windows versions, such as Windows 7 and Windows 8）
-
-#### 从百度网盘下载
-
-* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，适用于windows老版本，win7，win8）
+* <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Google Drive）
+* <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，百度网盘）
 
 ## Usage
 
@@ -100,8 +103,3 @@ English | [简体中文](./README-zh-CN.md)
         </tr>
     </tbody>
 </table>
-
-### Convert image format
-
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/f143c02d-acc9-4b16-91ca-5a6cb2d3327f" width="480">
-

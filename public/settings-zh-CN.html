@@ -10,6 +10,7 @@
 
 <body>
 <div class="settings">
+    <h2>图片：</h2>
     <div class="settings-backup">
         <input type="checkbox" name="backup"><span>在压缩前备份原始文件（source目录）</span>
     </div>
@@ -63,6 +64,21 @@
         <tr>
             <td class="settings-name">svg</td>
             <td>已设置最佳方案</td>
+            <td class="settings-value"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>视频：</h2>
+    <table class="settings-tb">
+        <!-- <caption>
+            拖动滑块设置压缩质量
+        </caption> -->
+        <tbody>
+        <tr>
+            <td class="settings-name">最大高度</td>
+            <td width="200">
+                <input type="number" id="maxHeightVideo"/>
+            </td>
             <td class="settings-value"></td>
         </tr>
         </tbody>
