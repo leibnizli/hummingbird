@@ -32,9 +32,9 @@
 
 #### 从Cloudflare下载
 
-* <a href="https://static.arayofsunshine.dev/hummingbird-4.5.0-arm64.dmg">**macOS**</a>（Apple Silicon）
-* <a href="https://static.arayofsunshine.dev/hummingbird-4.5.0.dmg">**macOS**</a>（Intel）
-* <a href="https://static.arayofsunshine.dev/hummingbird.Setup.4.5.0.exe">**Windows**</a>（>=10）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.0.0-arm64.dmg">**macOS**</a>（Apple Silicon）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.0.0.dmg">**macOS**</a>（Intel）
+* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.0.0.exe">**Windows**</a>（>=10）
 
 ### 旧版本 v3.0.0
 
