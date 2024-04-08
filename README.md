@@ -22,7 +22,7 @@ English | [简体中文](./README-zh-CN.md)
 * [What is Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
 * [macOS App cannot be opened](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
 
-### Latest version v4.5.0
+### Latest version v5.0.0
 
 #### Download from GitHub
 
