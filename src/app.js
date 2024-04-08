@@ -21,15 +21,22 @@ const cleanCSS = require('gulp-clean-css');
 const mime = require('mime');
 // Tell fluent-ffmpeg where it can find FFmpeg
 ffmpeg.setFfmpegPath(ffmpegStatic);
-/* i18n config */
-const lang = navigator.language
-i18n.configure({
-  updateFiles: false,
-  locales: ['en-US', 'zh-CN'],
-  directory: './locales',
-  defaultLocale: /zh/.test(lang) ? 'zh-CN' : 'en-US'
-});
 
+let appPath= "";
+const lang = navigator.language
+ipcRenderer.on('appPath', (event, p) => {
+  appPath = p
+  console.log(`App path: ${appPath}`)
+  /* i18n config */
+  i18n.configure({
+    updateFiles: false,
+    locales: ['en-US', 'zh-CN'],
+    directory: path.join(appPath, 'locales'),
+    defaultLocale: /zh/.test(lang) ? 'zh-CN' : 'en-US'
+  });
+  new App("#ui-app");
+});
+console.log(__dirname + '/locales')
 const Pie = require("./components/pie");
 let jpgValue, webpValue, backup, maxWidth = configuration.get('maxWidth') || 0,
   maxHeight = configuration.get('maxHeight') || 0;

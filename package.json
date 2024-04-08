@@ -16,6 +16,7 @@
   "build": {
     "appId": "dev.arayofsunshine.hummingbird",
     "mac": {
+      "notarize": false,
       "category": "tool",
       "target": {
         "target": "default",
@@ -35,8 +36,7 @@
         }
       ]
     },
-    "asar": false,
-    "afterSign": "./build/notarize.js"
+    "asar": false
   },
   "scripts": {
     "esbuild": "rimraf ./assets &&  node esbuild.config.mjs",
@@ -45,9 +45,11 @@
     "pack": "rimraf ./dist && electron-builder"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
+    "@electron/notarize": "2.3.0",
     "cross-env": "^7.0.3",
-    "electron": "^28.1.0",
-    "electron-builder": "^24.9.1",
+    "electron": "^29.2.0",
+    "electron-builder": "^24.13.3",
     "esbuild": "0.19.11"
   },
   "dependencies": {

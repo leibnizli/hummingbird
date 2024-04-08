@@ -22,11 +22,10 @@ if (!configuration.get('backup')) {
 if (!configuration.get('port')) {
   configuration.set('port', 3373);
 }
-
 const server = express()
 const port = configuration.get('port') || 3373
 // 指定静态文件目录
-server.use(express.static('public'));
+server.use(express.static(__dirname + '/public'));
 
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -85,6 +84,7 @@ app.on('ready', function () {
     mainWindow = null;
   });
   mainWindow.webContents.on('did-finish-load', function () {
+    mainWindow.webContents.send('appPath', app.getAppPath());
     mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
     mainWindow.webContents.send('mainWindow-share', configuration.get('count'), configuration.get('size'));
     mainWindow.webContents.send('backup', configuration.get('backup'));

@@ -88,5 +88,5 @@ navigator.userAgentData.getHighEntropyValues(["platformVersion"])
       console.log("Not running on Windows");
     }
   });
-const App = require("./app.js");
-new App("#ui-app");
+require("./app.js");
+

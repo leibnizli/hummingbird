@@ -1,30 +1,20 @@
+require('dotenv').config();
 const { notarize } = require('@electron/notarize');
-const path = require('path');
 
 exports.default = async function notarizing(context) {
-  if (context.electronPlatformName !== 'darwin' || process.env.CSC_IDENTITY_AUTO_DISCOVERY === 'false') {
-    console.log("Skipping notarization");
-    return;
-  }
-  console.log("Notarizing...")
-
-  const appBundleId = context.packager.appInfo.info._configuration.appId;
+  const { electronPlatformName, appOutDir } = context;
   const appName = context.packager.appInfo.productFilename;
-  const appPath = path.normalize(path.join(context.appOutDir, `${appName}.app`));
-  const appleId = process.env.APPLE_ID;
-  const appleIdPassword = process.env.APPLE_ID_PASSWORD;
-  if (!appleId) {
-    console.warn("Not notarizing: Missing APPLE_ID environment variable");
+
+  if (electronPlatformName !== 'darwin') {
     return;
   }
-  if (!appleIdPassword) {
-    console.warn("Not notarizing: Missing APPLE_ID_PASSWORD environment variable");
-    return;
-  }
-  return notarize({
-    appBundleId,
-    appPath,
-    appleId,
-    appleIdPassword,
+
+  return await notarize({
+    tool: "notarytool",
+    appBundleId: 'dev.arayofsunshine.hummingbird',
+    appPath: `${appOutDir}/${appName}.app`,
+    appleId: process.env.APPLEID,
+    appleIdPassword: process.env.APPLEIDPASS,
+    teamId: process.env.APPLE_TEAM_ID
   });
 };
