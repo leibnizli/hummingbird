@@ -62,7 +62,7 @@ ipcRenderer.on('mainWindow-share', function (e, count, size) {
   window.shareSize = size;
 });
 $(document).on("click", "#share", function (e) {
-  shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${window.shareCount} times and compressed the space to ${(window.shareSize / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
+  shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${window.shareCount} times and compressed the space ${(window.shareSize / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
 });
 $(document).on("click", "#minimized", function (e) {
   ipcRenderer.send('main-minimized');
