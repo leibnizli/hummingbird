@@ -74,10 +74,10 @@ app.on('ready', function () {
   if (app.getLocale() === "zh-CN") {
     locate = "-zh-CN";
   }
-  // 加载应用的 index.html
-  mainWindow.loadURL(`http://localhost:3373` + `/index${locate}.html`);
   // 打开开发工具
   // mainWindow.openDevTools();
+  // 加载应用的 index.html
+  mainWindow.loadURL(`http://localhost:3373` + `/index${locate}.html`);
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -271,7 +271,6 @@ ipcMain.on('open-settings-window', function () {
   settingsWindow.on('closed', function () {
     settingsWindow = null;
   });
-  // settingsWindow.openDevTools();
 
   settingsWindow.webContents.on('did-finish-load', function () {
     //

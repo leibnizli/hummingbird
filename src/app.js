@@ -1,6 +1,7 @@
 import i18n from 'i18n';
 import {getUserHome} from "./util";
 import configuration from "../configuration";
+
 const ffmpegStatic = require('ffmpeg-static');
 const ffmpeg = require('fluent-ffmpeg');
 const sharp = require('sharp');
@@ -22,7 +23,7 @@ const mime = require('mime');
 // Tell fluent-ffmpeg where it can find FFmpeg
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
-let appPath= "";
+let appPath = "";
 const lang = navigator.language
 ipcRenderer.on('appPath', (event, p) => {
   appPath = p
@@ -76,6 +77,7 @@ ipcRenderer.on('maxHeight', function (e, arg1) {
 ipcRenderer.on('maxHeightVideo', function (e, arg1) {
   maxHeightVideo = arg1;
 });
+
 function getFilesizeInBytes(filename) {
   var stats = fs.statSync(filename);
   return stats.size;
@@ -141,11 +143,10 @@ App.prototype = {
       $(e.target).removeClass("ui-area-drop-have");
       this.filesArray = [];
       this.diff = 0;
-      this._filterFiles(e.originalEvent.dataTransfer);
+      this._filterFiles(e.originalEvent.dataTransfer.items);
     });
   },
-  _filterFiles: function (dataTransfer) {
-    const items = dataTransfer.items;
+  _filterFiles: function (items) {
     if (items.length === 0) {
       this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
       return false;
@@ -160,13 +161,14 @@ App.prototype = {
       }
     }
   },
-  _traverseFileTree: function (item, path) {
+  _traverseFileTree: function (item) {
+    const self = this;
     if (item.isFile) {
       // Get file
       item.file((file) => {
         clearTimeout(this.Timer);
         this.Timer = setTimeout(() => {
-          if (this.filesArray.length>0) {
+          if (this.filesArray.length > 0) {
             this.status = "drop";
             this._updateState();
             this._delFiles(this.filesArray);
@@ -194,11 +196,17 @@ App.prototype = {
     } else if (item.isDirectory) {
       // Get folder contents
       const dirReader = item.createReader();
-      dirReader.readEntries((entries) => {
-        for (let i = 0; i < entries.length; i++) {
-          this._traverseFileTree(entries[i]);
-        }
-      });
+      const readEntries = function () {
+        dirReader.readEntries(function (entries) {
+          if (entries.length) {
+            for (let i = 0; i < entries.length; i++) {
+              self._traverseFileTree(entries[i]);
+            }
+            readEntries();
+          }
+        });
+      };
+      readEntries();
     }
   },
   _sharp: function (filePath) {
@@ -430,38 +438,38 @@ App.prototype = {
           break;
         case "video/mp4":
           options.push('-crf 28')
-          if (maxHeightVideo>0){
-            options.push(`-vf scale=-2:${maxHeightVideo}`);
-          }
-          ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
-              if (progress.percent) {
-                pie.set(((p / len) * 100 + 1/len * progress.percent).toFixed(0));
-              }
-            }).saveToFile(targetPath).on('end', () => {
-              console.log('FFmpeg has finished.');
-              runSucceed(i, [
-                {size: getFilesizeInBytes(targetPath)}
-              ], );
-            }).on('error', (error) => {
-              runSkip(i, error)
-            });
-          break;
-        case "video/mov":
-          options.push('-crf 28');
-          options.push('-c:v libx264');
-          options.push('-c:a copy');
-          if (maxHeightVideo>0){
+          if (maxHeightVideo > 0) {
             options.push(`-vf scale=-2:${maxHeightVideo}`);
           }
           ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
             if (progress.percent) {
-              pie.set(((p / len) * 100 + 1/len * progress.percent).toFixed(0));
+              pie.set(((p / len) * 100 + 1 / len * progress.percent).toFixed(0));
             }
           }).saveToFile(targetPath).on('end', () => {
             console.log('FFmpeg has finished.');
             runSucceed(i, [
               {size: getFilesizeInBytes(targetPath)}
-            ], );
+            ],);
+          }).on('error', (error) => {
+            runSkip(i, error)
+          });
+          break;
+        case "video/mov":
+          options.push('-crf 28');
+          options.push('-c:v libx264');
+          options.push('-c:a copy');
+          if (maxHeightVideo > 0) {
+            options.push(`-vf scale=-2:${maxHeightVideo}`);
+          }
+          ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
+            if (progress.percent) {
+              pie.set(((p / len) * 100 + 1 / len * progress.percent).toFixed(0));
+            }
+          }).saveToFile(targetPath).on('end', () => {
+            console.log('FFmpeg has finished.');
+            runSucceed(i, [
+              {size: getFilesizeInBytes(targetPath)}
+            ],);
           }).on('error', (error) => {
             runSkip(i, error)
           });
@@ -513,7 +521,8 @@ App.prototype = {
     let log = "";
     this.filesArray.forEach(function (file) {
       this.diff += file.size - file.optimized;
-      log += `${file.time} ${file.name} ${file.size}B - ${file.optimized}B = ${this.diff}B ${this.skip ? "skip" : ""} \n`
+      const fileDiff = file.size - file.optimized;
+      log += `${file.time} ${file.name} ${file.size}B - ${file.optimized}B = ${fileDiff}B ${this.skip ? "skip" : ""} \n`
     }.bind(this));
     this.$el.find(".ui-area-waiting").html(`${num} ${i18n.__('after')} ${(this.diff / (1024)).toFixed(3)}KB`);
     localStorage.setItem("count", window.shareCount + 1);
