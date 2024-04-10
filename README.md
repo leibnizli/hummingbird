@@ -2,7 +2,7 @@ English | [简体中文](./README-zh-CN.md)
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-1. **Hummingbird** uses intelligent compression technology to reduce file size. It supports: jpg, png, webp, svg, gif, gif, css, js, html, mp4, mov. You can set compression while scaling images or videos at the same ratio. size of. Folder compression can be dragged and dropped and can process up to **100** files at a time.
+1. **Hummingbird** uses intelligent compression technology to reduce file size. It supports: jpg, png, webp, svg, gif, gif, css, js, html, mp4, mov. You can set compression while scaling images or videos at the same ratio. size of. Folder compression can be dragged and dropped.
 2. **Hummingbird** can convert pictures in different formats, supports: png, webp, jpeg, jpg, gif, tiff, avi, heic, and can export pictures in different formats, supports: png, webp, jpeg, jpg, gif , tiff, avif, ico, icns (Apple system only) format pictures.
 3. **Hummingbird** can extract audio from videos, delete audio from videos, convert videos to gif, and convert video formats, supporting mp4, mov, and avi.
 4. **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
