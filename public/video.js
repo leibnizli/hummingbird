@@ -4,10 +4,6 @@ const {shell} = require("electron");
 const ffmpegStatic = require('ffmpeg-static');
 const ffmpeg = require('fluent-ffmpeg');
 const path = require("path");
-const {promisify} = require("util");
-const heicConvert = require("heic-convert");
-const sharp = require("sharp");
-const {execSync} = require("child_process");
 // Tell fluent-ffmpeg where it can find FFmpeg
 ffmpeg.setFfmpegPath(ffmpegStatic);
 var files = [];
@@ -65,7 +61,7 @@ $(document).on("click", '#delete', function (e) {
     let fileDirname = path.dirname(ele.path);
     let extension = path.extname(ele.path);
     let file = path.basename(ele.path, extension);
-    let targetPath = path.join(fileDirname, `${file}-no-audio.${extension}`);
+    let targetPath = path.join(fileDirname, `${file}_no_audio.${extension}`);
     ffmpeg()
       .input(ele.path)
       // Tell FFmpeg to ignore the audio track
@@ -94,6 +90,7 @@ $(document).on("click", '#delete', function (e) {
 //   return ele.type === "video/mp4"
 // });
 $(document).on("click", '#export', function (e) {
+  checkedData = [];
   if (files.length > 0) {
     $("input[type='checkbox']").each((i, ele) => {
       if ($(ele).prop('checked')) {

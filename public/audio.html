@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audio editing conversion</title>
+    <link rel="stylesheet" href="./assets/common.bundle.css">
+    <link rel="stylesheet" href="./audio.css">
+</head>
+
+<body>
+<div class="audio">
+    <div class="audio-hd">
+        <p>Select mp3, wav</p>
+        <p>When you select one file, you can edit it. When you select multiple files, you can only export files in different formats and cannot edit them.</p>
+        <p><input type="file" id="file" accept=".mp3, .wav" multiple></p>
+    </div>
+    <div class="audio-bd">
+        <div id="audioCut">
+            <p>
+                <label>
+                    <input type="checkbox" />Loop selected area
+                </label>
+                <label style="margin-left: 2em">
+                    Zoom：<input type="range" min="10" max="200" value="100" />
+                </label>
+            </p>
+            <div id="waveform" class="waveform"></div>
+            <p>Drag the mouse on the audio wave to select the audio range that needs to be retained. Multiple selections can be added at the same time. The range of the selection can be changed in size by dragging the left and right sidebars. Multiple selections can be added at the same time. Click the selection to select the current selection and press The <b>Delete</b> key can delete the current selection, and the <b>Space</b> key can play or pause the audio.</p>
+        </div>
+        <div class="audio-bd-set">
+            <h2>Select export format:</h2>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox" value="mp3" checked="checked">mp3
+                    </label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="wav">wav</label>
+                </li>
+            </ul>
+        </div>
+        <p><button id="export">Export</button> <span id="status"></span></p>
+    </div>
+    <div class="audio-ft">
+        <div class="audio-additional">
+        </div>
+    </div>
+</div>
+<script src="./assets/common.bundle.js"></script>
+<script src="./assets/audio.bundle.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VR549GFR33"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VR549GFR33');
+</script>
+</body>
+
+</html>

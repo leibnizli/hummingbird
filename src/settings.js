@@ -37,6 +37,6 @@ $(document).on("change", '.settings-range', function (e) {
   ipcRenderer.send('set-quality', target, Number(value));
 });
 $(document).on("click", '#buy', function (e) {
-  shell.openExternal("https://buy.arayofsunshine.dev");
+  // shell.openExternal("https://buy.arayofsunshine.dev");
 });
 

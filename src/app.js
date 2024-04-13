@@ -437,7 +437,7 @@ App.prototype = {
           });
           break;
         case "video/mp4":
-          options.push('-crf 28')
+          options.push('-crf 28');
           if (maxHeightVideo > 0) {
             options.push(`-vf scale=-2:${maxHeightVideo}`);
           }
@@ -525,8 +525,6 @@ App.prototype = {
       log += `${file.time} ${file.name} ${file.size}B - ${file.optimized}B = ${fileDiff}B ${this.skip ? "skip" : ""} \n`
     }.bind(this));
     this.$el.find(".ui-area-waiting").html(`${num} ${i18n.__('after')} ${(this.diff / (1024)).toFixed(3)}KB`);
-    localStorage.setItem("count", window.shareCount + 1);
-    localStorage.setItem("size", window.shareSize + 1);
     ipcRenderer.send('set-share', window.shareCount + 1, window.shareSize + this.diff);
 
     const maxSizeInBytes = 1024 * 1024; // 1MB

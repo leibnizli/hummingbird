@@ -41,6 +41,7 @@ let settingsWindow = null,
   mainWindow = null,
   codeWindow = null,
   videoWindow = null,
+  audioWindow = null,
   fontWindow = null,
   convertWindow = null;
 app.on('window-all-closed', function () {
@@ -86,7 +87,7 @@ app.on('ready', function () {
   mainWindow.webContents.on('did-finish-load', function () {
     mainWindow.webContents.send('appPath', app.getAppPath());
     mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
-    mainWindow.webContents.send('mainWindow-share', configuration.get('count'), configuration.get('size'));
+    mainWindow.webContents.send('share-data', configuration.get('count'), configuration.get('size'));
     mainWindow.webContents.send('backup', configuration.get('backup'));
   });
   mainWindow.once('ready-to-show', () => {
@@ -204,6 +205,41 @@ ipcMain.on('open-video-window', function () {
   videoWindow.webContents.on('did-finish-load', function () {
   });
 });
+ipcMain.on('open-audio-window', function () {
+  if (audioWindow) {
+    return;
+  }
+  audioWindow = new BrowserWindow({
+    icon: './src/images/icon.png',
+    title: 'Video',
+    width: 480,
+    height: 720,
+    frame: true,
+    resizable: true,
+    webPreferences: {
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
+      contextIsolation: false
+    }
+  });
+  let locate = "";
+  if (app.getLocale() === "zh-CN") {
+    locate = "-zh-CN";
+  }
+  // 加载应用的 index.html
+  audioWindow.loadURL('file://' + __dirname + `/public/audio${locate}.html`);
+
+  // 打开开发工具
+  // audioWindow.openDevTools();
+  // 当 window 被关闭，这个事件会被发出
+  audioWindow.on('closed', function () {
+    // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
+    audioWindow = null;
+  });
+  audioWindow.webContents.on('did-finish-load', function () {
+  });
+});
 ipcMain.on('open-font-window', function () {
   if (fontWindow) {
     return;
@@ -239,6 +275,7 @@ ipcMain.on('open-font-window', function () {
     fontWindow = null;
   });
   fontWindow.webContents.on('did-finish-load', function () {
+    fontWindow.webContents.send('appPath', app.getAppPath());
   });
 });
 ipcMain.on('open-settings-window', function () {
@@ -248,7 +285,7 @@ ipcMain.on('open-settings-window', function () {
   }
   settingsWindow = new BrowserWindow({
     width: 360,
-    height: 460,
+    height: 440,
     icon: './src/images/icon.png',
     frame: true,
     title: 'Settings',
@@ -299,7 +336,7 @@ ipcMain.on('backup', function (event, value) {
 ipcMain.on('set-share', function (event, count, size) {
   configuration.set('count', count);
   configuration.set('size', size);
-  mainWindow.webContents.send('mainWindow-share', count, size);
+  mainWindow.webContents.send('share-data', count, size);
 });
 ipcMain.handle('dialog:openMultiFileSelect', () => {
   return dialog.showOpenDialog({
@@ -409,24 +446,27 @@ const template = [
       {
         label: 'Report An Issue..',
         click: async () => {
-          const {shell} = require('electron')
           await shell.openExternal('https://github.com/leibnizli/hummingbird/issues')
         }
       },
       {
         label: 'Website',
         click: async () => {
-          const {shell} = require('electron')
           await shell.openExternal('https://arayofsunshine.dev/hummingbird')
         }
       },
       {
         label: 'Buy Me A Coffee',
         click: async () => {
-          const {shell} = require('electron')
           await shell.openExternal('https://buy.arayofsunshine.dev')
         }
-      }
+      },
+      {
+        label: 'Share To Twitter',
+        click: async () => {
+          shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${configuration.get('count')} times and compressed the space ${(configuration.get('size') / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
+        }
+      },
     ]
   }
 ]

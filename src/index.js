@@ -47,6 +47,9 @@ $(document).on("click", "#code", function (e) {
 $(document).on("click", "#video", function (e) {
   ipcRenderer.send('open-video-window');
 });
+$(document).on("click", "#audio", function (e) {
+  ipcRenderer.send('open-audio-window');
+});
 $(document).on("click", "#font", function (e) {
   ipcRenderer.send('open-font-window');
 });
@@ -57,12 +60,12 @@ $(document).on("click", "#issues", function (e) {
   shell.openExternal("https://github.com/leibnizli/hummingbird/issues");
 });
 window.shareCount = window.shareSize = 0;
-ipcRenderer.on('mainWindow-share', function (e, count, size) {
+ipcRenderer.on('share-data', function (e, count, size) {
   window.shareCount = count;
   window.shareSize = size;
 });
 $(document).on("click", "#share", function (e) {
-  shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${window.shareCount} times and compressed the space ${(window.shareSize / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
+  // shell.openExternal(`http://twitter.com/share?text=Hummingbird App has helped me process pictures ${window.shareCount} times and compressed the space ${(window.shareSize / (1024 * 1024)).toFixed(4)}M&url=https://github.com/leibnizli/hummingbird`);
 });
 $(document).on("click", "#minimized", function (e) {
   ipcRenderer.send('main-minimized');

@@ -1,0 +1,23 @@
+body { background:#fff; font-size:12px; }
+.audio {
+    padding:20px;
+    h2 { padding:5px 0; font-size:10px; font-weight:bold; }
+}
+.audio-hd {
+    strong { color:#3E2F00; }
+    p { line-height:28px; }
+}
+.audio-hd p { }
+.audio-bd { padding:20px 0;
+    p { padding:4px 0; }
+    .audio-bd-set { margin:10px 0;}
+    ul { display:flex; flex-wrap:wrap; }
+    li { width:60px; }
+    input { vertical-align:middle; margin-right:6px; }
+}
+.audio-ft {
+    padding:10px 0;
+    /*border-top:2px dashed rgba(64,100,138,.2);*/
+    .audio-additional {  }
+}
+.waveform { padding:20px 0; }

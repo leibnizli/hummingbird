@@ -1,26 +1,27 @@
+const i18n = require('i18n');
 const fontCarrier = require('font-carrier');
-const {shell} = require('electron') // deconstructing assignment
+const {shell, ipcRenderer} = require('electron') // deconstructing assignment
 const fs = require("fs");
 const path = require('path');
 // var fontCarrier = {};
 // var fs = {};
 //drag
 $(document).on({
-  dragleave: function(e) {
+  dragleave: function (e) {
     e.preventDefault();
   },
-  drop: function(e) {
+  drop: function (e) {
     e.preventDefault();
   },
-  dragenter: function(e) {
+  dragenter: function (e) {
     e.preventDefault();
   },
-  dragover: function(e) {
+  dragover: function (e) {
     e.preventDefault();
   }
 });
 
-function openFolder(path){
+function openFolder(path) {
   shell.openPath(path)
 }
 
@@ -28,6 +29,7 @@ function openFolder(path){
 var defaults = {
   index: 0
 }
+
 function App(options) {
   this.options = $.extend(true, defaults, options);
   this.index = this.options.index;
@@ -39,18 +41,19 @@ function App(options) {
   this.data = {};
   this.init();
 }
+
 App.prototype = {
-  init: function() {
+  init: function () {
     var self = this;
     this._action(this.index)
-    this.bd.on("dragenter", ".ui-font-area", function(e) {
+    this.bd.on("dragenter", ".ui-font-area", function (e) {
       $(this).addClass("active");
     });
-    this.bd.on("dragleave", ".ui-font-area", function(e) {
+    this.bd.on("dragleave", ".ui-font-area", function (e) {
       $(this).removeClass("active");
     });
 
-    this.bd.on("drop", ".ui-font-area", function(e) {
+    this.bd.on("drop", ".ui-font-area", function (e) {
       var files = e.originalEvent.dataTransfer.files,
         fontList = self.bd.find(".ui-font-list"),
         fontArea = $(this);
@@ -89,8 +92,8 @@ App.prototype = {
           }
           self.isFirst = false;
           //var importPath = file.path.replace(/[^/\\]+$/, "");
-          file.path.replace(/[^/\\]+$/, function(a) {
-            fontArea.find(".ui-font-area-txt").html('Current file：' + a + '<br>Drag one or more SVG files to start to modify');
+          file.path.replace(/[^/\\]+$/, function (a) {
+            fontArea.find(".ui-font-area-txt").html(i18n.__('current') + a + `<br>${i18n.__('continue')}`);
           });
           var glyphs = fontCarrier.transfer(file.path).allGlyph();
           for (key in glyphs) {
@@ -112,14 +115,14 @@ App.prototype = {
                         </li>');
           }
         } else {
-          for (var i = 0; i < files.length; i++) {
+          for (let i = 0; i < files.length; i++) {
             if (!/image\/svg/.test(files[i].type)) {
               continue;
             }
             var unicodeNum = self._getunicode(),
               len = self.data[self.status].length;
             for (var j = len; j > 0; j--) {
-              var snapNum = self.data[self.status][j - 1]['unicode'].replace(/\D/g, function(a) {
+              var snapNum = self.data[self.status][j - 1]['unicode'].replace(/\D/g, function (a) {
                 return ""
               });
               snapNum = Number(snapNum);
@@ -151,8 +154,8 @@ App.prototype = {
           return;
         }
         self.isFirst = false;
-        file.path.replace(/[^/\\]+$/, function(a) {
-          fontArea.find(".ui-font-area-txt").html('Files are about to cut：' + a);
+        file.path.replace(/[^/\\]+$/, function (a) {
+          fontArea.find(".ui-font-area-txt").html(i18n.__('current') + a);
         });
         self.data[self.status].push({
           path: file.path
@@ -160,24 +163,24 @@ App.prototype = {
       }
     });
     //nav
-    this.nav.on("click", "li", function(e) {
+    this.nav.on("click", "li", function (e) {
       var index = $(this).index();
       self._action(index);
     });
     //del
-    this.bd.on("click", ".ui-font-del", function(e) {
+    this.bd.on("click", ".ui-font-del", function (e) {
       self._deleteFontView(this)
     });
     //export
-    this.bd.on("click", ".ui-font-export", function(e) {
+    this.bd.on("click", ".ui-font-export", function (e) {
       self._exportIcon(this)
     });
     //replace
-    this.bd.on("change", ".ui-font-replace-input", function(e) {
-      self._replaceIcon(e,this)
+    this.bd.on("change", ".ui-font-replace-input", function (e) {
+      self._replaceIcon(e, this)
     });
     var isAllowRender = true;
-    this.bd.on("click", ".ui-font-command-render", function(e) {
+    this.bd.on("click", ".ui-font-command-render", function (e) {
       e.preventDefault();
       var renderBtn = $(this);
       if (isAllowRender) {
@@ -209,10 +212,10 @@ App.prototype = {
             font.output({
               path: path.join(directory, 'demo', 'iconfont')
             });
-            renderBtn.removeClass("disable").html("Generate");
+            renderBtn.removeClass("disable").html(i18n.__('generate'));
             isAllowRender = true;
             openFolder(newDirectory);
-          } catch (e){
+          } catch (e) {
             alert(e)
           }
         }
@@ -220,7 +223,7 @@ App.prototype = {
 
     });
   },
-  _renderFile: function(dir) {
+  _renderFile: function (dir) {
     var data = this.data[this.status],
       html = '';
     fs.writeFileSync(dir + '/demo.css', '@font-face{font-family:"iconfont";src:url("iconfont.eot");src:url("iconfont.eot?#iefix") format("embedded-opentype"),url("iconfont.woff") format("woff"),url("iconfont.ttf") format("truetype"),url("iconfont.svg#iconfont") format("svg")}.iconfont{font-family:"iconfont"!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}*{margin:0;padding:0;list-style:none}body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,sans-serif}h1,h2,h3,h4,h5,h6{font-size:100%}address,cite,dfn,em,var{font-style:normal}code,kbd,pre,samp{font-family:courier new,courier,monospace}small{font-size:12px}ul,ol{list-style:none}a{text-decoration:none}a:hover{text-decoration:underline}legend{color:#000}fieldset,img{border:0}button,input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}.ks-clear:after,.clear:after{content:"";display:block;height:0;clear:both}.ks-clear,.clear{*zoom:1}.main{padding:30px 100px}.main h1{font-size:36px;color:#333;text-align:left;margin-bottom:30px;border-bottom:1px solid #eee}.helps{margin-top:40px}.helps pre{padding:20px;margin:10px 0;border:solid 1px #e7e1cd;background-color:#fffdef;overflow:auto}.icon_lists li{float:left;width:100px;height:180px;text-align:center}.icon_lists .icon{font-size:42px;line-height:100px;margin:10px 0;color:#333;-webkit-transition:font-size .25s ease-out 0s;-moz-transition:font-size .25s ease-out 0s;transition:font-size .25s ease-out 0s}.icon_lists .icon:hover{font-size:100px}');
@@ -237,33 +240,33 @@ App.prototype = {
         '<pre>.iconfont {\n    font-family:"iconfont" !important;\n    font-size:16px;\n    font-style:normal;\n    -webkit-font-smoothing: antialiased;\n    -webkit-text-stroke-width: 0.2px;\n    -moz-osx-font-smoothing: grayscale;\n}</pre>Step 3: Select the corresponding icon and get font coding, apply to the page<pre>&lt;i class="iconfont"&gt;&amp;#x33;&lt;/i&gt;</pre></div></div></body></html>');
     }
   },
-  _getunicode: function() {
+  _getunicode: function () {
     return this.unicodeNum += 1;
   },
-  _deleteFontView: function(el) {
+  _deleteFontView: function (el) {
     var $item = $(el).closest(".ui-font-item");
     var data = this.data[this.status];
     data.splice(data.length - 1 - $item.index(), 1);
     $item.remove();
   },
-  _exportIcon: function(el) {
+  _exportIcon: function (el) {
     var $item = $(el).closest(".ui-font-item");
     var data = this.data[this.status];
     data = data[data.length - 1 - $item.index()];
     //data.splice(data.length - 1 - $item.index(), 1);
     var exportPath = data.path.replace(/[^/\\]+$/, "")
-    fs.writeFileSync(exportPath + '/' + data.unicode.slice(2,7) + '.svg', data.glyph);
+    fs.writeFileSync(exportPath + '/' + data.unicode.slice(2, 7) + '.svg', data.glyph);
   },
-  _replaceIcon: function(e,el) {
+  _replaceIcon: function (e, el) {
     var $item = $(el).closest(".ui-font-item");
-    var path = "file:///"+$(el).val();
+    var path = "file:///" + $(el).val();
     $item.find("img").attr("src", path)
     var data = this.data[this.status];
     data = data[data.length - 1 - $item.index()];
     data.path = path
     data.glyph = fs.readFileSync($(el).val()).toString()
   },
-  _action: function(i) {
+  _action: function (i) {
     localStorage.nav = i;
     var el = this.nav.find("li").eq(i);
     $(el).addClass("active").siblings().removeClass("active");
@@ -273,41 +276,41 @@ App.prototype = {
     this._renderView(this.status);
     this._initData();
   },
-  _initData: function() {
+  _initData: function () {
     var self = this;
     this.unicodeNum = 1000;
-    this.nav.find("li").each(function(i, el) {
+    this.nav.find("li").each(function (i, el) {
       var action = $(el).data("action");
       self.data[action] = [];
     });
   },
-  _renderView: function(status) {
+  _renderView: function (status) {
     var self = this;
     var commonHtml = '<div class="ui-font-main">\
                     <ul class="ui-font-list"></ul>\
                     <div class="result"></div>\
                     <div class="ui-font-command">\
-                        <button class="ui-btn ui-font-command-render">Generate</button>\
+                        <button class="ui-btn ui-font-command-render">' + i18n.__('generate') + '</button>\
                     </div>\
                 </div>';
     var view = {
       merge: '<div class="ui-font">\
                 <div class="ui-font-area">\
-                    <span class="icon-yijieshou ui-font-area-txt">Drag one or more SVG files to this</span>\
+                    <span class="icon-yijieshou ui-font-area-txt">' + i18n.__('merge') + '</span>\
                 </div>' + commonHtml + '</div>',
       add: '<div class="ui-font">\
                 <div class="ui-font-area">\
-                    <span class="icon-yijieshou ui-font-area-txt">Drag and drop a font (.ttf) file to be modified <br/> If the file is large, you need to wait patiently</span>\
+                    <span class="icon-yijieshou ui-font-area-txt">' + i18n.__('add') + '</span>\
                 </div>' + commonHtml + '</div>',
       cut: '<div class="ui-font">\
                     <div class="ui-font-area">\
-                        <span class="icon-yijieshou ui-font-area-txt">Drag and drop a font (.ttf) file to this <br/> If the file is large, you need to wait patiently</span>\
+                        <span class="icon-yijieshou ui-font-area-txt">' + i18n.__('cut') + '</span>\
                     </div>\
                     <div class="ui-font-main" style="display:none">\
                         <textarea class="ui-font-textarea" placeholder="Enter the text you need to keep here"></textarea>\
                         <div class="result"></div>\
                         <div class="ui-font-command">\
-                            <button class="ui-btn ui-font-command-render">Generate</button>\
+                            <button class="ui-btn ui-font-command-render">' + i18n.__('generate') + '</button>\
                         </div>\
                     </div>\
                 </div>',
@@ -315,12 +318,25 @@ App.prototype = {
     this.bd.html(view[status]);
   }
 }
-var initIndex;
+let initIndex;
 if (localStorage.getItem("nav")) {
   initIndex = localStorage.getItem("nav");
 } else {
   initIndex = 0;
 }
-new App({
-  index: initIndex
+let appPath = "";
+const lang = navigator.language;
+ipcRenderer.on('appPath', (event, p) => {
+  appPath = p
+  console.log(`App path: ${appPath}`)
+  /* i18n config */
+  i18n.configure({
+    updateFiles: false,
+    locales: ['en-US', 'zh-CN'],
+    directory: path.join(appPath, 'locales'),
+    defaultLocale: /zh/.test(lang) ? 'zh-CN' : 'en-US'
+  });
+  new App({
+    index: initIndex
+  });
 });

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>音频编辑转换</title>
+    <link rel="stylesheet" href="./assets/common.bundle.css">
+    <link rel="stylesheet" href="./audio.css">
+</head>
+
+<body>
+<div class="audio">
+    <div class="audio-hd">
+        <p>选择mp3、wav</p>
+        <p>选择一个文件时可剪辑，选择多个文件时只能导出不同格式的文件不可剪辑。</p>
+        <p><input type="file" id="file" accept=".mp3, .wav" multiple></p>
+    </div>
+    <div class="audio-bd">
+        <div id="audioCut">
+            <p>
+                <label>
+                    <input type="checkbox" />循环播放所选区域
+                </label>
+                <label style="margin-left: 2em">
+                    缩放：<input type="range" min="10" max="200" value="100" />
+                </label>
+            </p>
+            <div id="waveform" class="waveform"></div>
+            <p>在音频波浪上拖动鼠标即可选择需要保留的音频区间，可以同时添加多个选区，选区的范围可通过拖动左右边栏改变大小，可以同时增加多个选区，点击选区选择当前选区，按下<b>Delete</b>键可删除当前选区，按下<b>Space</b>键可以在播放或暂停音频。</p>
+        </div>
+        <div class="audio-bd-set">
+            <h2>选择导出的格式:</h2>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox" value="mp3" checked="checked">mp3
+                    </label>
+                </li>
+                <li>
+                    <label><input type="checkbox" value="wav">wav</label>
+                </li>
+            </ul>
+        </div>
+        <p><button id="export">导出</button> <span id="status"></span></p>
+    </div>
+    <div class="audio-ft">
+        <div class="audio-additional">
+        </div>
+    </div>
+</div>
+<script src="./assets/common.bundle.js"></script>
+<script src="./assets/audio.bundle.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VR549GFR33"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VR549GFR33');
+</script>
+</body>
+
+</html>

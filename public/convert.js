@@ -7,8 +7,6 @@ const {execSync} = require('child_process');
 const {shell} = require("electron");
 const sharp = require('sharp');
 const toIco = require('to-ico');
-const {exec} = require('child_process');
-const isMac = process.platform === 'darwin'
 var files = [];
 var checkedData = [];
 
