@@ -6,13 +6,14 @@
 2. **Hummingbird**可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
 3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
 4. **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
-5. **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
+5. 可以裁取音频中的一段或多段，可以转换为mp3、wav格式。
+6. **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
    * 合并，可将svg文件批量拼合为字体文件
    * 修改，可对字体追加、删除、替换、导出字形，例如：替换字体中的指定字形
    * 裁剪，从中文字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
-6. **Hummingbird**可以查看压缩文件的历史记录。
+7. **Hummingbird**可以查看压缩文件的历史记录。
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/ddd03382-f7a6-4b2a-80ad-245c4f884e62" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/82983e50-e594-4a27-b7ce-3b64a6a65512" width="432">
 
 * jpg、png、webp、svg、gif、html压缩后会替换掉当前文件，可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件。
 * css、js、mp4压缩后会生成一个带.min的新文件。
@@ -22,7 +23,7 @@
 * [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
 * [macOS App打不开](https://arayofsunshine.dev//zh-Hans/blog/macos-app-cannot-be-opened)
 
-### 最新版本 v5.0.0
+### 最新版本 v5.1.0
 
 #### 从GitHub下载
 
@@ -32,9 +33,9 @@
 
 #### 从Cloudflare下载
 
-* <a href="https://static.arayofsunshine.dev/hummingbird-5.0.0-arm64.dmg">**macOS**</a>（Apple Silicon）
-* <a href="https://static.arayofsunshine.dev/hummingbird-5.0.0.dmg">**macOS**</a>（Intel）
-* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.0.0.exe">**Windows**</a>（>=10）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0-arm64.dmg">**macOS**</a>（Apple Silicon）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0.dmg">**macOS**</a>（Intel）
+* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.1.0.exe">**Windows**</a>（>=10）
 
 ### 旧版本 v3.0.0
 
@@ -106,4 +107,8 @@
         </tr>
     </tbody>
 </table>
+
+### 裁切音频
+
+<img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
 
