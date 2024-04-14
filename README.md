@@ -5,8 +5,8 @@ English | [简体中文](./README-zh-CN.md)
 1. **Hummingbird** uses intelligent compression technology to reduce file size. It supports: jpg, png, webp, svg, gif, gif, css, js, html, mp4, mov. You can set compression while scaling images or videos at the same ratio. size of. Folder compression can be dragged and dropped.
 2. **Hummingbird** can convert pictures in different formats, supports: png, webp, jpeg, jpg, gif, tiff, avi, heic, and can export pictures in different formats, supports: png, webp, jpeg, jpg, gif , tiff, avif, ico, icns (Apple system only) format pictures.
 3. **Hummingbird** can extract audio from videos, delete audio from videos, convert videos to gif, and convert video formats, supporting mp4, mov, and avi.
-4. **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
-5. One or more segments of audio can be cut, and can be converted to mp3, wav format.
+4. One or more segments of audio can be cut, and can be converted to mp3, wav format.
+5. **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
 6. **Hummingbird** can handle font files, its predecessor is [Panda](https://github.com/leibnizli/panda).
     * Merge, you can batch assemble svg files into font files
     * Modify, you can add, delete, replace, and export glyphs to fonts, for example: replace specified glyphs in fonts
@@ -108,3 +108,7 @@ Suitable for old versions of windows, win7, win8
 ### Crop audio
 
 <img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
+
+### Processing font files
+
+<img alt="Processing font" src="https://github.com/leibnizli/hummingbird/assets/1193966/2f1347d4-8c7c-49c5-afa8-94ee44c95f2f" width="320">

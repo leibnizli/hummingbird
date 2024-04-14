@@ -5,8 +5,8 @@
 1. **Hummingbird**使用智能压缩技术来减少文件的大小，支持：jpg、png、webp、svg、gif、gif、css、js、html、mp4、mov，可以设置压缩的同时等比例缩放图片或视频的尺寸。可以拖放文件夹压缩。
 2. **Hummingbird**可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
 3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
-4. **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
-5. 可以裁取音频中的一段或多段，可以转换为mp3、wav格式。
+4. 可以裁取音频中的一段或多段，可以批量转换音频为mp3、wav格式。
+5. **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
 6. **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
    * 合并，可将svg文件批量拼合为字体文件
    * 修改，可对字体追加、删除、替换、导出字形，例如：替换字体中的指定字形
@@ -111,4 +111,8 @@
 ### 裁切音频
 
 <img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
+
+### 处理字体文件
+
+<img alt="Processing font" src="https://github.com/leibnizli/hummingbird/assets/1193966/2f1347d4-8c7c-49c5-afa8-94ee44c95f2f" width="320">
 
