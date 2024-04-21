@@ -166,6 +166,7 @@ App.prototype = {
     if (item.isFile) {
       // Get file
       item.file((file) => {
+        // console.log('file',file)
         clearTimeout(this.Timer);
         this.Timer = setTimeout(() => {
           if (this.filesArray.length > 0) {

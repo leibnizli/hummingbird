@@ -26,9 +26,10 @@
     width: 34px;
     margin: 0 3px;
     color: rgba(64, 100, 138, 0.8);
-    text-align: center;
-    line-height: 30px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ui-hd-icon:after {
