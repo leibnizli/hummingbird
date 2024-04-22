@@ -31,12 +31,6 @@
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (>=10)
 
-#### 从Cloudflare下载
-
-* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0-arm64.dmg">**macOS**</a>（Apple Silicon）
-* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0.dmg">**macOS**</a>（Intel）
-* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.1.0.exe">**Windows**</a>（>=10）
-
 ### 旧版本 v3.0.0
 
 适用于windows老版本，win7，win8
