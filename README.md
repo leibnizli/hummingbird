@@ -31,6 +31,12 @@ English | [简体中文](./README-zh-CN.md)
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases">**Windows**</a> (>=10)
 
+#### Download from Cloudflare
+
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0-arm64.dmg">**macOS**</a>（Apple Silicon）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0.dmg">**macOS**</a>（Intel）
+* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.1.0.exe">**Windows**</a>（>=10）
+
 ### Old version v3.0.0
 
 Suitable for old versions of windows, win7, win8
