@@ -10,7 +10,7 @@
 6. **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
    * 合并，可将svg文件批量拼合为字体文件
    * 修改，可对字体追加、删除、替换、导出字形，例如：替换字体中的指定字形
-   * 裁剪，从中文字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
+   * 裁剪，从字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
 7. **Hummingbird**可以查看压缩文件的历史记录。
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/82983e50-e594-4a27-b7ce-3b64a6a65512" width="432">
