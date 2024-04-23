@@ -4,6 +4,7 @@ const path = require('path')
 const log = require('electron-log');
 const configuration = require("./configuration");
 const express = require('express')
+const {getUserHome} = require("./src/util.js");
 if (!configuration.get('jpg')) {
   configuration.set('jpg', 80);
 }
@@ -21,6 +22,12 @@ if (!configuration.get('backup')) {
 }
 if (!configuration.get('port')) {
   configuration.set('port', 3373);
+}
+if (!configuration.get('progressive')) {
+  configuration.set('progressive', true);
+}
+if (!configuration.get('png')) {
+  configuration.set('png', [0.6, 0.85]);
 }
 const server = express()
 const port = configuration.get('port') || 3373
@@ -60,8 +67,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 432,
-    height: 343,
+    width: 392,
+    height: 316,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -87,6 +94,8 @@ app.on('ready', function () {
   mainWindow.webContents.on('did-finish-load', function () {
     mainWindow.webContents.send('appPath', app.getAppPath());
     mainWindow.webContents.send('quality', configuration.get('jpg'), configuration.get('webp'));
+    mainWindow.webContents.send('png', configuration.get('png'));
+    mainWindow.webContents.send('progressive', configuration.get('progressive'));
     mainWindow.webContents.send('share-data', configuration.get('count'), configuration.get('size'));
     mainWindow.webContents.send('backup', configuration.get('backup'));
   });
@@ -366,6 +375,23 @@ autoUpdater.on('update-downloaded', () => {
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
+const submenu = [
+  {
+    label: 'More Settings',
+    click: async () => {
+      const p = path.join(getUserHome(), 'hummingbird-config.json');
+      shell.openPath(p);
+    }
+  },
+  {type: 'separator'},
+  {
+    label: 'Compression Logs',
+    click: async () => {
+      const p = path.join(getUserHome(), 'hummingbird-log.txt');
+      shell.openPath(p);
+    }
+  },
+]
 const template = [
   // { role: 'appMenu' }
   ...(isMac
@@ -374,6 +400,8 @@ const template = [
       submenu: [
         {role: 'about'},
         {type: 'separator'},
+        ...submenu,
+        {type: 'separator'},
         {role: 'hide'},
         {role: 'hideOthers'},
         {role: 'unhide'},
@@ -381,7 +409,10 @@ const template = [
         {role: 'quit'}
       ]
     }]
-    : []),
+    : [{
+      label: app.name,
+      submenu: [...submenu]
+    }]),
   // { role: 'editMenu' }
   {
     label: 'Edit',

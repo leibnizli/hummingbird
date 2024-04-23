@@ -1,5 +1,5 @@
 import i18n from 'i18n';
-import {getUserHome} from "./util";
+import {getUserHome} from "./util.mjs";
 import configuration from "../configuration";
 
 const ffmpegStatic = require('ffmpeg-static');
@@ -39,7 +39,7 @@ ipcRenderer.on('appPath', (event, p) => {
 });
 console.log(__dirname + '/locales')
 const Pie = require("./components/pie");
-let jpgValue, webpValue, backup, maxWidth = configuration.get('maxWidth') || 0,
+let jpgValue, webpValue, backup,progressive,png, maxWidth = configuration.get('maxWidth') || 0,
   maxHeight = configuration.get('maxHeight') || 0;
 let maxHeightVideo = configuration.get('maxHeightVideo') || 0;
 
@@ -49,6 +49,12 @@ ipcRenderer.on('quality', function (e, arg1, arg2) {
 });
 ipcRenderer.on('backup', function (e, arg1) {
   backup = arg1;
+});
+ipcRenderer.on('progressive', function (e, arg1) {
+  progressive = arg1;
+});
+ipcRenderer.on('png', function (e, arg1) {
+  png = arg1;
 });
 
 function setTip() {
@@ -347,7 +353,7 @@ App.prototype = {
           self._sharp(filePath).finally(() => {
             sharp(filePath).jpeg({
               mozjpeg: true,
-              progressive: true,
+              progressive,
               quality: jpgValue || 80
             })
               .toBuffer(function (err, buffer) {
@@ -367,7 +373,7 @@ App.prototype = {
                 plugins: [
                   imageminOptipng({optimizationLevel: 2}),//OptiPNG 无损压缩算法
                   imageminPngquant({
-                    quality: [0.6, 0.85],
+                    quality: png,
                   })//Pngquant 有损压缩算法
                 ]
               }).then(files => {

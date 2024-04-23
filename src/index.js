@@ -2,7 +2,7 @@ import path from "path";
 const fs = require("fs");
 const {shell, ipcRenderer} = require('electron')
 import "./index.css";
-import {getUserHome} from "./util"
+import {getUserHome} from "./util.mjs"
 
 const logPath = path.join(getUserHome(), 'hummingbird-log.txt');
 // 检测文件是否存在
