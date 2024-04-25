@@ -500,7 +500,7 @@ App.prototype = {
       pie.set(((p / len) * 100).toFixed(0));
       obj.count--;
       if (p >= len) {
-        self._dropOver(len);
+        self._finished(len);
       }
     }
 
@@ -513,7 +513,7 @@ App.prototype = {
       pie.set(((p / len) * 100).toFixed(0));
       obj.count--;
       if (p >= len) {
-        self._dropOver(len);
+        self._finished(len);
       }
     }
 
@@ -521,7 +521,7 @@ App.prototype = {
       filesHandle(0)
     }
   },
-  _dropOver: function (num) {
+  _finished: function (num) {
     this.status = "waiting";
     this._updateState();
     console.log(this.filesArray)
