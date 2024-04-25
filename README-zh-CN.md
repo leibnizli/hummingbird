@@ -13,7 +13,7 @@
    * 裁剪，从字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
 7. **Hummingbird**可以查看压缩文件的历史记录。
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/82983e50-e594-4a27-b7ce-3b64a6a65512" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/bd27ac90-bb06-42d4-aef0-7a7825328d90" width="432">
 
 * jpg、png、webp、svg、gif、html压缩后会替换掉当前文件，可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件。
 * css、js、mp4压缩后会生成一个带.min的新文件。
@@ -23,7 +23,7 @@
 * [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
 * [macOS App打不开](https://arayofsunshine.dev//zh-Hans/blog/macos-app-cannot-be-opened)
 
-### 最新版本 v5.1.0
+### 最新版本
 
 #### 从GitHub下载
 

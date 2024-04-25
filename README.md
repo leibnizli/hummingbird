@@ -13,7 +13,7 @@ English | [简体中文](./README-zh-CN.md)
     * Cropping, filtering out the required glyphs from the font (filtering 8.1M Chinese fonts, it takes about 6 seconds to wait)
 7. **Hummingbird** can view the history of compressed files.
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/40468e0a-9f09-41d2-a4b9-c9948af152c7" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/471c6d89-e554-4402-9493-a831ed672053" width="432">
 
 * jpg, png, webp, svg, gif, html will replace the current file after compression, Backup can be turned on in Settings, and hummingbird will back up the files to the `source` folder in the current directory.
 * A new file with .min will be generated after css, js, mp4 compression.
@@ -23,7 +23,7 @@ English | [简体中文](./README-zh-CN.md)
 * [What is Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
 * [macOS App cannot be opened](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
 
-### Latest version v5.1.0
+### Latest version
 
 #### Download from GitHub
 
