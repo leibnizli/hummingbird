@@ -33,9 +33,9 @@ English | [简体中文](./README-zh-CN.md)
 
 #### Download from Cloudflare
 
-* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0-arm64.dmg">**macOS**</a>（Apple Silicon）
-* <a href="https://static.arayofsunshine.dev/hummingbird-5.1.0.dmg">**macOS**</a>（Intel）
-* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.1.0.exe">**Windows**</a>（>=10）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.2.0-arm64.dmg">**macOS**</a>（Apple Silicon）
+* <a href="https://static.arayofsunshine.dev/hummingbird-5.2.0.dmg">**macOS**</a>（Intel）
+* <a href="https://static.arayofsunshine.dev/hummingbird%20Setup%205.2.0.exe">**Windows**</a>（>=10）
 
 ### Old version v3.0.0
 
