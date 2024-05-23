@@ -21,7 +21,7 @@
 ## 安装
 
 * [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
-* [macOS App打不开](https://arayofsunshine.dev//zh-Hans/blog/macos-app-cannot-be-opened)
+* [macOS App打不开](https://arayofsunshine.dev/zh-Hans/blog/macos-app-cannot-be-opened)
 
 ### 最新版本
 

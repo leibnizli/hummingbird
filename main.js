@@ -67,8 +67,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 392,
-    height: 316,
+    width: 352,
+    height: 290,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -144,7 +144,7 @@ ipcMain.on('open-convert-window', function () {
   convertWindow.webContents.on('did-finish-load', function () {
   });
 });
-ipcMain.on('open-code-window', function () {
+function openCodeWindow(){
   if (codeWindow) {
     return;
   }
@@ -178,6 +178,9 @@ ipcMain.on('open-code-window', function () {
   });
   codeWindow.webContents.on('did-finish-load', function () {
   });
+}
+ipcMain.on('open-code-window', function () {
+  openCodeWindow()
 });
 ipcMain.on('open-video-window', function () {
   if (videoWindow) {
@@ -389,6 +392,12 @@ const submenu = [
     click: async () => {
       const p = path.join(getUserHome(), 'hummingbird-log.txt');
       shell.openPath(p);
+    }
+  },
+  {
+    label: 'Get File Encoding',
+    click: async () => {
+      openCodeWindow()
     }
   },
 ]
