@@ -6,12 +6,6 @@ English | [简体中文](./README-zh-CN.md)
 2. **Hummingbird** can convert pictures in different formats, supports: png, webp, jpeg, jpg, gif, tiff, avi, heic, and can export pictures in different formats, supports: png, webp, jpeg, jpg, gif , tiff, avif, ico, icns (Apple system only) format pictures.
 3. **Hummingbird** can extract audio from videos, delete audio from videos, convert videos to gif, and convert video formats, supporting mp4, mov, and avi.
 4. One or more segments of audio can be cut, and can be converted to mp3, wav format.
-5. **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
-6. **Hummingbird** can handle font files, its predecessor is [Panda](https://github.com/leibnizli/panda).
-    * Merge, you can batch assemble svg files into font files
-    * Modify, you can add, delete, replace, and export glyphs to fonts, for example: replace specified glyphs in fonts
-    * Cropping, filtering out the required glyphs from the font (filtering 8.1M Chinese fonts, it takes about 6 seconds to wait)
-7. **Hummingbird** can view the history of compressed files.
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/471c6d89-e554-4402-9493-a831ed672053" width="432">
 
@@ -108,6 +102,18 @@ Suitable for old versions of windows, win7, win8
 ### Crop audio
 
 <img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
+
+
+## Hidden functions
+
+Access hidden functions through the menu bar entrance.
+
+* **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
+* **Hummingbird** can handle font files, its predecessor is [Panda](https://github.com/leibnizli/panda).
+    * Merge, you can batch assemble svg files into font files
+    * Modify, you can add, delete, replace, and export glyphs to fonts, for example: replace specified glyphs in fonts
+    * Cropping, filtering out the required glyphs from the font (filtering 8.1M Chinese fonts, it takes about 6 seconds to wait)
+* **Hummingbird** can view the history of compressed files.
 
 ### Processing font files
 

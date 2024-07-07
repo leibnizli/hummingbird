@@ -6,12 +6,6 @@
 2. **Hummingbird**可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
 3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
 4. 可以裁取音频中的一段或多段，可以批量转换音频为mp3、wav格式。
-5. **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
-6. **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
-   * 合并，可将svg文件批量拼合为字体文件
-   * 修改，可对字体追加、删除、替换、导出字形，例如：替换字体中的指定字形
-   * 裁剪，从字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
-7. **Hummingbird**可以查看压缩文件的历史记录。
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/bd27ac90-bb06-42d4-aef0-7a7825328d90" width="432">
 
@@ -111,6 +105,17 @@
 ### 裁切音频
 
 <img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
+
+## 隐藏功能
+
+通过菜单栏入口进入隐藏功能。
+
+*  **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
+* **Hummingbird**可以处理字体文件，其前身是[Panda](https://github.com/leibnizli/panda)。
+    * 合并，可将svg文件批量拼合为字体文件
+    * 修改，可对字体追加、删除、替换、导出字形，例如：替换字体中的指定字形
+    * 裁剪，从字体中过滤出需要的字形（过滤8.1M的中文字体，需等待时间约6s）
+* **Hummingbird**可以查看压缩文件的历史记录。
 
 ### 处理字体文件
 

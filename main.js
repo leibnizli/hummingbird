@@ -67,8 +67,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 352,
-    height: 290,
+    width: 312,
+    height: 260,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -253,6 +253,9 @@ ipcMain.on('open-audio-window', function () {
   });
 });
 ipcMain.on('open-font-window', function () {
+  openFontWindow();
+});
+function openFontWindow(){
   if (fontWindow) {
     return;
   }
@@ -289,7 +292,7 @@ ipcMain.on('open-font-window', function () {
   fontWindow.webContents.on('did-finish-load', function () {
     fontWindow.webContents.send('appPath', app.getAppPath());
   });
-});
+}
 ipcMain.on('open-settings-window', function () {
   console.log('app.getLocale()', app.getLocale());
   if (settingsWindow) {
@@ -398,6 +401,12 @@ const submenu = [
     label: 'Get File Encoding',
     click: async () => {
       openCodeWindow()
+    }
+  },
+  {
+    label: 'Font editing',
+    click: async () => {
+      openFontWindow()
     }
   },
 ]
