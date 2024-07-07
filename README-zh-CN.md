@@ -118,6 +118,3 @@
 * **Hummingbird**可以查看压缩文件的历史记录。
 
 ### 处理字体文件
-
-<img alt="Processing font" src="https://github.com/leibnizli/hummingbird/assets/1193966/2f1347d4-8c7c-49c5-afa8-94ee44c95f2f" width="320">
-

@@ -116,5 +116,3 @@ Access hidden functions through the menu bar entrance.
 * **Hummingbird** can view the history of compressed files.
 
 ### Processing font files
-
-<img alt="Processing font" src="https://github.com/leibnizli/hummingbird/assets/1193966/2f1347d4-8c7c-49c5-afa8-94ee44c95f2f" width="320">
