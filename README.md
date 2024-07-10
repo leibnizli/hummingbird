@@ -7,7 +7,7 @@ English | [简体中文](./README-zh-CN.md)
 3. **Hummingbird** can extract audio from videos, delete audio from videos, convert videos to gif, and convert video formats, supporting mp4, mov, and avi.
 4. One or more segments of audio can be cut, and can be converted to mp3, wav format.
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/471c6d89-e554-4402-9493-a831ed672053" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/2a07f300-2d62-4624-9043-24d5daa6bd7a" width="424">
 
 * jpg, png, webp, svg, gif, html will replace the current file after compression, Backup can be turned on in Settings, and hummingbird will back up the files to the `source` folder in the current directory.
 * A new file with .min will be generated after css, js, mp4 compression.

@@ -7,7 +7,7 @@
 3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
 4. 可以裁取音频中的一段或多段，可以批量转换音频为mp3、wav格式。
 
-<img src="https://github.com/leibnizli/hummingbird/assets/1193966/bd27ac90-bb06-42d4-aef0-7a7825328d90" width="432">
+<img src="https://github.com/leibnizli/hummingbird/assets/1193966/60f91e4b-0e75-4f5d-a7f3-8b938dc48bca" width="424">
 
 * jpg、png、webp、svg、gif、html压缩后会替换掉当前文件，可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件。
 * css、js、mp4压缩后会生成一个带.min的新文件。
