@@ -1,12 +1,12 @@
 {
-  "waiting": "Drag and drop one or more files or directories",
+  "waiting": "Drop one or more files or directories",
   "dragenter": "Release the mouse, and the process begins",
   "after": "files have been processed and the compressed space is",
   "generate": "Generate a new font",
   "merge": "Drag one or more SVG files to this",
-  "add": "Drag and drop a font (.ttf) file to be modified",
+  "add": "Drop a font (.ttf) file to be modified",
   "continue": "You can continue dragging and dropping SVG files here",
-  "cut": "Drag and drop a font (.ttf) file to this",
+  "cut": "Drop a font (.ttf) file to this",
   "current": "Current file：",
   "cutTip": "Enter the characters you want to keep here"
 }

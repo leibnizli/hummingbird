@@ -1,7 +1,7 @@
 {
   "name": "hummingbird",
   "version": "5.3.0",
-  "description": "Support the drag and drop folder compression.",
+  "description": "Support the Drop folder compression.",
   "main": "main.js",
   "repository": {
     "type": "git",
