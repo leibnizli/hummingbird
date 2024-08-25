@@ -29,14 +29,46 @@ if (!configuration.get('progressive')) {
 if (!configuration.get('png')) {
   configuration.set('png', [0.6, 0.85]);
 }
+
+const initialPort = configuration.get('port') || 3373
+
 const server = express()
-const port = configuration.get('port') || 3373
 // 指定静态文件目录
 server.use(express.static(__dirname + '/public'));
 
-server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const net = require('net');
+
+function startServer(port) {
+
+  server.listen(port, () => {
+    console.log('Server started on port ' + port);
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is in use, trying another port...`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+}
+
+function checkPort(port, callback) {
+  const tester = net.createServer()
+    .once('error', err => (err.code === 'EADDRINUSE' ? callback(true) : callback(false)))
+    .once('listening', () => tester.once('close', () => callback(false)).close())
+    .listen(port);
+}
+
+checkPort(initialPort, (isBusy) => {
+  if (isBusy) {
+    console.log(`Port ${initialPort} is in use, trying another port...`);
+    startServer(initialPort + 1);
+  } else {
+    startServer(initialPort);
+  }
+});
 
 const isMac = process.platform === 'darwin'
 
