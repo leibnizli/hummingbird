@@ -12,6 +12,9 @@
 * jpg、png、webp、svg、gif、html压缩后会替换掉当前文件，可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件。
 * css、js、mp4压缩后会生成一个带.min的新文件。
 
+> [!WARNING]
+> 体积大的视频压缩非常耗CPU，一般情况下不要压缩。
+
 ## 安装
 
 * [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)

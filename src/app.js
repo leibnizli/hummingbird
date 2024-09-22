@@ -191,7 +191,7 @@ App.prototype = {
             type: file.type
           });
         }
-        if (file.path.match(/\.(mov)$/)) {
+        if (file.path.match(/\.(mov|MOV)$/)) {
           this.filesArray.push({
             size: file.size,
             name: file.name,
@@ -464,6 +464,7 @@ App.prototype = {
         case "video/mov":
           options.push('-crf 28');
           options.push('-c:v libx264');
+          //-c:a copy 选项用于直接复制音频流，而不对音频进行重新编码
           options.push('-c:a copy');
           if (maxHeightVideo > 0) {
             options.push(`-vf scale=-2:${maxHeightVideo}`);

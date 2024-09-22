@@ -176,7 +176,8 @@ ipcMain.on('open-convert-window', function () {
   convertWindow.webContents.on('did-finish-load', function () {
   });
 });
-function openCodeWindow(){
+
+function openCodeWindow() {
   if (codeWindow) {
     return;
   }
@@ -211,6 +212,7 @@ function openCodeWindow(){
   codeWindow.webContents.on('did-finish-load', function () {
   });
 }
+
 ipcMain.on('open-code-window', function () {
   openCodeWindow()
 });
@@ -287,7 +289,8 @@ ipcMain.on('open-audio-window', function () {
 ipcMain.on('open-font-window', function () {
   openFontWindow();
 });
-function openFontWindow(){
+
+function openFontWindow() {
   if (fontWindow) {
     return;
   }
@@ -325,6 +328,7 @@ function openFontWindow(){
     fontWindow.webContents.send('appPath', app.getAppPath());
   });
 }
+
 ipcMain.on('open-settings-window', function () {
   console.log('app.getLocale()', app.getLocale());
   if (settingsWindow) {
