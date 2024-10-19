@@ -30,7 +30,7 @@ if (!configuration.get('png')) {
   configuration.set('png', [0.6, 0.85]);
 }
 
-const initialPort = configuration.get('port') || 3373
+let initialPort = configuration.get('port') || 3373
 
 const server = express()
 // 指定静态文件目录
@@ -41,6 +41,7 @@ const net = require('net');
 function startServer(port) {
 
   server.listen(port, () => {
+    initialPort = port;
     console.log('Server started on port ' + port);
   });
 
@@ -81,7 +82,6 @@ let settingsWindow = null,
   codeWindow = null,
   videoWindow = null,
   audioWindow = null,
-  fontWindow = null,
   convertWindow = null;
 app.on('window-all-closed', function () {
   // 在 OS X 上，通常用户在明确地按下 Cmd + Q 之前
@@ -117,7 +117,7 @@ app.on('ready', function () {
   // 打开开发工具
   // mainWindow.openDevTools();
   // 加载应用的 index.html
-  mainWindow.loadURL(`http://localhost:3373` + `/index${locate}.html`);
+  mainWindow.loadURL(`http://localhost:${initialPort}` + `/index${locate}.html`);
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -164,7 +164,7 @@ ipcMain.on('open-convert-window', function () {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  convertWindow.loadURL(`http://localhost:3373` + `/convert${locate}.html`);
+  convertWindow.loadURL(`http://localhost:${initialPort}` + `/convert${locate}.html`);
 
   // 打开开发工具
   // convertWindow.openDevTools();
@@ -200,7 +200,7 @@ function openCodeWindow() {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  codeWindow.loadURL(`http://localhost:3373` + `/code${locate}.html`);
+  codeWindow.loadURL(`http://localhost:${initialPort}` + `/code${locate}.html`);
 
   // 打开开发工具
   // codeWindow.openDevTools();
@@ -239,7 +239,7 @@ ipcMain.on('open-video-window', function () {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  videoWindow.loadURL(`http://localhost:3373` + `/video${locate}.html`);
+  videoWindow.loadURL(`http://localhost:${initialPort}` + `/video${locate}.html`);
 
   // 打开开发工具
   // videoWindow.openDevTools();
@@ -286,48 +286,6 @@ ipcMain.on('open-audio-window', function () {
   audioWindow.webContents.on('did-finish-load', function () {
   });
 });
-ipcMain.on('open-font-window', function () {
-  openFontWindow();
-});
-
-function openFontWindow() {
-  if (fontWindow) {
-    return;
-  }
-  fontWindow = new BrowserWindow({
-    icon: './src/images/icon.png',
-    title: 'Font',
-    width: 345,
-    height: 528,
-    minWidth: 280,
-    minHeight: 428,
-    frame: true,
-    resizable: true,
-    webPreferences: {
-      enableRemoteModule: true,
-      nodeIntegration: true,
-      nodeIntegrationInWorker: true,
-      contextIsolation: false
-    }
-  });
-  let locate = "";
-  if (app.getLocale() === "zh-CN") {
-    locate = "-zh-CN";
-  }
-  // 加载应用的 index.html
-  fontWindow.loadURL(`http://localhost:3373` + `/font${locate}.html`);
-
-  // 打开开发工具
-  // fontWindow.openDevTools();
-  // 当 window 被关闭，这个事件会被发出
-  fontWindow.on('closed', function () {
-    // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
-    fontWindow = null;
-  });
-  fontWindow.webContents.on('did-finish-load', function () {
-    fontWindow.webContents.send('appPath', app.getAppPath());
-  });
-}
 
 ipcMain.on('open-settings-window', function () {
   console.log('app.getLocale()', app.getLocale());
@@ -352,7 +310,7 @@ ipcMain.on('open-settings-window', function () {
   if (app.getLocale() === "zh-CN") {
     locate = "-zh-CN";
   }
-  settingsWindow.loadURL(`http://localhost:3373` + `/settings${locate}.html`);
+  settingsWindow.loadURL(`http://localhost:${initialPort}` + `/settings${locate}.html`);
   // 打开开发工具
   //settingsWindow.openDevTools();
 
@@ -437,12 +395,6 @@ const submenu = [
     label: 'Get File Encoding',
     click: async () => {
       openCodeWindow()
-    }
-  },
-  {
-    label: 'Font editing',
-    click: async () => {
-      openFontWindow()
     }
   },
 ]

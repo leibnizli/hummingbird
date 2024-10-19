@@ -112,10 +112,6 @@ Suitable for old versions of windows, win7, win8
 Access hidden functions through the menu bar entrance.
 
 * **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
-* **Hummingbird** can handle font files, its predecessor is [Panda](https://github.com/leibnizli/panda).
-    * Merge, you can batch assemble svg files into font files
-    * Modify, you can add, delete, replace, and export glyphs to fonts, for example: replace specified glyphs in fonts
-    * Cropping, filtering out the required glyphs from the font (filtering 8.1M Chinese fonts, it takes about 6 seconds to wait)
 * **Hummingbird** can view the history of compressed files.
 
 ### Processing font files

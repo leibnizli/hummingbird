@@ -50,9 +50,6 @@ $(document).on("click", "#video", function (e) {
 $(document).on("click", "#audio", function (e) {
   ipcRenderer.send('open-audio-window');
 });
-$(document).on("click", "#font", function (e) {
-  ipcRenderer.send('open-font-window');
-});
 $(document).on("click", "#log", function (e) {
   shell.openPath(logPath)
 });
