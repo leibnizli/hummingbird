@@ -1,5 +1,5 @@
 import i18n from 'i18n';
-import {getUserHome} from "./util.mjs";
+import {getUserHome} from "./util.js";
 import configuration from "../configuration";
 
 const ffmpegStatic = require('ffmpeg-static');
