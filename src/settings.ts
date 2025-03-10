@@ -1,87 +1,107 @@
 import "./settings.css";
 import configuration from "../configuration";
 import { shell, IpcRenderer } from "electron";
-// 类型声明
+
+// 使用 import 替代 require
+import { ipcRenderer } from "electron";
+
+// 定义配置项接口
 interface Configuration {
-  get(key: string): string | number | boolean;
-  set(key: string, value: string | number | boolean): void;
+  backup: boolean;
+  maxWidth: number;
+  maxHeightVideo: number;
+  maxHeight: number;
+  jpg: number;
+  webp: number;
 }
 
-interface HTMLInputWithDataset extends HTMLInputElement {
-  dataset: {
-    target: string;
-  };
-}
+// 定义设置处理类
+class SettingsHandler {
+  private static set(el: HTMLInputElement, value: string | number): void {
+    el.value = value.toString();
+    const targetEl = document.getElementById(el.dataset.target || '') as HTMLInputElement;
+    if (targetEl) {
+      targetEl.value = value.toString();
+    }
+  }
 
-// 从 electron 获取 ipcRenderer
-const { ipcRenderer }: { ipcRenderer: IpcRenderer } = require('electron');
+  private static initializeSettings(): void {
+    const backupInput = document.querySelector("input[name='backup']") as HTMLInputElement;
+    if (backupInput) {
+      backupInput.checked = configuration.get('backup');
+    }
 
-/**
- * 设置输入元素的值，并同步更新目标元素
- * @param el 输入元素
- * @param value 要设置的值
- */
-function set(el: HTMLInputWithDataset, value: string | number): void {
-  el.value = String(value);
-  const targetEl = document.getElementById(el.dataset.target);
-  if (targetEl instanceof HTMLInputElement) {
-    targetEl.value = String(value);
+    const inputs: Record<string, string> = {
+      "maxWidth": 'maxWidth',
+      "maxHeightVideo": 'maxHeightVideo',
+      "maxHeight": 'maxHeight'
+    };
+
+    Object.entries(inputs).forEach(([id, configKey]) => {
+      const element = document.getElementById(id) as HTMLInputElement;
+      if (element) {
+        element.value = configuration.get(configKey).toString();
+      }
+    });
+
+    const qualitySettings = [configuration.get('jpg'), configuration.get('webp')];
+    document.querySelectorAll<HTMLInputElement>(".settings-range").forEach((item, i) => {
+      this.set(item, qualitySettings[i]);
+    });
+  }
+
+  private static setupEventListeners(): void {
+    // 备份设置监听
+    document.addEventListener("change", (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target.matches("input[name='backup']")) {
+        ipcRenderer.send('backup', target.checked);
+      }
+    });
+
+    // 尺寸设置监听
+    document.addEventListener("input", (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      const sizeSettings: Record<string, string> = {
+        "maxWidth": 'maxWidth',
+        "maxHeightVideo": 'maxHeightVideo',
+        "maxHeight": 'maxHeight'
+      };
+
+      const setting = sizeSettings[target.id];
+      if (setting) {
+        ipcRenderer.send(setting, target.value);
+      }
+    });
+
+    // 质量设置监听
+    document.addEventListener("change", (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target.matches('.settings-range')) {
+        const value = target.value;
+        const targetKey = target.dataset.target;
+        this.set(target, value);
+        if (targetKey) {
+          ipcRenderer.send('set-quality', targetKey, Number(value));
+        }
+      }
+    });
+
+    // 购买按钮监听
+    document.addEventListener("click", (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.id === 'buy') {
+        // shell.openExternal("https://buy.arayofsunshine.dev");
+      }
+    });
+  }
+
+  public static initialize(): void {
+    this.initializeSettings();
+    this.setupEventListeners();
   }
 }
 
-// 初始化设置值
-const backupInput = document.querySelector("input[name='backup']") as HTMLInputElement;
-const maxWidthInput = document.getElementById("maxWidth") as HTMLInputElement;
-const maxHeightVideoInput = document.getElementById("maxHeightVideo") as HTMLInputElement;
-const maxHeightInput = document.getElementById("maxHeight") as HTMLInputElement;
-
-if (backupInput && maxWidthInput && maxHeightVideoInput && maxHeightInput) {
-  backupInput.checked = configuration.get('backup') as boolean;
-  maxWidthInput.value = String(configuration.get('maxWidth'));
-  maxHeightVideoInput.value = String(configuration.get('maxHeightVideo'));
-  maxHeightInput.value = String(configuration.get('maxHeight'));
-}
-
-const arg = [configuration.get('jpg'), configuration.get('webp')];
-
-document.querySelectorAll<HTMLInputWithDataset>(".settings-range").forEach((item, i) => {
-  set(item, arg[i]);
-});
-
-// 事件监听
-document.addEventListener("change", (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  if (target.matches("input[name='backup']")) {
-    ipcRenderer.send('backup', target.checked);
-  }
-});
-
-document.addEventListener("input", (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  if (target.matches("#maxWidth")) {
-    ipcRenderer.send('maxWidth', target.value);
-  } else if (target.matches("#maxHeightVideo")) {
-    ipcRenderer.send('maxHeightVideo', target.value);
-  } else if (target.matches("#maxHeight")) {
-    ipcRenderer.send('maxHeight', target.value);
-  }
-});
-
-document.addEventListener("change", (e: Event) => {
-  const target = e.target as HTMLInputWithDataset;
-  if (target.matches('.settings-range')) {
-    const value = target.value;
-    const targetKey = target.dataset.target;
-    set(target, value);
-    ipcRenderer.send('set-quality', targetKey, Number(value));
-  }
-});
-
-// Buy button click event (currently commented out)
-document.addEventListener("click", (e: Event) => {
-  const target = e.target as HTMLElement;
-  if (target.matches('#buy')) {
-    // shell.openExternal("https://buy.arayofsunshine.dev");
-  }
-});
+// 初始化设置
+SettingsHandler.initialize();
 
