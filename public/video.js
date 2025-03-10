@@ -1,6 +1,7 @@
 const fs = require("fs");
 const {clipboard} = require('electron');
 const {shell} = require("electron");
+const { webUtils } = require('electron')
 const ffmpegStatic = require('ffmpeg-static');
 const ffmpeg = require('fluent-ffmpeg');
 const path = require("path");
@@ -16,89 +17,105 @@ function openFolder(path) {
   shell.openPath(path)
 }
 
-//image/vnd.microsoft.icon
-//image/vnd.microsoft.icon
-$(document).on("change", '#file', function (e) {
-  console.log(this.files)
-  files = Array.from(this.files).map((ele, i) => {
-    return {
-      path: ele.path,
-      type: ele.type
-    }
-  });
-});
-$(document).on("click", '#mp3', function (e) {
-  if (files.length === 0) return;
-  files.forEach((ele, i) => {
-    let fileDirname = path.dirname(ele.path);
-    let extension = path.extname(ele.path);
-    let file = path.basename(ele.path, extension);
-    let targetPath = path.join(fileDirname, `${file}.mp3`);
-    ffmpeg()
-      .input(ele.path)
-      .outputOptions('-ab', '192k')
-      .on('progress', (progress) => {
-        if (progress.percent) {
-          statusMP3.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
-        }
-      })
-      .saveToFile(targetPath)
-      .on('end', () => {
-        statusMP3.textContent = 'finished';
-        console.log('FFmpeg has finished.');
-      })
-      .on('error', (error) => {
-        statusMP3.textContent = 'error';
-      });
-    if (i === 0) {
-      openFolder(fileDirname);
-    }
-  });
-});
-$(document).on("click", '#delete', function (e) {
-  if (files.length === 0) return;
-  files.forEach((ele, i) => {
-    let fileDirname = path.dirname(ele.path);
-    let extension = path.extname(ele.path);
-    let file = path.basename(ele.path, extension);
-    let targetPath = path.join(fileDirname, `${file}_no_audio.${extension}`);
-    ffmpeg()
-      .input(ele.path)
-      // Tell FFmpeg to ignore the audio track
-      .noAudio()
-      // Copy the video without re-encoding
-      .outputOptions('-codec', 'copy')
-      .on('progress', (progress) => {
-        if (progress.percent) {
-          statusDelete.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
-        }
-      })
-      .saveToFile(targetPath)
-      .on('end', () => {
-        statusDelete.textContent = 'finished';
-        console.log('FFmpeg has finished.');
-      })
-      .on('error', (error) => {
-        statusDelete.textContent = 'error';
-      });
-    if (i === 0) {
-      openFolder(fileDirname);
-    }
-  });
-});
-// files = files.filter((ele)=>{
-//   return ele.type === "video/mp4"
-// });
-$(document).on("click", '#export', function (e) {
-  checkedData = [];
-  if (files.length > 0) {
-    $("input[type='checkbox']").each((i, ele) => {
-      if ($(ele).prop('checked')) {
-        checkedData.push($(ele).val());
+// 文件选择事件
+const fileInput = document.getElementById('file');
+if (fileInput) {
+  fileInput.addEventListener('change', function(e) {
+    console.log(this.files);
+    files = Array.from(this.files).map((ele, i) => {
+      return {
+        path: webUtils.getPathForFile(ele),
+        type: ele.type
       }
     });
-    if (checkedData.length === 0) return;
-    Convert();
+  });
+}
+
+// 按钮点击事件处理
+document.addEventListener('click', (e) => {
+  const button = e.target.closest('[id]');
+  if (!button) return;
+
+  switch (button.id) {
+    case 'mp3':
+      if (files.length === 0) return;
+      files.forEach((ele, i) => {
+        let fileDirname = path.dirname(ele.path);
+        let extension = path.extname(ele.path);
+        let file = path.basename(ele.path, extension);
+        let targetPath = path.join(fileDirname, `${file}.mp3`);
+        ffmpeg()
+          .input(ele.path)
+          .outputOptions('-ab', '192k')
+          .on('progress', (progress) => {
+            if (progress.percent && statusMP3) {
+              statusMP3.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
+            }
+          })
+          .saveToFile(targetPath)
+          .on('end', () => {
+            if (statusMP3) {
+              statusMP3.textContent = 'finished';
+            }
+            console.log('FFmpeg has finished.');
+          })
+          .on('error', (error) => {
+            if (statusMP3) {
+              statusMP3.textContent = 'error';
+            }
+          });
+        if (i === 0) {
+          openFolder(fileDirname);
+        }
+      });
+      break;
+
+    case 'delete':
+      if (files.length === 0) return;
+      files.forEach((ele, i) => {
+        let fileDirname = path.dirname(ele.path);
+        let extension = path.extname(ele.path);
+        let file = path.basename(ele.path, extension);
+        let targetPath = path.join(fileDirname, `${file}_no_audio.${extension}`);
+        ffmpeg()
+          .input(ele.path)
+          .noAudio()
+          .outputOptions('-codec', 'copy')
+          .on('progress', (progress) => {
+            if (progress.percent && statusDelete) {
+              statusDelete.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
+            }
+          })
+          .saveToFile(targetPath)
+          .on('end', () => {
+            if (statusDelete) {
+              statusDelete.textContent = 'finished';
+            }
+            console.log('FFmpeg has finished.');
+          })
+          .on('error', (error) => {
+            if (statusDelete) {
+              statusDelete.textContent = 'error';
+            }
+          });
+        if (i === 0) {
+          openFolder(fileDirname);
+        }
+      });
+      break;
+
+    case 'export':
+      checkedData = [];
+      if (files.length > 0) {
+        document.querySelectorAll("input[type='checkbox']").forEach((ele) => {
+          if (ele.checked) {
+            checkedData.push(ele.value);
+          }
+        });
+        if (checkedData.length === 0) return;
+        Convert();
+      }
+      break;
   }
 });
 
@@ -117,70 +134,84 @@ function Convert() {
             .input(ele.path)
             .outputOptions('-vcodec', 'h264')
             .on('progress', (progress) => {
-              if (progress.percent) {
+              if (progress.percent && status) {
                 status.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
               }
             })
             .saveToFile(targetPath)
             .on('end', () => {
-              status.textContent = 'finished';
+              if (status) {
+                status.textContent = 'finished';
+              }
               console.log('FFmpeg has finished.');
             })
             .on('error', (error) => {
-              status.textContent = 'error';
+              if (status) {
+                status.textContent = 'error';
+              }
             });
           break;
         case "mov":
           ffmpeg()
             .input(ele.path)
-            // .outputOptions('-vcodec', 'h264')
             .on('progress', (progress) => {
-              if (progress.percent) {
+              if (progress.percent && status) {
                 status.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
               }
             })
             .saveToFile(targetPath)
             .on('end', () => {
-              status.textContent = 'finished';
+              if (status) {
+                status.textContent = 'finished';
+              }
               console.log('FFmpeg has finished.');
             })
             .on('error', (error) => {
-              status.textContent = 'error';
+              if (status) {
+                status.textContent = 'error';
+              }
             });
           break;
         case "avi":
           ffmpeg()
             .input(ele.path)
-            // .outputOptions('-vcodec', 'h264')
             .on('progress', (progress) => {
-              if (progress.percent) {
+              if (progress.percent && status) {
                 status.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
               }
             })
             .saveToFile(targetPath)
             .on('end', () => {
-              status.textContent = 'finished';
+              if (status) {
+                status.textContent = 'finished';
+              }
               console.log('FFmpeg has finished.');
             })
             .on('error', (error) => {
-              status.textContent = 'error';
+              if (status) {
+                status.textContent = 'error';
+              }
             });
           break;
         case "gif":
           ffmpeg()
             .input(ele.path)
             .on('progress', (progress) => {
-              if (progress.percent) {
+              if (progress.percent && status) {
                 status.textContent = `Processing: ${Math.floor(progress.percent)}% done`;
               }
             })
             .saveToFile(targetPath)
             .on('end', () => {
-              status.textContent = 'finished';
+              if (status) {
+                status.textContent = 'finished';
+              }
               console.log('FFmpeg has finished.');
             })
             .on('error', (error) => {
-              status.textContent = 'error';
+              if (status) {
+                status.textContent = 'error';
+              }
             });
           break;
         default:

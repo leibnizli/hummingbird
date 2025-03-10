@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { app, clipboard } = require('electron');
+const { webUtils } = require('electron')
 const { promisify } = require('util');
 const heicConvert = require('heic-convert');
 const path = require("path");
@@ -14,33 +15,44 @@ function openFolder(path) {
   shell.openPath(path)
 }
 
-//image/vnd.microsoft.icon
-//image/vnd.microsoft.icon
-$(document).on("change", '#file', function (e) {
-  console.log(this.files)
-  $("#convertLog").html(``)
-  files = Array.from(this.files).map((ele, i) => {
-    return {
-      path: ele.path,
-      type: ele.type
+// 文件选择事件
+const fileInput = document.getElementById('file');
+if (fileInput) {
+  fileInput.addEventListener('change', function(e) {
+    console.log(this.files);
+    const convertLog = document.getElementById('convertLog');
+    if (convertLog) {
+      convertLog.innerHTML = '';
     }
-  });
-  files = files.filter((ele) => {
-    return ele.type !== ""
-  });
-});
-$(document).on("click", '#export', function (e) {
-  checkedData = [];
-  // files = files.filter((ele)=>{
-  //   return ele.type !== "image/svg+xml"
-  // });
-  if (files.length > 0) {
-    $("input[type='checkbox']").each((i, ele) => {
-      if ($(ele).prop('checked')) {
-        checkedData.push($(ele).val());
+    files = Array.from(this.files).map((ele, i) => {
+      return {
+        path: webUtils.getPathForFile(ele),
+        type: ele.type
       }
     });
-    Convert();
+    files = files.filter((ele) => {
+      return ele.type !== ""
+    });
+  });
+}
+
+// 按钮点击事件处理
+document.addEventListener('click', (e) => {
+  const button = e.target.closest('[id]');
+  if (!button) return;
+
+  switch (button.id) {
+    case 'export':
+      checkedData = [];
+      if (files.length > 0) {
+        document.querySelectorAll("input[type='checkbox']").forEach((ele) => {
+          if (ele.checked) {
+            checkedData.push(ele.value);
+          }
+        });
+        Convert();
+      }
+      break;
   }
 });
 
@@ -52,6 +64,7 @@ function writeFile(targetPath, buffer) {
 
 function generateFavicon(sourcePath, destPath) {
   const image = fs.readFileSync(sourcePath);
+  const convertLog = document.getElementById('convertLog');
 
   toIco([image], {
     sizes: [16, 24, 32, 48, 64, 128, 256],
@@ -59,14 +72,19 @@ function generateFavicon(sourcePath, destPath) {
   }).then(result => {
     fs.writeFileSync(destPath, result);
     console.log(`Image has been ${destPath}`);
-  }).catch((err)=>{
-    $("#convertLog").html(`${err}`)
+  }).catch((err) => {
+    if (convertLog) {
+      convertLog.innerHTML = `${err}`;
+    }
   });
 }
 
 function Convert() {
   if (checkedData.length === 0) return;
   if (files.length === 0) return;
+  console.log(files,'files')
+  const convertLog = document.getElementById('convertLog');
+
   files.forEach((ele, i) => {
     let fileDirname = path.dirname(ele.path);
     let extension = path.extname(ele.path);
@@ -178,7 +196,9 @@ function Convert() {
 
                 console.log('All commands executed successfully');
               } catch (error) {
-                $("#convertLog").html(`Error executing command: ${error.message}`)
+                if (convertLog) {
+                  convertLog.innerHTML = `Error executing command: ${error.message}`;
+                }
                 console.error(`Error executing command: ${error.message}`);
               }
             }

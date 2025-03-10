@@ -5,6 +5,7 @@ const RegionsPlugin = require('wavesurfer.js/dist/plugins/regions.esm.js');
 const os =  require('os');
 const fs = require("fs");
 const {shell} = require("electron");
+const { webUtils } = require('electron')
 const ffmpegStatic = require('ffmpeg-static');
 const ffmpeg = require('fluent-ffmpeg');
 const path = require("path");
@@ -21,14 +22,13 @@ const getDesktopOrHomeDir = () => {
   return desktopDir;
 }
 
-
 let files = [{
   path: path.join(__dirname, '/hummingbird-test-audio.mp3'),
   type: 'audio/mpeg'
 }];
 let checkedData = [];
 const status = document.getElementById('status');
-const audioCut = $("#audioCut");
+const audioCut = document.getElementById('audioCut');
 
 function openFolder(path) {
   shell.openPath(path)
@@ -149,29 +149,29 @@ document.addEventListener('keydown', function (e) {
     // wsRegions.clearRegions();
   }
 });
-$(document).on("change", '#file', function (e) {
+document.getElementById('file').addEventListener('change', function(e) {
   console.log(this.files)
   files = Array.from(this.files).map((ele, i) => {
     return {
-      path: ele.path,
+      path: webUtils.getPathForFile(ele),
       type: ele.type
     }
   });
   wsRegions.clearRegions();
   if (files.length === 1) {
     wavesurfer.load(`file://${files[0].path}`);
-    audioCut.show();
+    audioCut.style.display = 'block';
   }
   if (files.length > 1) {
-    audioCut.hide();
+    audioCut.style.display = 'none';
   }
 });
-$(document).on("click", '#export', function (e) {
+document.getElementById('export').addEventListener('click', function(e) {
   checkedData = [];
   if (files.length > 0) {
-    $("input[type='checkbox']").each((i, ele) => {
-      if ($(ele).prop('checked')) {
-        checkedData.push($(ele).val());
+    document.querySelectorAll("input[type='checkbox']").forEach((ele) => {
+      if (ele.checked) {
+        checkedData.push(ele.value);
       }
     });
     if (checkedData.length === 0) return;

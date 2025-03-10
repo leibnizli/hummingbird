@@ -1,7 +1,7 @@
 import i18n from 'i18n';
 import {getUserHome} from "./util.js";
 import configuration from "../configuration";
-
+const { webUtils } = require('electron')
 const ffmpegStatic = require('ffmpeg-static');
 const ffmpeg = require('fluent-ffmpeg');
 const sharp = require('sharp');
@@ -58,16 +58,16 @@ ipcRenderer.on('png', function (e, arg1) {
 });
 
 function setTip() {
-  let $tip = $("#tip");
-  $tip.html('');
+  const tip = document.getElementById("tip");
+  tip.innerHTML = '';
   if (maxWidth > 0) {
-    $tip.html(`maxWidth:${maxWidth}`)
+    tip.innerHTML = `maxWidth:${maxWidth}`;
   }
   if (maxHeight > 0) {
-    $tip.html(`maxHeight:${maxHeight}`)
+    tip.innerHTML = `maxHeight:${maxHeight}`;
   }
   if (maxWidth > 0 && maxHeight > 0) {
-    $tip.html(`maxWidth:${maxWidth} maxHeight:${maxHeight}`)
+    tip.innerHTML = `maxWidth:${maxWidth} maxHeight:${maxHeight}`;
   }
 }
 
@@ -90,7 +90,7 @@ function getFilesizeInBytes(filename) {
 }
 
 function App(el, options) {
-  this.$el = $(el);
+  this.el = typeof el === 'string' ? document.querySelector(el) : el;
   this.options = options;
   this.status = "waiting";
   this.filesArray = [];
@@ -111,68 +111,167 @@ function App(el, options) {
 App.prototype = {
   _init: function () {
     this._updateState();
-    this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
-    this.$el.on("click", "#import", (e) => {
+    const waitingEl = this.el.querySelector(".ui-area-waiting");
+    if (waitingEl) {
+      waitingEl.innerHTML = i18n.__('waiting');
+    }
+
+    const importBtn = this.el.querySelector("#import");
+    if (importBtn) {
+      importBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
+          if (paths === undefined) {
+            return;
+          } // Dialog was cancelled
+          this.filesArray = [];
+          this.diff = 0;
+          this.status = "drop";
+          this._updateState();
+          for (let p of paths) {
+            const mime_type = mime.getType(p);
+            this.filesArray.push({
+              size: getFilesizeInBytes(p),
+              name: path.basename(p),
+              path: p,
+              type: mime_type
+            });
+          }
+          this._delFiles(this.filesArray);
+        });
+      });
+    }
+
+    // 阻止默认的拖拽行为
+    document.addEventListener('dragenter', (e) => {
       e.preventDefault();
-      ipcRenderer.invoke('dialog:openMultiFileSelect').then((paths) => {
-        if (paths === undefined) {
-          return
-        } // Dialog was cancelled
+      const dropArea = e.target.closest('.ui-area-drop');
+      if (dropArea) {
+        dropArea.classList.add("ui-area-drop-have");
+        const waitingEl = dropArea.querySelector(".ui-area-waiting");
+        if (waitingEl) {
+          waitingEl.innerHTML = i18n.__('dragenter');
+        }
+      }
+    });
+
+    document.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      const dropArea = e.target.closest('.ui-area-drop');
+      if (dropArea) {
+        dropArea.classList.remove("ui-area-drop-have");
+        const waitingEl = dropArea.querySelector(".ui-area-waiting");
+        if (waitingEl) {
+          waitingEl.innerHTML = i18n.__('waiting');
+        }
+      }
+    });
+
+    document.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    document.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const dropArea = e.target.closest('.ui-area-drop');
+      if (dropArea) {
+        dropArea.classList.remove("ui-area-drop-have");
         this.filesArray = [];
         this.diff = 0;
-        this.status = "drop";
-        this._updateState();
-        for (let p of paths) {
-          const mime_type = mime.getType(p);
-          this.filesArray.push({
-            size: getFilesizeInBytes(p),
-            name: path.basename(p),
-            path: p,
-            type: mime_type
-          });
+
+        // 处理拖放的文件和文件夹
+        const items = e.dataTransfer.items;
+        if (items) {
+          this._filterFiles(items);
+        } else {
+          // 降级处理：如果不支持 items，则直接处理文件
+          const files = e.dataTransfer.files;
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (file.type.indexOf("image") > -1 ||
+                file.type.indexOf("css") > -1 ||
+                file.type.indexOf("javascript") > -1 ||
+                file.type.indexOf("html") > -1 ||
+                file.type.indexOf("mp4") > -1) {
+              this.filesArray.push({
+                size: file.size,
+                name: file.name,
+                path: file.path,
+                type: file.type
+              });
+            }
+            if (file.name.match(/\.(mov|MOV)$/)) {
+              this.filesArray.push({
+                size: file.size,
+                name: file.name,
+                path: file.path,
+                type: 'video/mov'
+              });
+            }
+          }
+          if (this.filesArray.length > 0) {
+            this.status = "drop";
+            this._updateState();
+            this._delFiles(this.filesArray);
+          }
         }
-        //console.log(this.filesArray);
-        this._delFiles(this.filesArray);
-      });
-    });
-    this.$el.on("dragenter", ".ui-area-drop", (e) => {
-      e.preventDefault();
-      $(e.target).addClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html(i18n.__('dragenter'));
-    });
-    this.$el.on("dragleave", ".ui-area-drop", (e) => {
-      e.preventDefault();
-      $(e.target).removeClass("ui-area-drop-have");
-      this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
-    });
-    this.$el.on("drop", ".ui-area-drop", (e) => {
-      $(e.target).removeClass("ui-area-drop-have");
-      this.filesArray = [];
-      this.diff = 0;
-      this._filterFiles(e.originalEvent.dataTransfer.items);
+      }
     });
   },
   _filterFiles: function (items) {
     if (items.length === 0) {
-      this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
+      const waitingEl = this.el.querySelector(".ui-area-waiting");
+      if (waitingEl) {
+        waitingEl.innerHTML = i18n.__('waiting');
+      }
       return false;
     }
+
     if (!this.time) {
       this.time = Date.now();
     }
+
+    // 处理所有拖放的项目
     for (let i = 0; i < items.length; i++) {
       const entry = items[i].webkitGetAsEntry();
       if (entry) {
         this._traverseFileTree(entry);
+      } else if (items[i].kind === 'file') {
+        // 降级处理：如果不支持 webkitGetAsEntry
+        const file = items[i].getAsFile();
+        this._handleFile(file);
       }
+    }
+  },
+  _handleFile: function(file) {
+    if (!file) return;
+
+    // 检查文件类型
+    if (file.type.indexOf("image") > -1 ||
+        file.type.indexOf("css") > -1 ||
+        file.type.indexOf("javascript") > -1 ||
+        file.type.indexOf("html") > -1 ||
+        file.type.indexOf("mp4") > -1) {
+      this.filesArray.push({
+        size: file.size,
+        name: file.name,
+        path: webUtils.getPathForFile(file) || '', // 在普通 Chrome 中可能没有 path
+        type: file.type
+      });
+    }
+    if (file.name.match(/\.(mov|MOV)$/)) {
+      this.filesArray.push({
+        size: file.size,
+        name: file.name,
+        path: webUtils.getPathForFile(file) || '', // 在普通 Chrome 中可能没有 path
+        type: 'video/mov'
+      });
     }
   },
   _traverseFileTree: function (item) {
     const self = this;
     if (item.isFile) {
-      // Get file
       item.file((file) => {
-        // console.log('file',file)
         clearTimeout(this.Timer);
         this.Timer = setTimeout(() => {
           if (this.filesArray.length > 0) {
@@ -180,28 +279,16 @@ App.prototype = {
             this._updateState();
             this._delFiles(this.filesArray);
           } else {
-            this.$el.find(".ui-area-waiting").html(i18n.__('waiting'));
+            const waitingEl = this.el.querySelector(".ui-area-waiting");
+            if (waitingEl) {
+              waitingEl.innerHTML = i18n.__('waiting');
+            }
           }
         }, 100);
-        if (file.type.indexOf("image") > -1 || file.type.indexOf("css") > -1 || file.type.indexOf("javascript") > -1 || file.type.indexOf("html") > -1 || file.type.indexOf("mp4") > -1) {
-          this.filesArray.push({
-            size: file.size,
-            name: file.name,
-            path: file.path,
-            type: file.type
-          });
-        }
-        if (file.path.match(/\.(mov|MOV)$/)) {
-          this.filesArray.push({
-            size: file.size,
-            name: file.name,
-            path: file.path,
-            type: 'video/mov'
-          });
-        }
+
+        this._handleFile(file);
       });
     } else if (item.isDirectory) {
-      // Get folder contents
       const dirReader = item.createReader();
       const readEntries = function () {
         dirReader.readEntries(function (entries) {
@@ -209,7 +296,7 @@ App.prototype = {
             for (let i = 0; i < entries.length; i++) {
               self._traverseFileTree(entries[i]);
             }
-            readEntries();
+            readEntries(); // 继续读取，直到所有条目都被处理
           }
         });
       };
@@ -532,7 +619,7 @@ App.prototype = {
       const fileDiff = file.size - file.optimized;
       log += `${file.time} ${file.name} ${file.size}B - ${file.optimized}B = ${fileDiff}B ${this.skip ? "skip" : ""} \n`
     }.bind(this));
-    this.$el.find(".ui-area-waiting").html(`${num} ${i18n.__('after')} ${(this.diff / (1024)).toFixed(3)}KB`);
+    this._updateProgress(num);
     ipcRenderer.send('set-share', window.shareCount + 1, window.shareSize + this.diff);
 
     const maxSizeInBytes = 1024 * 1024; // 1MB
@@ -569,7 +656,15 @@ App.prototype = {
     }
   },
   _updateState: function () {
-    this.$el.find(".ui-area-main").html(this.statusHtml[this.status]);
+    if (this.el) {
+      this.el.querySelector('.ui-area-main').innerHTML = this.statusHtml[this.status];
+    }
+  },
+  _updateProgress: function(num) {
+    const waitingEl = this.el.querySelector(".ui-area-waiting");
+    if (waitingEl) {
+      waitingEl.innerHTML = `${num} ${i18n.__('after')} ${(this.diff / (1024)).toFixed(3)}KB`;
+    }
   }
 }
 module.exports = App;

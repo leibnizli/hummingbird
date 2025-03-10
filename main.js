@@ -104,6 +104,7 @@ app.on('ready', function () {
     frame: false,
     resizable: false,
     webPreferences: {
+      sandbox: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
@@ -153,6 +154,7 @@ ipcMain.on('open-convert-window', function () {
     frame: true,
     resizable: true,
     webPreferences: {
+      sandbox: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
@@ -189,6 +191,7 @@ function openCodeWindow() {
     frame: true,
     resizable: true,
     webPreferences: {
+      sandbox: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
@@ -228,6 +231,7 @@ ipcMain.on('open-video-window', function () {
     frame: true,
     resizable: true,
     webPreferences: {
+      sandbox: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
@@ -263,6 +267,7 @@ ipcMain.on('open-audio-window', function () {
     frame: true,
     resizable: true,
     webPreferences: {
+      sandbox: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       nodeIntegrationInWorker: true,

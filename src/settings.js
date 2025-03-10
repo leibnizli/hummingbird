@@ -5,38 +5,52 @@ import {shell} from "electron";
 const {ipcRenderer} = require('electron')
 
 function set(el, value) {
-  $(el).val(value);
-  $('#' + $(el).data("target")).val(value);
+  el.value = value;
+  const targetEl = document.getElementById(el.dataset.target);
+  if (targetEl) targetEl.value = value;
 }
 
-$("input[name='backup']").prop('checked', configuration.get('backup'));
-$("#maxWidth").val(configuration.get('maxWidth'));
-$("#maxHeightVideo").val(configuration.get('maxHeightVideo'));
-$("#maxHeight").val(configuration.get('maxHeight'));
-const arg = [configuration.get('jpg'),configuration.get('webp')];
-$(".settings-range").each(function (i, item) {
+// 初始化设置值
+document.querySelector("input[name='backup']").checked = configuration.get('backup');
+document.getElementById("maxWidth").value = configuration.get('maxWidth');
+document.getElementById("maxHeightVideo").value = configuration.get('maxHeightVideo');
+document.getElementById("maxHeight").value = configuration.get('maxHeight');
+const arg = [configuration.get('jpg'), configuration.get('webp')];
+
+document.querySelectorAll(".settings-range").forEach((item, i) => {
   set(item, arg[i]);
 });
-$(document).on("change", "input[name='backup']", function (e) {
-  ipcRenderer.send('backup', $(e.target).prop('checked'));
+
+// 事件监听
+document.addEventListener("change", (e) => {
+  if (e.target.matches("input[name='backup']")) {
+    ipcRenderer.send('backup', e.target.checked);
+  }
 });
-$(document).on("input", "#maxWidth", function (e) {
-  ipcRenderer.send('maxWidth', $(this).val());
+
+document.addEventListener("input", (e) => {
+  if (e.target.matches("#maxWidth")) {
+    ipcRenderer.send('maxWidth', e.target.value);
+  } else if (e.target.matches("#maxHeightVideo")) {
+    ipcRenderer.send('maxHeightVideo', e.target.value);
+  } else if (e.target.matches("#maxHeight")) {
+    ipcRenderer.send('maxHeight', e.target.value);
+  }
 });
-$(document).on("input", "#maxHeightVideo", function (e) {
-  ipcRenderer.send('maxHeightVideo', $(this).val());
+
+document.addEventListener("change", (e) => {
+  if (e.target.matches('.settings-range')) {
+    const value = e.target.value;
+    const target = e.target.dataset.target;
+    set(e.target, value);
+    ipcRenderer.send('set-quality', target, Number(value));
+  }
 });
-$(document).on("input", "#maxHeight", function (e) {
-  ipcRenderer.send('maxHeight', $(this).val());
-});
-$(document).on("change", '.settings-range', function (e) {
-  let $self = $(this),
-    value = $self.val(),
-    target = $self.data("target");
-  set(this, $self.val());
-  ipcRenderer.send('set-quality', target, Number(value));
-});
-$(document).on("click", '#buy', function (e) {
-  // shell.openExternal("https://buy.arayofsunshine.dev");
+
+// Buy button click event (currently commented out)
+document.addEventListener("click", (e) => {
+  if (e.target.matches('#buy')) {
+    // shell.openExternal("https://buy.arayofsunshine.dev");
+  }
 });
 
