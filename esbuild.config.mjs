@@ -2,7 +2,7 @@
 import * as esbuild from 'esbuild'
 
 let ctx = await esbuild.context({
-  entryPoints: ['./src/common.js','./src/index.js','./src/settings.ts','./src/audio.js'],
+  entryPoints: ['./src/common.js','./src/index.ts','./src/settings.ts','./src/audio.js'],
   bundle: true,
   minify: true,
   sourcemap: true,
