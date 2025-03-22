@@ -36,8 +36,7 @@ window.shareSize = 0;
 /**
  * Path to the application's log file
  */
-const logPath = path.join(getUserHome(), LOG_FILE_NAME);
-
+const logPath = path.join(getUserHome(), LOG_FILE_NAME)
 /**
  * Initialize log file if it doesn't exist
  */

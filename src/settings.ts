@@ -1,5 +1,5 @@
 import "./settings.css";
-import configuration from "../configuration";
+import configuration from "../configuration.js";
 import { shell, IpcRenderer } from "electron";
 
 // 使用 import 替代 require
@@ -17,11 +17,11 @@ interface Configuration {
 
 // 定义设置处理类
 class SettingsHandler {
-  private static set(el: HTMLInputElement, value: string | number): void {
-    el.value = value.toString();
+  private static set(el: HTMLInputElement, value: string): void {
+    el.value = value;
     const targetEl = document.getElementById(el.dataset.target || '') as HTMLInputElement;
     if (targetEl) {
-      targetEl.value = value.toString();
+      targetEl.value = value;
     }
   }
 
@@ -40,7 +40,7 @@ class SettingsHandler {
     Object.entries(inputs).forEach(([id, configKey]) => {
       const element = document.getElementById(id) as HTMLInputElement;
       if (element) {
-        element.value = configuration.get(configKey).toString();
+        element.value = configuration.get(configKey);
       }
     });
 
@@ -95,7 +95,6 @@ class SettingsHandler {
       }
     });
   }
-
   public static initialize(): void {
     this.initializeSettings();
     this.setupEventListeners();
