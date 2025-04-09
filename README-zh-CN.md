@@ -59,8 +59,8 @@
             <td>后</td>
         </tr>
         <tr>
-            <td>41kb</td>
-            <td>12kb</td>
+            <td>41kB</td>
+            <td>12kB</td>
         </tr>
     </tbody>
 </table>
@@ -80,8 +80,8 @@
             <td>后</td>
         </tr>
         <tr>
-            <td>28.9kb</td>
-            <td>9.42kb</td>
+            <td>28.9kB</td>
+            <td>9.42kB</td>
         </tr>
     </tbody>
 </table>
@@ -99,8 +99,8 @@
             <td>后</td>
         </tr>
         <tr>
-            <td>5.47kb</td>
-            <td>3.55kb</td>
+            <td>5.47kB</td>
+            <td>3.55kB</td>
         </tr>
     </tbody>
 </table>
