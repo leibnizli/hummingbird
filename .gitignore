@@ -17,3 +17,4 @@ src/font/demo
 
 electron-builder.yml
 memo.md
+*.sh
