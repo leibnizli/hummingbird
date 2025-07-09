@@ -26,7 +26,7 @@
 
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）
 * ~~**macOS**~~（Intel）
-* <a href="https://github.com/leibnizli/hummingbird/releases/tag/v5.3.0">**Windows**</a> (>=10)
+* <a href="https://github.com/leibnizli/hummingbird/releases/download/v5.3.0/hummingbird-Setup-5.3.0.exe">**Windows**</a> (>=10)
 
 ### 旧版本 v3.0.0
 
