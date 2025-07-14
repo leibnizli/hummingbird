@@ -14,9 +14,6 @@
 
 ## 安装
 
-* [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
-* [macOS App打不开](https://arayofsunshine.dev/zh-Hans/blog/macos-app-cannot-be-opened)
-
 ### 最新版本
 
 #### 从GitHub下载
@@ -31,3 +28,8 @@
 
 * <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Google网盘）
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，百度网盘）
+
+## 帮助
+
+* [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
+* [macOS App打不开](https://arayofsunshine.dev/zh-Hans/blog/macos-app-cannot-be-opened)

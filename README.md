@@ -15,9 +15,6 @@ English | [简体中文](./README-zh-CN.md)
 
 ## Install
 
-* [What is Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
-* [macOS App cannot be opened](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
-
 ### Latest version
 
 #### Download from GitHub
@@ -33,3 +30,8 @@ Suitable for old versions of windows, win7, win8
 
 * <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Google Drive）
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，百度网盘）
+
+## Help
+
+* [What is Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
+* [macOS App cannot be opened](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
