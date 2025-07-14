@@ -7,8 +7,6 @@ English | [简体中文](./README-zh-CN.md)
 3. **Hummingbird** can extract audio from videos, delete audio from videos, convert videos to gif, and convert video formats, supporting mp4, mov, and avi.
 4. One or more segments of audio can be cut, and can be converted to mp3, wav format.
 
-> [!WARNING]
-> Compression of large videos consumes a lot of CPU, so generally do not compress them.
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/2a07f300-2d62-4624-9043-24d5daa6bd7a" width="424">
 
@@ -35,91 +33,3 @@ Suitable for old versions of windows, win7, win8
 
 * <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Google Drive）
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，百度网盘）
-
-## Usage
-
-### Reduce the file size
-
-#### jpg
-
-<table>
-    <tbody>
-        <tr>
-            <td><img src="./demo/jpg-before.jpg" alt="" width="280" height="392"></td>
-            <td><img src="./demo/jpg-after.jpg" alt="" width="280" height="392"></td>
-        </tr>
-        <tr>
-            <td>Before</td>
-            <td>After</td>
-        </tr>
-        <tr>
-            <td>41kB</td>
-            <td>12kB</td>
-        </tr>
-    </tbody>
-</table>
-
-#### png
-
-<table>
-    <tbody>
-        <tr>
-            <td><img src="./demo/png-before.png" alt="" width="128" height="128"></td>
-            <td><img src="./demo/png-after.png" alt="" width="128" height="128"></td>
-        </tr>
-        <tr>
-            <td>Before</td>
-            <td>After</td>
-        </tr>
-        <tr>
-            <td>28.9kB</td>
-            <td>9.42kB</td>
-        </tr>
-    </tbody>
-</table>
-
-#### svg
-
-<table>
-    <tbody>
-        <tr>
-            <td><img src="./demo/svg-before.svg" alt="" width="216" height="164"></td>
-            <td><img src="./demo/svg-after.svg" alt="" width="216" height="164"></td>
-        </tr>
-        <tr>
-            <td>Before</td>
-            <td>After</td>
-        </tr>
-        <tr>
-            <td>5.47kB</td>
-            <td>3.55kB</td>
-        </tr>
-    </tbody>
-</table>
-
-#### mov
-
-<table>
-    <tbody>
-        <tr>
-            <td>Before</td>
-            <td>After</td>
-        </tr>
-        <tr>
-            <td>1382.44MB</td>
-            <td>37.95MB</td>
-        </tr>
-    </tbody>
-</table>
-
-### Crop audio
-
-<img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
-
-
-## Hidden functions
-
-Access hidden functions through the menu bar entrance.
-
-* **Hummingbird** can quickly obtain the Base64 encoding of files, supporting: png, webp, jpeg, jpg, gif, tiff, avi, svg, ttf, woff, woff2.
-* **Hummingbird** can view the history of compressed files.

@@ -12,9 +12,6 @@
 * jpg、png、webp、svg、gif、html压缩后会替换掉当前文件，可以在设置中开启备份，开启后会自动在当前目录新建`source`文件夹并备份处理前的文件。
 * css、js、mp4压缩后会生成一个带.min的新文件。
 
-> [!WARNING]
-> 体积大的视频压缩非常耗CPU，一般情况下不要压缩。
-
 ## 安装
 
 * [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
@@ -34,78 +31,3 @@
 
 * <a href="https://drive.google.com/file/d/1eMLdviqWVWRv8gXT_d1W1uUZoIwIumVS/view?usp=drive_link">**Windows**</a>（v3.0.0，Google网盘）
 * <a href="https://pan.baidu.com/s/1146zRGqLFlDR27a7rUgr5w">**Windows**</a>（v3.0.0，百度网盘）
-
-
-## 使用
-
-### 压缩图片
-
-#### jpg压缩对比
-
-<table>
-    <tbody>
-        <tr>
-            <td><img src="./demo/jpg-before.jpg" alt="" width="280" height="392"></td>
-            <td><img src="./demo/jpg-after.jpg" alt="" width="280" height="392"></td>
-        </tr>
-        <tr>
-            <td>前</td>
-            <td>后</td>
-        </tr>
-        <tr>
-            <td>41kB</td>
-            <td>12kB</td>
-        </tr>
-    </tbody>
-</table>
-
-#### png压缩对比
-
-对于png24通道透明有比较好的压缩效果
-
-<table>
-    <tbody>
-        <tr>
-            <td><img src="./demo/png-before.png" alt="" width="128" height="128"></td>
-            <td><img src="./demo/png-after.png" alt="" width="128" height="128"></td>
-        </tr>
-        <tr>
-            <td>前</td>
-            <td>后</td>
-        </tr>
-        <tr>
-            <td>28.9kB</td>
-            <td>9.42kB</td>
-        </tr>
-    </tbody>
-</table>
-
-#### svg压缩对比
-
-<table>
-    <tbody>
-        <tr>
-            <td><img src="./demo/svg-before.svg" alt="" width="216" height="164"></td>
-            <td><img src="./demo/svg-after.svg" alt="" width="216" height="164"></td>
-        </tr>
-        <tr>
-            <td>前</td>
-            <td>后</td>
-        </tr>
-        <tr>
-            <td>5.47kB</td>
-            <td>3.55kB</td>
-        </tr>
-    </tbody>
-</table>
-
-### 裁切音频
-
-<img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
-
-## 隐藏功能
-
-通过菜单栏入口进入隐藏功能。
-
-*  **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
-* **Hummingbird**可以查看压缩文件的历史记录。
