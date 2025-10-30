@@ -2,7 +2,7 @@
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-1. **Hummingbird**使用智能压缩技术来减少文件的大小，支持：jpg、png、webp、svg、gif、gif、css、js、html、mp4、mov，可以设置压缩的同时等比例缩放图片或视频的尺寸。可以拖放文件夹压缩。
+1. **Hummingbird**使用智能压缩技术来减少文件的大小，支持：jpg、png、webp、svg、gif、css、js、html、mp4、mov，可以设置压缩的同时等比例缩放图片或视频的尺寸。可以拖放文件夹压缩。
 2. **Hummingbird**可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
 3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
 4. 可以裁取音频中的一段或多段，可以批量转换音频为mp3、wav格式。
@@ -31,5 +31,79 @@
 
 ## 帮助
 
-* [什么是Apple Silicon？](https://arayofsunshine.dev/zh-Hans/blog/apple-silicon)
-* [macOS App打不开](https://arayofsunshine.dev/zh-Hans/blog/macos-app-cannot-be-opened)
+* [什么是Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
+* [macOS App打不开](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened
+
+## 使用
+
+### 压缩图片
+
+#### jpg压缩对比
+
+<table>
+    <tbody>
+        <tr>
+            <td><img src="./demo/jpg-before.jpg" alt="" width="280" height="392"></td>
+            <td><img src="./demo/jpg-after.jpg" alt="" width="280" height="392"></td>
+        </tr>
+        <tr>
+            <td>前</td>
+            <td>后</td>
+        </tr>
+        <tr>
+            <td>41kB</td>
+            <td>12kB</td>
+        </tr>
+    </tbody>
+</table>
+
+#### png压缩对比
+
+对于png24通道透明有比较好的压缩效果
+
+<table>
+    <tbody>
+        <tr>
+            <td><img src="./demo/png-before.png" alt="" width="128" height="128"></td>
+            <td><img src="./demo/png-after.png" alt="" width="128" height="128"></td>
+        </tr>
+        <tr>
+            <td>前</td>
+            <td>后</td>
+        </tr>
+        <tr>
+            <td>28.9kB</td>
+            <td>9.42kB</td>
+        </tr>
+    </tbody>
+</table>
+
+#### svg压缩对比
+
+<table>
+    <tbody>
+        <tr>
+            <td><img src="./demo/svg-before.svg" alt="" width="216" height="164"></td>
+            <td><img src="./demo/svg-after.svg" alt="" width="216" height="164"></td>
+        </tr>
+        <tr>
+            <td>前</td>
+            <td>后</td>
+        </tr>
+        <tr>
+            <td>5.47kB</td>
+            <td>3.55kB</td>
+        </tr>
+    </tbody>
+</table>
+
+### 裁切音频
+
+<img alt="audio" src="https://github.com/leibnizli/hummingbird/assets/1193966/9c8a9f07-fd62-416e-b536-57483730834f" width="300">
+
+## 隐藏功能
+
+通过菜单栏入口进入隐藏功能。
+
+*  **Hummingbird**可以快速获取文件的Base64编码，支持：png、webp、jpeg、jpg、gif、tiff、avif、svg、ttf、woff、woff2。
+* **Hummingbird**可以查看压缩文件的历史记录。
