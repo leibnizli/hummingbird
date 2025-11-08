@@ -3,6 +3,7 @@ const {autoUpdater} = require('electron-updater');
 const path = require('path')
 const log = require('electron-log');
 const configuration = require("./configuration");
+const express = require('express')
 const {getUserHome} = require("./src/util.js");
 if (!configuration.get('jpg')) {
   configuration.set('jpg', 80);
@@ -19,6 +20,9 @@ if (!configuration.get('size')) {
 if (!configuration.get('backup')) {
   configuration.set('backup', false);
 }
+if (!configuration.get('port')) {
+  configuration.set('port', 3373);
+}
 if (!configuration.get('progressive')) {
   configuration.set('progressive', true);
 }
@@ -26,7 +30,46 @@ if (!configuration.get('png')) {
   configuration.set('png', [0.6, 0.85]);
 }
 
+let initialPort = configuration.get('port') || 3373
+
+const server = express()
+// 指定静态文件目录
+server.use(express.static(__dirname + '/public'));
+
 const net = require('net');
+
+function startServer(port) {
+
+  server.listen(port, () => {
+    initialPort = port;
+    console.log('Server started on port ' + port);
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is in use, trying another port...`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+}
+
+function checkPort(port, callback) {
+  const tester = net.createServer()
+    .once('error', err => (err.code === 'EADDRINUSE' ? callback(true) : callback(false)))
+    .once('listening', () => tester.once('close', () => callback(false)).close())
+    .listen(port);
+}
+
+checkPort(initialPort, (isBusy) => {
+  if (isBusy) {
+    console.log(`Port ${initialPort} is in use, trying another port...`);
+    startServer(initialPort + 1);
+  } else {
+    startServer(initialPort);
+  }
+});
 
 const isMac = process.platform === 'darwin'
 
@@ -75,7 +118,7 @@ app.on('ready', function () {
   // 打开开发工具
   // mainWindow.openDevTools();
   // 加载应用的 index.html
-  mainWindow.loadURL('file://' + __dirname + `/public/index${locate}.html`);
+  mainWindow.loadURL(`http://localhost:${initialPort}` + `/index${locate}.html`);
   // 当 window 被关闭，这个事件会被发出
   mainWindow.on('closed', function () {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，通常会把多个 window 对象存放在一个数组里面，但这次不是。
@@ -123,7 +166,7 @@ ipcMain.on('open-convert-window', function () {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  convertWindow.loadURL('file://' + __dirname + `/public/convert${locate}.html`);
+  convertWindow.loadURL(`http://localhost:${initialPort}` + `/convert${locate}.html`);
 
   // 打开开发工具
   // convertWindow.openDevTools();
@@ -160,7 +203,7 @@ function openCodeWindow() {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  codeWindow.loadURL('file://' + __dirname + `/public/code${locate}.html`);
+  codeWindow.loadURL(`http://localhost:${initialPort}` + `/code${locate}.html`);
 
   // 打开开发工具
   // codeWindow.openDevTools();
@@ -200,7 +243,7 @@ ipcMain.on('open-video-window', function () {
     locate = "-zh-CN";
   }
   // 加载应用的 index.html
-  videoWindow.loadURL('file://' + __dirname + `/public/video${locate}.html`);
+  videoWindow.loadURL(`http://localhost:${initialPort}` + `/video${locate}.html`);
 
   // 打开开发工具
   // videoWindow.openDevTools();
@@ -272,7 +315,7 @@ ipcMain.on('open-settings-window', function () {
   if (app.getLocale() === "zh-CN") {
     locate = "-zh-CN";
   }
-  settingsWindow.loadURL('file://' + __dirname + `/public/settings${locate}.html`);
+  settingsWindow.loadURL(`http://localhost:${initialPort}` + `/settings${locate}.html`);
   // 打开开发工具
   //settingsWindow.openDevTools();
 
