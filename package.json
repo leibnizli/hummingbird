@@ -1,6 +1,6 @@
 {
   "name": "hummingbird",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "Support the Drop folder compression.",
   "main": "main.js",
   "repository": {
@@ -45,7 +45,7 @@
     "esbuild": "rimraf ./assets &&  node esbuild.config.mjs",
     "dev": "electron .",
     "dir": "rimraf ./dist && electron-builder --dir",
-    "pack": "rimraf ./dist && electron-builder build --mac --publish always"
+    "pack": "rimraf ./dist && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder build --mac --publish never"
   },
   "devDependencies": {
     "@electron/notarize": "2.3.0",
@@ -62,6 +62,7 @@
     "electron-log": "^5.1.2",
     "electron-updater": "^6.1.7",
     "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
     "fluent-ffmpeg": "^2.1.2",
     "gulp": "^4.0.0",
     "gulp-clean-css": "^3.4.1",

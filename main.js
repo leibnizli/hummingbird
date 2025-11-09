@@ -5,6 +5,18 @@ const log = require('electron-log');
 const configuration = require("./configuration");
 const express = require('express')
 const {getUserHome} = require("./src/util.js");
+
+// Configure electron-log for production
+log.transports.file.level = 'info';
+log.transports.console.level = 'info';
+
+// Override console methods to use electron-log in production
+if (app.isPackaged) {
+  console.log = log.log;
+  console.error = log.error;
+  console.warn = log.warn;
+  console.info = log.info;
+}
 if (!configuration.get('jpg')) {
   configuration.set('jpg', 80);
 }
@@ -99,8 +111,8 @@ app.on('ready', function () {
   mainWindow = new BrowserWindow({
     icon: './src/images/icon.png',
     title: 'Hummingbird',
-    width: 312,
-    height: 260,
+    width: app.isPackaged?312:812,
+    height: app.isPackaged?260:760,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -115,8 +127,10 @@ app.on('ready', function () {
   if (app.getLocale() === "zh-CN") {
     locate = "-zh-CN";
   }
-  // 打开开发工具
-  // mainWindow.openDevTools();
+  // 打开开发工具（仅在开发环境）
+  if (!app.isPackaged) {
+    mainWindow.openDevTools();
+  }
   // 加载应用的 index.html
   mainWindow.loadURL(`http://localhost:${initialPort}` + `/index${locate}.html`);
   // 当 window 被关闭，这个事件会被发出
@@ -394,6 +408,13 @@ const submenu = [
     click: async () => {
       const p = path.join(getUserHome(), 'hummingbird-log.txt');
       shell.openPath(p);
+    }
+  },
+  {
+    label: 'Application Logs',
+    click: async () => {
+      const logPath = log.transports.file.getFile().path;
+      shell.showItemInFolder(logPath);
     }
   },
   {

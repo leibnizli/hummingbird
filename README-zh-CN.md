@@ -18,7 +18,7 @@
 
 #### 从GitHub下载
 
-* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）安装完毕后需要`系统设置`-`安全&隐私`中允许启动Hummingbird
 * ~~**macOS**~~（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases/download/v5.3.0/hummingbird-Setup-5.3.0.exe">**Windows**</a> (>=10)
 

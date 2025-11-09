@@ -3,11 +3,13 @@ import {getUserHome} from "./util.js";
 import configuration from "../configuration";
 const { webUtils } = require('electron')
 const ffmpegStatic = require('ffmpeg-static');
+const ffprobeStatic = require('ffprobe-static');
 const ffmpeg = require('fluent-ffmpeg');
 const sharp = require('sharp');
 const fs = require("fs");
 const path = require('path');
 const {ipcRenderer} = require('electron');
+const log = require('electron-log');
 const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminOptipng = require('imagemin-optipng');
@@ -20,8 +22,73 @@ const uglify = require('gulp-uglify');
 const rename = require("gulp-rename");
 const cleanCSS = require('gulp-clean-css');
 const mime = require('mime');
-// Tell fluent-ffmpeg where it can find FFmpeg
+
+// Configure logging for renderer process - safely check if transports exist
+try {
+  if (log.transports && log.transports.file) {
+    log.transports.file.level = 'info';
+  }
+  if (log.transports && log.transports.console) {
+    log.transports.console.level = 'info';
+  }
+} catch (err) {
+  // Ignore if transports are not available
+}
+
+// Override console in renderer process for production
+const originalConsoleLog = console.log;
+const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
+console.log = function(...args) {
+  try {
+    log.info(...args);
+  } catch (e) {
+    // Fallback to original if log fails
+  }
+  originalConsoleLog.apply(console, args);
+};
+
+console.error = function(...args) {
+  try {
+    log.error(...args);
+  } catch (e) {
+    // Fallback to original if log fails
+  }
+  originalConsoleError.apply(console, args);
+};
+
+console.warn = function(...args) {
+  try {
+    log.warn(...args);
+  } catch (e) {
+    // Fallback to original if log fails
+  }
+  originalConsoleWarn.apply(console, args);
+};
+
+// Tell fluent-ffmpeg where it can find FFmpeg and FFprobe
+console.log('Setting FFmpeg path to:', ffmpegStatic);
+console.log('Setting FFprobe path to:', ffprobeStatic.path);
 ffmpeg.setFfmpegPath(ffmpegStatic);
+ffmpeg.setFfprobePath(ffprobeStatic.path);
+
+// Verify FFmpeg and FFprobe are accessible
+try {
+  const fs = require('fs');
+  if (fs.existsSync(ffmpegStatic)) {
+    console.log('FFmpeg binary exists at path');
+  } else {
+    console.error('FFmpeg binary NOT found at path:', ffmpegStatic);
+  }
+  if (fs.existsSync(ffprobeStatic.path)) {
+    console.log('FFprobe binary exists at path');
+  } else {
+    console.error('FFprobe binary NOT found at path:', ffprobeStatic.path);
+  }
+} catch (err) {
+  console.error('Error checking FFmpeg/FFprobe paths:', err);
+}
 
 let appPath = "";
 const lang = navigator.language
@@ -387,7 +454,15 @@ App.prototype = {
       index = 0,
       self = this,
       len = this.filesArray.length;
-    pie.set(0);
+    
+    // Ensure DOM is ready before setting initial progress
+    // Use requestAnimationFrame to ensure DOM is painted
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        pie.set(0);
+      });
+    });
+    
     const obj = new Proxy({count: 0}, {
       get: function (target, propKey, receiver) {
         return Reflect.get(target, propKey, receiver);
@@ -530,25 +605,74 @@ App.prototype = {
             ]);
           });
           break;
-        case "video/mp4":
+        case "video/mp4": {
+          console.log('Starting MP4 processing...');
           options.push('-crf 28');
           if (maxHeightVideo > 0) {
             options.push(`-vf scale=-2:${maxHeightVideo}`);
           }
-          ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
-            if (progress.percent) {
-              pie.set(((p / len) * 100 + 1 / len * progress.percent).toFixed(0));
+          
+          // Get video duration first, then start processing
+          console.log('Calling ffprobe for:', filePath);
+          ffmpeg.ffprobe(filePath, (err, metadata) => {
+            let videoDuration = 0;
+            if (err) {
+              console.error('ffprobe error:', err);
+            } else {
+              console.log('ffprobe success, metadata format:', metadata ? metadata.format : 'no format');
             }
-          }).saveToFile(targetPath).on('end', () => {
-            console.log('FFmpeg has finished.');
-            runSucceed(i, [
-              {size: getFilesizeInBytes(targetPath)}
-            ],);
-          }).on('error', (error) => {
-            runSkip(i, error)
+            if (!err && metadata && metadata.format && metadata.format.duration) {
+              videoDuration = metadata.format.duration;
+              console.log('Video duration:', videoDuration, 'seconds');
+            } else {
+              console.warn('Could not get video duration, progress will not be shown');
+            }
+            
+            const mp4Command = ffmpeg()
+              .input(filePath)
+              .fps(30)
+              .outputOptions(options)
+              .on('progress', (progress) => {
+                try {
+                  if (progress && progress.timemark) {
+                    if (videoDuration > 0) {
+                      // Parse timemark (format: "00:00:05.73")
+                      const timemarkParts = progress.timemark.split(':');
+                      const hours = parseInt(timemarkParts[0]) || 0;
+                      const minutes = parseInt(timemarkParts[1]) || 0;
+                      const seconds = parseFloat(timemarkParts[2]) || 0;
+                      const currentTime = hours * 3600 + minutes * 60 + seconds;
+                      
+                      const videoPercent = Math.min(100, (currentTime / videoDuration) * 100);
+                      const currentProgress = ((p / len) * 100 + (1 / len) * videoPercent).toFixed(0);
+                      console.log('Video progress:', currentProgress + '%');
+                      
+                      if (pie && typeof pie.set === 'function') {
+                        pie.set(currentProgress);
+                      }
+                    }
+                  }
+                } catch (err) {
+                  console.error('Error updating video progress:', err);
+                }
+              })
+              .on('end', () => {
+                console.log('FFmpeg has finished.');
+                runSucceed(i, [
+                  {size: getFilesizeInBytes(targetPath)}
+                ]);
+              })
+              .on('error', (error) => {
+                console.error('FFmpeg error:', error);
+                runSkip(i, error);
+              });
+            
+            mp4Command.saveToFile(targetPath);
           });
           break;
-        case "video/mov":
+        }
+        case "video/mov": {
+          console.log('Starting MOV processing...');
           options.push('-crf 28');
           options.push('-c:v libx264');
           //-c:a copy 选项用于直接复制音频流，而不对音频进行重新编码
@@ -556,19 +680,66 @@ App.prototype = {
           if (maxHeightVideo > 0) {
             options.push(`-vf scale=-2:${maxHeightVideo}`);
           }
-          ffmpeg().input(filePath).fps(30).outputOptions(options).on('progress', (progress) => {
-            if (progress.percent) {
-              pie.set(((p / len) * 100 + 1 / len * progress.percent).toFixed(0));
+          
+          // Get video duration first, then start processing
+          console.log('Calling ffprobe for:', filePath);
+          ffmpeg.ffprobe(filePath, (err, metadata) => {
+            let videoDuration = 0;
+            if (err) {
+              console.error('ffprobe error:', err);
+            } else {
+              console.log('ffprobe success, metadata format:', metadata ? metadata.format : 'no format');
             }
-          }).saveToFile(targetPath).on('end', () => {
-            console.log('FFmpeg has finished.');
-            runSucceed(i, [
-              {size: getFilesizeInBytes(targetPath)}
-            ],);
-          }).on('error', (error) => {
-            runSkip(i, error)
+            if (!err && metadata && metadata.format && metadata.format.duration) {
+              videoDuration = metadata.format.duration;
+              console.log('Video duration:', videoDuration, 'seconds');
+            } else {
+              console.warn('Could not get video duration, progress will not be shown');
+            }
+            
+            const movCommand = ffmpeg()
+              .input(filePath)
+              .fps(30)
+              .outputOptions(options)
+              .on('progress', (progress) => {
+                try {
+                  if (progress && progress.timemark) {
+                    if (videoDuration > 0) {
+                      // Parse timemark (format: "00:00:05.73")
+                      const timemarkParts = progress.timemark.split(':');
+                      const hours = parseInt(timemarkParts[0]) || 0;
+                      const minutes = parseInt(timemarkParts[1]) || 0;
+                      const seconds = parseFloat(timemarkParts[2]) || 0;
+                      const currentTime = hours * 3600 + minutes * 60 + seconds;
+                      
+                      const videoPercent = Math.min(100, (currentTime / videoDuration) * 100);
+                      const currentProgress = ((p / len) * 100 + (1 / len) * videoPercent).toFixed(0);
+                      console.log('Video progress:', currentProgress + '%');
+                      
+                      if (pie && typeof pie.set === 'function') {
+                        pie.set(currentProgress);
+                      }
+                    }
+                  }
+                } catch (err) {
+                  console.error('Error updating video progress:', err);
+                }
+              })
+              .on('end', () => {
+                console.log('FFmpeg has finished.');
+                runSucceed(i, [
+                  {size: getFilesizeInBytes(targetPath)}
+                ]);
+              })
+              .on('error', (error) => {
+                console.error('FFmpeg error:', error);
+                runSkip(i, error);
+              });
+            
+            movCommand.saveToFile(targetPath);
           });
           break;
+        }
         default:
           runSkip(i);
       }
