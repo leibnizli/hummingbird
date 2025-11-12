@@ -22,6 +22,7 @@ English | [简体中文](./README-zh-CN.md)
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）After installation, you need to allow Hummingbird to launch in `System Settings` → `Security & Privacy`.
 * ~~**macOS**~~（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases/download/v5.3.0/hummingbird-Setup-5.3.0.exe">**Windows**</a> (>=10)
+* <a href="https://apps.apple.com/us/app/hummingbird-video-compression/id6755109910">**iOS**</a>
 
 
 ### Old version v3.0.0

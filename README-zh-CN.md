@@ -21,6 +21,7 @@
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）安装完毕后需要`系统设置`-`安全&隐私`中允许启动Hummingbird
 * ~~**macOS**~~（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases/download/v5.3.0/hummingbird-Setup-5.3.0.exe">**Windows**</a> (>=10)
+* <a href="https://apps.apple.com/us/app/hummingbird-video-compression/id6755109910">**iOS**</a>
 
 ### 旧版本 v3.0.0
 
@@ -32,7 +33,7 @@
 ## 帮助
 
 * [什么是Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
-* [macOS App打不开](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened
+* [macOS App打不开](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
 
 ## 使用
 
