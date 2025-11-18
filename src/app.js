@@ -641,8 +641,10 @@ App.prototype = {
                       const hours = parseInt(timemarkParts[0]) || 0;
                       const minutes = parseInt(timemarkParts[1]) || 0;
                       const seconds = parseFloat(timemarkParts[2]) || 0;
-                      const currentTime = hours * 3600 + minutes * 60 + seconds;
-                      
+                      let currentTime = hours * 3600 + minutes * 60 + seconds;
+                      if (currentTime < 0) {
+                        currentTime = 0;
+                      }
                       const videoPercent = Math.min(100, (currentTime / videoDuration) * 100);
                       const currentProgress = ((p / len) * 100 + (1 / len) * videoPercent).toFixed(0);
                       console.log('Video progress:', currentProgress + '%');
