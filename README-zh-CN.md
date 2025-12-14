@@ -33,7 +33,6 @@
 ## 帮助
 
 * [什么是Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
-* [macOS App打不开](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
 
 ## 使用
 

@@ -35,7 +35,6 @@ Suitable for old versions of windows, win7, win8
 ## Help
 
 * [What is Apple Silicon？](https://arayofsunshine.dev/blog/apple-silicon)
-* [macOS App cannot be opened](https://arayofsunshine.dev/blog/macos-app-cannot-be-opened)
 
 
 ## Usage
