@@ -19,10 +19,10 @@ English | [简体中文](./README-zh-CN.md)
 
 #### Download from GitHub
 
-* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）After installation, you need to allow Hummingbird to launch in `System Settings` → `Security & Privacy`.
-* ~~**macOS**~~（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases/download/v5.3.0/hummingbird-Setup-5.3.0.exe">**Windows**</a> (>=10)
-* <a href="https://apps.apple.com/us/app/id6755109910">****iPhone****</a> iPhone / iPad / Mac (Apple Silicon)
+* <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64, Powerful features, easy to use）After installation, you need to allow Hummingbird to launch in `System Settings` → `Security & Privacy`.
+* ~~**macOS**~~（Intel）
+* <a href="https://apps.apple.com/us/app/id6755109910">**macOS, iOS**</a> (iPhone / iPad / Mac, Apple Silicon, Powerful functionality with more fine-grained control.)
 
 
 ### Old version v3.0.0

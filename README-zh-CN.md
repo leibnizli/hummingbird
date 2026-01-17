@@ -21,7 +21,7 @@
 * <a href="https://github.com/leibnizli/hummingbird/releases">**macOS**</a>（Apple Silicon, arm64）安装完毕后需要`系统设置`-`安全&隐私`中允许启动Hummingbird
 * ~~**macOS**~~（Intel）
 * <a href="https://github.com/leibnizli/hummingbird/releases/download/v5.3.0/hummingbird-Setup-5.3.0.exe">**Windows**</a> (>=10)
-* <a href="https://apps.apple.com/us/app/id6755109910">**iOS**</a> iPhone / iPad / Mac (Apple Silicon)
+* <a href="https://apps.apple.com/us/app/id6755109910">**macOS、iOS**</a>（iPhone / iPad / Mac，Apple Silicon，强大的个性化配置）
 
 ### 旧版本 v3.0.0
 
