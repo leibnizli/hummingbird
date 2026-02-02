@@ -2,10 +2,12 @@
 
 # <img alt="hummingbird-h1" src="https://github.com/leibnizli/hummingbird/assets/1193966/8a1a4c5b-e69b-4788-961b-60d9d323781c" width="240">
 
-1. **Hummingbird**使用智能压缩技术来减少文件的大小，支持：jpg、png、webp、svg、gif、css、js、html、mp4、mov，可以设置压缩的同时等比例缩放图片或视频的尺寸。可以拖放文件夹压缩。
-2. **Hummingbird**可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
-3. **Hummingbird**可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
-4. 可以裁取音频中的一段或多段，可以批量转换音频为mp3、wav格式。
+**Hummingbird** 是一款 **隐私优先 (Privacy-first)**、**离线可用 (Offline)** 的**图片压缩 (Image Compression)** 和媒体处理工具。它支持高效的 **批量处理 (Batch processing)** 以及全面的 **WebP/SVG 支持**。
+
+1. **Hummingbird** 使用智能压缩技术来减少文件的大小，支持：jpg、png、webp、svg、gif、css、js、html、mp4、mov，可以设置压缩的同时等比例缩放图片或视频的尺寸。**批量处理**非常简单——只需拖放文件夹即可压缩。
+2. **Hummingbird** 可以转换不同格式的图片，支持：png、webp、jpeg、jpg、gif、tiff、 avif、heic，可以导出不同格式的图片，支持：png、 webp、 jpeg、 jpg、 gif、 tiff、 avif、 ico、icns(仅苹果系统)格式的图片。
+3. **Hummingbird** 可以从视频中提取音频，可以将视频中的音频删除，可以将视频转换为gif，可以转换视频格式，支持mp4、mov、avi。
+4. **Hummingbird** 可以裁取音频中的一段或多段，可以批量转换音频为mp3、wav格式。
 
 <img src="https://github.com/leibnizli/hummingbird/assets/1193966/60f91e4b-0e75-4f5d-a7f3-8b938dc48bca" width="424">
 
