@@ -12,50 +12,6 @@ const LOG_FILE_NAME = 'hummingbird-log.txt';
 const INITIAL_LOG_CONTENT = '----log----\n';
 const GITHUB_ISSUES_URL = 'https://github.com/leibnizli/hummingbird/issues';
 
-interface ShareData {
-  count: number;
-  size: number;
-}
-
-interface WindowState {
-  shareCount: number;
-  shareSize: number;
-}
-
-interface NavigatorUABrandVersion {
-  brand: string;
-  version: string;
-}
-
-interface UADataValues {
-  brands?: NavigatorUABrandVersion[];
-  mobile?: boolean;
-  platform?: string;
-  architecture?: string;
-  bitness?: string;
-  model?: string;
-  platformVersion?: string;
-  uaFullVersion?: string;
-}
-
-interface NavigatorUAData {
-  readonly brands: NavigatorUABrandVersion[];
-  readonly mobile: boolean;
-  readonly platform: string;
-  getHighEntropyValues(hints: string[]): Promise<UADataValues>;
-}
-
-declare global {
-  interface Window extends WindowState {
-    shareCount: number;
-    shareSize: number;
-  }
-
-  interface Navigator {
-    readonly userAgentData?: NavigatorUAData;
-  }
-}
-
 // Initialize window state
 window.shareCount = 0;
 window.shareSize = 0;
@@ -177,7 +133,7 @@ async function initialize(): Promise<void> {
   await checkWindowsVersion();
 
   // Initialize app
-  require('./app.js');
+  await import('./app.js');
 }
 
 // Start the application
