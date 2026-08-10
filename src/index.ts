@@ -22,10 +22,37 @@ interface WindowState {
   shareSize: number;
 }
 
+interface NavigatorUABrandVersion {
+  brand: string;
+  version: string;
+}
+
+interface UADataValues {
+  brands?: NavigatorUABrandVersion[];
+  mobile?: boolean;
+  platform?: string;
+  architecture?: string;
+  bitness?: string;
+  model?: string;
+  platformVersion?: string;
+  uaFullVersion?: string;
+}
+
+interface NavigatorUAData {
+  readonly brands: NavigatorUABrandVersion[];
+  readonly mobile: boolean;
+  readonly platform: string;
+  getHighEntropyValues(hints: string[]): Promise<UADataValues>;
+}
+
 declare global {
   interface Window extends WindowState {
     shareCount: number;
     shareSize: number;
+  }
+
+  interface Navigator {
+    readonly userAgentData?: NavigatorUAData;
   }
 }
 
@@ -110,9 +137,15 @@ function setupShareDataListener(): void {
  */
 async function checkWindowsVersion(): Promise<void> {
   try {
-    const ua = await navigator.userAgentData.getHighEntropyValues(['platformVersion']);
-    if (navigator.userAgentData.platform === 'Windows') {
-      const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+    const userAgentData = navigator.userAgentData;
+    if (!userAgentData) {
+      console.log('userAgentData is not supported');
+      return;
+    }
+
+    const ua = await userAgentData.getHighEntropyValues(['platformVersion']);
+    if (userAgentData.platform === 'Windows') {
+      const majorPlatformVersion = parseInt((ua.platformVersion ?? '0').split('.')[0], 10);
 
       if (majorPlatformVersion >= 13) {
         console.log('Windows 11 or later');
