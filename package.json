@@ -87,7 +87,7 @@
     "imagemin-webp": "^5.0.0",
     "mime": "^3.0.0",
     "nconf": "0.11.4",
-    "sharp": "^0.33.2",
+    "sharp": "^0.35.4",
     "to-ico": "^1.1.5",
     "wavesurfer.js": "^7.7.10"
   }
